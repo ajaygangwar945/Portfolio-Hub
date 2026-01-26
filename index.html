@@ -173,11 +173,11 @@
                     onclick="showPowerBiBasics()">
                     Power BI Basics
                 </button>
-                <button onclick="toggleTheme()"
+                <button onclick="toggleTheme()" title="Toggle light/dark mode" aria-label="Toggle light/dark mode"
                     class="p-2 text-[#605e5c] dark:text-[#a19f9d] hover:bg-[#f3f2f1] dark:hover:bg-[#323130] rounded-full transition-all">
                     <svg id="sun-icon" class="w-5 h-5 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="M12 3v1m0 16v1m9-9h-1M4 9H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z">
+                            d="M12 3v2.25m6.364.386l-1.591 1.591M21 12h-2.25m-.386 6.364l-1.591-1.591M12 18.75V21m-4.773-4.227l-1.591 1.591M3 12h2.25m.386-6.364l1.591 1.591M15.75 12a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0z">
                         </path>
                     </svg>
                     <svg id="moon-icon" class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -316,21 +316,17 @@
                                 <h3 class="font-bold text-xl text-[#323130] dark:text-white">Data Modeling</h3>
                             </div>
                             <ul class="text-sm text-pbi-grey dark:text-[#a19f9d] space-y-3 flex-1">
-                                <li class="flex items-start"><span class="text-pbi-yellow mr-2">•</span><span>Prefer
-                                        star schema with fact and dimension tables to simplify relationship
-                                        paths.</span></li>
+                                <li class="flex items-start"><span class="text-pbi-yellow mr-2">•</span><span>Structure
+                                        your data into a "Star Schema" for cleaner and faster reports.</span></li>
                                 <li class="flex items-start"><span class="text-pbi-yellow mr-2">•</span><span>Keep
-                                        relationships simple; avoid bi‑directional filters which can cause
-                                        ambiguity.</span></li>
-                                <li class="flex items-start"><span class="text-pbi-yellow mr-2">•</span><span>Hide
-                                        technical keys, surrogate IDs, and unused columns from the final report
-                                        view.</span></li>
-                                <li class="flex items-start"><span class="text-pbi-yellow mr-2">•</span><span>Give
-                                        tables and columns clear, business‑friendly names for better Q&A
-                                        discovery.</span></li>
-                                <li class="flex items-start"><span class="text-pbi-yellow mr-2">•</span><span>Implement
-                                        Hierarchies for dates and locations to enable intuitive drill‑down paths.</span>
+                                        connections between tables simple and avoid multi‑directional filters.</span>
                                 </li>
+                                <li class="flex items-start"><span class="text-pbi-yellow mr-2">•</span><span>Hide messy
+                                        technical IDs and unused columns to keep the report tidy.</span></li>
+                                <li class="flex items-start"><span class="text-pbi-yellow mr-2">•</span><span>Use
+                                        friendly names for tables and columns so everyone understands them.</span></li>
+                                <li class="flex items-start"><span class="text-pbi-yellow mr-2">•</span><span>Group
+                                        dates and locations into hierarchies for easy zooming and drilling.</span></li>
                             </ul>
                         </div>
                     </article>
@@ -344,18 +340,16 @@
                                 <h3 class="font-bold text-xl text-[#323130] dark:text-white">Visual Design</h3>
                             </div>
                             <ul class="text-sm text-pbi-grey dark:text-[#a19f9d] space-y-3 flex-1">
-                                <li class="flex items-start"><span class="text-pbi-yellow mr-2">•</span><span>Use
-                                        bar/column charts for comparison and line charts for temporal trends.</span>
-                                </li>
-                                <li class="flex items-start"><span class="text-pbi-yellow mr-2">•</span><span>Adopt a
-                                        consistent colour palette and font style to maintain brand integrity.</span>
-                                </li>
-                                <li class="flex items-start"><span class="text-pbi-yellow mr-2">•</span><span>Align all
-                                        visuals to a grid layout to achieve a clean, enterprise‑grade feel.</span></li>
-                                <li class="flex items-start"><span class="text-pbi-yellow mr-2">•</span><span>Utilize
-                                        tooltips and drill‑through pages to reduce primary visual clutter.</span></li>
-                                <li class="flex items-start"><span class="text-pbi-yellow mr-2">•</span><span>Ensure
-                                        high contrast and readable text sizes for accessibility compliance.</span></li>
+                                <li class="flex items-start"><span class="text-pbi-yellow mr-2">•</span><span>Use bar
+                                        charts for comparing items and line charts for showing trends.</span></li>
+                                <li class="flex items-start"><span class="text-pbi-yellow mr-2">•</span><span>Stick to
+                                        the same colors and fonts for a professional and consistent look.</span></li>
+                                <li class="flex items-start"><span class="text-pbi-yellow mr-2">•</span><span>Align your
+                                        charts to a grid so the page looks organized and easy to read.</span></li>
+                                <li class="flex items-start"><span class="text-pbi-yellow mr-2">•</span><span>Use pop‑up
+                                        tips and detail pages to keep the main screen clean and focused.</span></li>
+                                <li class="flex items-start"><span class="text-pbi-yellow mr-2">•</span><span>Make sure
+                                        text is large and clear enough so everyone can read it easily.</span></li>
                             </ul>
                         </div>
                     </article>
@@ -369,92 +363,87 @@
                                 <h3 class="font-bold text-xl text-[#323130] dark:text-white">Performance</h3>
                             </div>
                             <ul class="text-sm text-pbi-grey dark:text-[#a19f9d] space-y-3 flex-1">
-                                <li class="flex items-start"><span class="text-pbi-yellow mr-2">•</span><span>Import
-                                        only the specific columns and filtered rows required for the analysis.</span>
-                                </li>
-                                <li class="flex items-start"><span class="text-pbi-yellow mr-2">•</span><span>Prefer
-                                        measures instead of calculated columns to optimize the data engine.</span></li>
-                                <li class="flex items-start"><span class="text-pbi-yellow mr-2">•</span><span>Limit
-                                        visuals per report page and avoid using excessively complex DAX filters.</span>
-                                </li>
-                                <li class="flex items-start"><span class="text-pbi-yellow mr-2">•</span><span>Enable
-                                        Incremental Refresh for large‑scale datasets to reduce load times.</span></li>
+                                <li class="flex items-start"><span class="text-pbi-yellow mr-2">•</span><span>Only bring
+                                        in the data you actually need; don't load extra "junk" columns.</span></li>
                                 <li class="flex items-start"><span class="text-pbi-yellow mr-2">•</span><span>Use
-                                        Performance Analyzer to pinpoint bottlenecks in visual rendering.</span></li>
+                                        measures instead of building new data columns to save memory.</span></li>
+                                <li class="flex items-start"><span class="text-pbi-yellow mr-2">•</span><span>Don't put
+                                        too many charts on one page—it can slow everything down.</span></li>
+                                <li class="flex items-start"><span class="text-pbi-yellow mr-2">•</span><span>Update
+                                        only the newest data instead of reloading everything every time.</span></li>
+                                <li class="flex items-start"><span class="text-pbi-yellow mr-2">•</span><span>Check the
+                                        Performance Analyzer to find and fix any slow‑loading charts.</span></li>
                             </ul>
                         </div>
                     </article>
 
-                    <!-- DAX Basics -->
+                    <!-- DAX Expressions -->
                     <article class="tips-card h-full">
                         <div
                             class="tips-card-inner bg-gradient-to-br from-[#f3f2f1] to-[#e1dfdd] dark:from-[#323130] dark:to-[#2d2c2b] p-6 rounded-xl shadow-xl border border-[#edebe9] dark:border-[#3b3a39] hover:border-pbi-yellow/50 transition-all h-full flex flex-col">
                             <div class="flex items-center mb-4">
-                                <span class="tips-3d-icon text-2xl mr-3">🔧</span>
-                                <h3 class="font-bold text-xl text-[#323130] dark:text-white">DAX Basics</h3>
+                                <span class="tips-3d-icon text-2xl mr-3">🔢</span>
+                                <h3 class="font-bold text-xl text-[#323130] dark:text-white">DAX Expressions</h3>
                             </div>
                             <ul class="text-sm text-pbi-grey dark:text-[#a19f9d] space-y-3 flex-1">
-                                <li class="flex items-start"><span class="text-pbi-yellow mr-2">•</span><span>Use VAR to
-                                        simplify complex logic and improve query readability and speed.</span></li>
-                                <li class="flex items-start"><span class="text-pbi-yellow mr-2">•</span><span>Master Row
-                                        Context vs. Filter Context to avoid common calculation errors.</span></li>
-                                <li class="flex items-start"><span class="text-pbi-yellow mr-2">•</span><span>Practise
-                                        Time Intelligence functions like TOTALYTD and SAMEPERIODLASTYEAR.</span></li>
+                                <li class="flex items-start"><span class="text-pbi-yellow mr-2">•</span><span>Use
+                                        "Variables" to break down long calculations and make them easier to read.</span>
+                                </li>
+                                <li class="flex items-start"><span class="text-pbi-yellow mr-2">•</span><span>Learn the
+                                        "CALCULATE" function—it's the key to powerful data filtering.</span></li>
+                                <li class="flex items-start"><span class="text-pbi-yellow mr-2">•</span><span>Avoid
+                                        complex logic inside loops to keep your calculations running fast.</span></li>
+                                <li class="flex items-start"><span class="text-pbi-yellow mr-2">•</span><span>Use the
+                                        "DIVIDE" function to avoid errors when dividing by zero.</span></li>
+                                <li class="flex items-start"><span class="text-pbi-yellow mr-2">•</span><span>Use
+                                        built‑in time tools to easily compare this year to last year.</span></li>
+                            </ul>
+                        </div>
+                    </article>
+
+                    <!-- Power Query -->
+                    <article class="tips-card h-full">
+                        <div
+                            class="tips-card-inner bg-gradient-to-br from-[#f3f2f1] to-[#e1dfdd] dark:from-[#323130] dark:to-[#2d2c2b] p-6 rounded-xl shadow-xl border border-[#edebe9] dark:border-[#3b3a39] hover:border-pbi-yellow/50 transition-all h-full flex flex-col">
+                            <div class="flex items-center mb-4">
+                                <span class="tips-3d-icon text-2xl mr-3">🔄</span>
+                                <h3 class="font-bold text-xl text-[#323130] dark:text-white">Power Query</h3>
+                            </div>
+                            <ul class="text-sm text-pbi-grey dark:text-[#a19f9d] space-y-3 flex-1">
+                                <li class="flex items-start"><span class="text-pbi-yellow mr-2">•</span><span>Let the
+                                        database do the hard work before data reaches Power BI.</span></li>
+                                <li class="flex items-start"><span class="text-pbi-yellow mr-2">•</span><span>Fix your
+                                        data types (like dates or numbers) right at the very start.</span></li>
+                                <li class="flex items-start"><span class="text-pbi-yellow mr-2">•</span><span>Name your
+                                        steps clearly so you can remember what you did later on.</span></li>
+                                <li class="flex items-start"><span class="text-pbi-yellow mr-2">•</span><span>Delete
+                                        unwanted columns early to keep your file size small and snappy.</span></li>
+                                <li class="flex items-start"><span class="text-pbi-yellow mr-2">•</span><span>Try to use
+                                        the easy menu buttons before diving into the complex code editor.</span></li>
+                            </ul>
+                        </div>
+                    </article>
+
+                    <!-- Security & Governance -->
+                    <article class="tips-card h-full">
+                        <div
+                            class="tips-card-inner bg-gradient-to-br from-[#f3f2f1] to-[#e1dfdd] dark:from-[#323130] dark:to-[#2d2c2b] p-6 rounded-xl shadow-xl border border-[#edebe9] dark:border-[#3b3a39] hover:border-pbi-yellow/50 transition-all h-full flex flex-col">
+                            <div class="flex items-center mb-4">
+                                <span class="tips-3d-icon text-2xl mr-3">🛡️</span>
+                                <h3 class="font-bold text-xl text-[#323130] dark:text-white">Security & Governance</h3>
+                            </div>
+                            <ul class="text-sm text-pbi-grey dark:text-[#a19f9d] space-y-3 flex-1">
+                                <li class="flex items-start"><span class="text-pbi-yellow mr-2">•</span><span>Use
+                                        "Row‑Level Security" so people only see the data they are allowed to.</span>
+                                </li>
+                                <li class="flex items-start"><span class="text-pbi-yellow mr-2">•</span><span>Share your
+                                        work through "Apps" to give users a clean, finished experience.</span></li>
+                                <li class="flex items-start"><span class="text-pbi-yellow mr-2">•</span><span>Check
+                                        usage reports to see which dashboards people are actually using.</span></li>
+                                <li class="flex items-start"><span class="text-pbi-yellow mr-2">•</span><span>Set up
+                                        automatic alerts to get notified when a target is hit or missed.</span></li>
                                 <li class="flex items-start"><span class="text-pbi-yellow mr-2">•</span><span>Always
-                                        document and comment your key modular measures for maintenance.</span></li>
-                                <li class="flex items-start"><span class="text-pbi-yellow mr-2">•</span><span>Use DIVIDE
-                                        over / to handle zero-division errors gracefully and safely.</span></li>
-                            </ul>
-                        </div>
-                    </article>
-
-                    <!-- Sharing & Governance -->
-                    <article class="tips-card h-full">
-                        <div
-                            class="tips-card-inner bg-gradient-to-br from-[#f3f2f1] to-[#e1dfdd] dark:from-[#323130] dark:to-[#2d2c2b] p-6 rounded-xl shadow-xl border border-[#edebe9] dark:border-[#3b3a39] hover:border-pbi-yellow/50 transition-all h-full flex flex-col">
-                            <div class="flex items-center mb-4">
-                                <span class="tips-3d-icon text-2xl mr-3">🚀</span>
-                                <h3 class="font-bold text-xl text-[#323130] dark:text-white">Sharing & Governance</h3>
-                            </div>
-                            <ul class="text-sm text-pbi-grey dark:text-[#a19f9d] space-y-3 flex-1">
-                                <li class="flex items-start"><span class="text-pbi-yellow mr-2">•</span><span>Publish to
-                                        dedicated Workspaces and Apps for secure production distribution.</span></li>
-                                <li class="flex items-start"><span class="text-pbi-yellow mr-2">•</span><span>Implement
-                                        Row‑Level Security (RLS) to restrict data access based on user roles.</span>
-                                </li>
-                                <li class="flex items-start"><span class="text-pbi-yellow mr-2">•</span><span>Use
-                                        Version Control for .pbix files and document every change systematically.</span>
-                                </li>
-                                <li class="flex items-start"><span class="text-pbi-yellow mr-2">•</span><span>Apply
-                                        standard Themes to maintain institutional branding across all reports.</span>
-                                </li>
-                                <li class="flex items-start"><span class="text-pbi-yellow mr-2">•</span><span>Schedule
-                                        automated refreshes to ensure data is always current for stakeholders.</span>
-                                </li>
-                            </ul>
-                        </div>
-                    </article>
-
-                    <!-- Quick Tips -->
-                    <article class="tips-card h-full">
-                        <div
-                            class="tips-card-inner bg-gradient-to-br from-[#f3f2f1] to-[#e1dfdd] dark:from-[#323130] dark:to-[#2d2c2b] p-6 rounded-xl shadow-xl border border-[#edebe9] dark:border-[#3b3a39] hover:border-pbi-yellow/50 transition-all h-full flex flex-col">
-                            <div class="flex items-center mb-4">
-                                <span class="tips-3d-icon text-2xl mr-3">💡</span>
-                                <h3 class="font-bold text-xl text-[#323130] dark:text-white">Quick Tips</h3>
-                            </div>
-                            <ul class="text-sm text-pbi-grey dark:text-[#a19f9d] space-y-3 flex-1">
-                                <li class="flex items-start"><span class="text-pbi-yellow mr-2">•</span><span>Always
-                                        start development by defining the core business question to solve.</span></li>
-                                <li class="flex items-start"><span class="text-pbi-yellow mr-2">•</span><span>Use
-                                        Bookmarks and Selection panes to create guided analytical narratives.</span>
-                                </li>
-                                <li class="flex items-start"><span class="text-pbi-yellow mr-2">•</span><span>Test
-                                        reports on various screen resolutions and mobile device layouts.</span></li>
-                                <li class="flex items-start"><span class="text-pbi-yellow mr-2">•</span><span>Validate
-                                        automated numbers with business experts to ensure data accuracy.</span></li>
-                                <li class="flex items-start"><span class="text-pbi-yellow mr-2">•</span><span>Regularly
-                                        prune your data model of any unused measures or calculated columns.</span></li>
+                                        save versions of your work so you can go back if something breaks.</span></li>
                             </ul>
                         </div>
                     </article>
@@ -652,12 +641,11 @@
             setHeroActive('dashboard');
             setNavbarActive('dashboard');
             setFooterActive('dashboard');
-            // Ensure the selector is updated if it exists and then switch to the selected dashboard
             const selector = document.getElementById('dashboard-selector');
             if (selector && selector.value) {
                 switchDashboard(selector.value);
             } else {
-                switchDashboard(dashboards[0].id); // Default to the first dashboard in the array
+                switchDashboard(dashboards[0].id);
             }
         }
 
@@ -714,7 +702,6 @@
 
             initThree();
 
-            // Populate dashboard selector
             const selector = document.getElementById('dashboard-selector');
             if (selector) {
                 selector.innerHTML = dashboards.map(db => `<option value="${db.id}">${db.title}</option>`).join('');
