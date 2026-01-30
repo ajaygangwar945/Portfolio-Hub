@@ -68,6 +68,18 @@ The Hub consists of 16 distinct portals, each tailored to a specific technology 
 
 ---
 
+## 🏛️ Project Structure
+
+```bash
+Portfolio-Hub/
+├── assets/                 # Centralized storage for all images, SVGs, and visual assets
+├── index.html              # Main entry HUB connecting all pods
+├── [domain].html           # 16 Specialized portfolio portals (python.html, java.html, etc.)
+└── README.md               # Documentation and deployment guides
+```
+
+---
+
 ## ⚙️ Local Setup
 
 1. **Clone the repository**:
