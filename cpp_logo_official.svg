@@ -1,0 +1,16 @@
+<svg width="100" height="100" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Hexagonal Background -->
+  <path d="M50 5L89 27.5V72.5L50 95L11 72.5V27.5L50 5Z" fill="#659AD2"/>
+  <path d="M50 5L89 27.5V72.5L50 95L50 50L89 27.5Z" fill="#00599C"/>
+  <path d="M50 95L11 72.5V27.5L50 50L50 95Z" fill="#004482"/>
+  
+  <!-- Large white C -->
+  <path d="M52 32C47.5 32 43.5 33.5 40 36.5C36.5 39.5 34.5 44 34.5 50C34.5 56 36.5 60.5 40 63.5C43.5 66.5 47.5 68 52 68C56.5 68 60 67 63 65L68 72C63.5 76 58 78 52 78C44 78 37.5 75.5 32 70.5C26.5 65.5 24 58.5 24 50C24 41.5 26.5 34.5 32 29.5C37.5 24.5 44 22 52 22C58 22 63.5 24 68 28L63 35C60 33 56.5 32 52 32Z" fill="white"/>
+  
+  <!-- Plus Symbols -->
+  <rect x="64" y="47" width="14" height="6" rx="1" fill="white"/>
+  <rect x="68" y="43" width="6" height="14" rx="1" fill="white"/>
+  
+  <rect x="80" y="47" width="14" height="6" rx="1" fill="white"/>
+  <rect x="84" y="43" width="6" height="14" rx="1" fill="white"/>
+</svg>

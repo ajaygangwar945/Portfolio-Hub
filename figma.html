@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FIGMA PORTFOLIO</title>
+    <link rel="icon" type="image/svg+xml" href="Figma-logo.svg">
+
+    <!-- Tailwind -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Three.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        figma: {
+                            purple: '#A259FF',
+                            orange: '#F24E1E',
+                            pink: '#FF7262',
+                            blue: '#1ABCFE',
+                            green: '#0ACF83',
+                            dark: '#111111',
+                            darkBg: '#050505'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Segoe+UI:wght@300;400;600;700&display=swap');
+
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        #three-canvas {
+            position: fixed;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            pointer-events: none;
+            opacity: 0.7;
+        }
+
+        .glass-nav {
+            background: rgba(255, 255, 255, 0.7);
+            -webkit-backdrop-filter: blur(12px);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(162, 89, 255, 0.1);
+        }
+
+        .dark .glass-nav {
+            background: rgba(5, 5, 5, 0.8);
+        }
+
+        .kpi-card {
+            perspective: 1000px;
+        }
+
+        .kpi-inner {
+            transform-style: preserve-3d;
+            transition: all 0.25s ease;
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(10px);
+        }
+
+        .dark .kpi-inner {
+            background: rgba(17, 17, 17, 0.8);
+        }
+
+        .kpi-card:hover .kpi-inner {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 20px 40px -15px rgba(162, 89, 255, 0.3);
+            border-color: rgba(162, 89, 255, 0.5);
+        }
+
+        .fade-in-3d {
+            animation: fadeIn3D 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+        }
+
+        @keyframes fadeIn3D {
+            from {
+                opacity: 0;
+                transform: perspective(1000px) rotateX(-20deg) translateZ(-50px);
+            }
+
+            to {
+                opacity: 1;
+                transform: perspective(1000px) rotateX(0deg) translateZ(0);
+            }
+        }
+
+        button:active {
+            transform: scale(0.95);
+        }
+    </style>
+</head>
+
+<body
+    class="min-h-screen flex flex-col bg-[#fdfdfd] dark:bg-figma-darkBg text-[#212121] dark:text-[#f3f2f1] overflow-x-hidden">
+    <canvas id="three-canvas"></canvas>
+
+    <header class="relative z-20 border-b border-figma-purple/20 glass-nav">
+        <div class="max-w-6xl mx-auto flex items-center justify-between px-4 sm:px-6 h-16">
+            <div class="flex items-center gap-3">
+                <div class="flex items-center transition-transform hover:rotate-12">
+                    <img src="Figma-logo.svg" class="w-8 h-8" alt="Figma Logo">
+                </div>
+                <div>
+                    <p class="text-sm font-bold uppercase tracking-tighter">FIGMA PORTFOLIO</p>
+                    <p class="text-[10px] text-gray-500 font-bold uppercase tracking-widest">Architect • Designer •
+                        Developer</p>
+                </div>
+            </div>
+            <div class="flex items-center gap-3">
+                <button onclick="location.href='index.html'" aria-label="View all language portals"
+                    class="px-4 py-1.5 rounded-full text-xs font-bold border border-gray-200 dark:border-gray-700 bg-transparent text-gray-500 hover:bg-figma-purple hover:text-white transition-all">All
+                    Portals</button>
+                <div class="h-4 w-[1px] bg-gray-300 dark:bg-gray-700 mx-1"></div>
+                <button id="nav-system-btn" class="px-4 py-1.5 rounded-full text-xs font-bold transition-all"
+                    onclick="showHub()" aria-label="Show Figma Projects">Projects</button>
+                <button id="nav-vault-btn" class="px-4 py-1.5 rounded-full text-xs font-bold transition-all"
+                    onclick="showVault()" aria-label="Show Figma Fundamentals">Figma Fundamentals</button>
+                <button onclick="toggleTheme()" title="Toggle Theme" aria-label="Toggle dark and light theme"
+                    class="p-2 rounded-full hover:bg-black/5 dark:hover:bg-white/5 transition-all">
+                    <svg id="theme-icon" class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <main class="relative z-10 flex-none pb-20">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 pt-12 space-y-12">
+            <section class="grid gap-12 lg:grid-cols-[1.5fr,1fr] items-center">
+                <div class="space-y-6">
+                    <p
+                        class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-[11px] font-bold bg-figma-purple/10 text-figma-purple border border-figma-purple/20 uppercase tracking-widest">
+                        SYSTEMS ARCHITECT <span class="w-1.5 h-1.5 rounded-full bg-figma-purple animate-ping"></span>
+                    </p>
+                    <h1
+                        class="text-4xl sm:text-5xl lg:text-7xl font-black leading-[1.1] tracking-tight text-figma-purple">
+                        Atomic <br> <span class="text-black dark:text-white">Systems.</span> <br> Proto <span
+                            class="text-figma-blue">Interactive.</span></h1>
+                    <p class="text-sm sm:text-lg text-gray-500 dark:text-gray-400 font-medium leading-relaxed">Bridge
+                        the gap between vision and reality. I build robust design systems and high-fidelity interaction
+                        models that define the structural logic of modern products.</p>
+                    <div class="flex gap-4">
+                        <button id="hero-system-btn" onclick="showHub()" title="View Figma Projects"
+                            class="inline-flex items-center justify-center px-8 py-3 rounded-xl text-sm font-bold bg-figma-dark text-white shadow-lg hover:shadow-figma-dark/30 transition-all">Projects</button>
+                        <button id="hero-vault-btn" onclick="showVault()" title="View Figma Fundamentals"
+                            class="inline-flex items-center justify-center px-8 py-3 rounded-xl text-sm font-bold border border-figma-dark/20 hover:bg-figma-dark/5 transition-all">Figma
+                            Fundamentals</button>
+                    </div>
+                </div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div class="kpi-card shadow-xl rounded-2xl">
+                        <div class="kpi-inner p-6 rounded-2xl border border-figma-purple/10">
+                            <p class="text-[10px] font-bold text-figma-purple uppercase tracking-widest mb-1">UI/UX</p>
+                            <h3 class="text-lg font-black uppercase">PORTFOLIO</h3>
+                            <div class="flex items-center gap-2 mt-4"><span
+                                    class="w-2 h-2 rounded-full bg-figma-green"></span><span
+                                    class="text-[10px] font-bold text-gray-400 italic">USER_FLOWS</span></div>
+                        </div>
+                    </div>
+                    <div class="kpi-card shadow-xl rounded-2xl">
+                        <div class="kpi-inner p-6 rounded-2xl border border-figma-purple/10">
+                            <p class="text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-1">Systems</p>
+                            <h3 class="text-lg font-black">Atomic Design</h3>
+                            <p class="text-[10px] font-bold text-figma-blue mt-2 italic capitalize">COMPONENT_LIBRARY
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="content-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 fade-in-3d">
+                <!-- Data Population -->
+            </section>
+        </div>
+    </main>
+
+    <footer class="relative z-10 py-8 border-t border-figma-purple/20 dark: glass-nav">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 flex flex-col md:flex-row items-center justify-between gap-6">
+            <div class="flex items-center gap-4">
+                <div class="flex items-center gap-2">
+                    <img src="Figma-logo.svg" class="w-5 h-5 opacity-90" alt="Figma footer logo"
+                        title="Figma Portfolio Logo">
+                    <span class="text-sm font-black tracking-widest uppercase text-figma-purple">FIGMA PORTFOLIO</span>
+                </div>
+                <div class="w-[1px] h-3 bg-gray-300 dark:bg-gray-800"></div>
+                <p class="text-[10px] text-gray-600 dark:text-gray-400 font-bold uppercase tracking-widest">© 2026
+                    PORTFOLIO HUB</p>
+            </div>
+            <div class="flex items-center gap-6">
+                <button onclick="showHub()" aria-label="Go to Projects"
+                    class="footer-nav-link text-xs font-bold uppercase tracking-widest transition-all">Projects</button>
+                <button onclick="showVault()" aria-label="Go to Figma Fundamentals"
+                    class="footer-nav-link text-xs font-bold uppercase tracking-widest transition-all">Figma
+                    Fundamentals</button>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        const systemProjects = [
+            { icon: '💎', title: 'SaaS Design System', desc: 'A multi-library system with tokenized assets, component sets, and exhaustive variant documentation.', tags: ['OPS', 'SCALING'] },
+            { icon: '🏦', title: 'Banking Ecosystem', desc: 'High-fidelity end-to-end mobile flow featuring complex state logic and transaction simulations.', tags: ['FINTECH', 'UX'] },
+            { icon: '🕹️', title: 'Interactive Prototype', desc: 'A functional web app mockup built with advanced smart animate and variable-driven logic.', tags: ['ANIMATION', 'LOGIC'] }
+        ];
+
+        const curriculumVault = [
+            { icon: '💠', title: 'Components', points: ['Master components', 'Variants logic', 'Properties setup', 'Instance swaps'] },
+            { icon: '📐', title: 'Auto Layout', points: ['Flexbox logic', 'Padding/Gap', 'Constraints', 'Resizing behavior'] },
+            { icon: '🎨', title: 'Styles', points: ['Color tokens', 'Typography styles', 'Effect grids', 'Library publishing'] },
+            { icon: '✒️', title: 'Vector', points: ['Pen tool mastery', 'Boolean operations', 'Masking paths', 'Outline stroke'] },
+            { icon: '📱', title: 'Prototyping', points: ['Interaction flows', 'Smart animate', 'Scroll overflow', 'Device frames'] },
+            { icon: '🧩', title: 'Plugins', points: ['Data population', 'Icon sets', 'Accessibility checks', 'Code export'] }
+        ];
+
+        let scene, camera, renderer, nodes = [];
+        function initThree() {
+            const canvas = document.getElementById('three-canvas');
+            scene = new THREE.Scene();
+            camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+            camera.position.z = 100;
+            renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true });
+            renderer.setSize(window.innerWidth, window.innerHeight);
+
+            const colors = [0xA259FF, 0xF24E1E, 0xFF7262, 0x1ABCFE, 0x0ACF83];
+            for (let i = 0; i < 40; i++) {
+                const geometry = new THREE.OctahedronGeometry(Math.random() * 6 + 2);
+                const material = new THREE.MeshBasicMaterial({ color: colors[i % 5], transparent: true, opacity: Math.random() * 0.4 + 0.1, wireframe: true });
+                const node = new THREE.Mesh(geometry, material);
+                node.position.set((Math.random() - 0.5) * 400, (Math.random() - 0.5) * 200, (Math.random() - 0.5) * 200);
+                node.userData = { sx: (Math.random() - 0.5) * 0.1, sy: (Math.random() - 0.5) * 0.1, rs: Math.random() * 0.02 };
+                scene.add(node); nodes.push(node);
+            }
+            animate();
+        }
+
+        function animate() {
+            requestAnimationFrame(animate);
+            nodes.forEach(n => { n.position.x += n.userData.sx; n.position.y += n.userData.sy; n.rotation.x += n.userData.rs; if (Math.abs(n.position.x) > 250) n.position.x *= -1; });
+            renderer.render(scene, camera);
+        }
+
+        function showHub() {
+            const grid = document.getElementById('content-grid');
+            grid.innerHTML = systemProjects.map((p, i) => `
+                <div class="kpi-card fade-in-3d group" style="animation-delay: ${i * 0.1}s">
+                    <div class="kpi-inner rounded-3xl border border-figma-purple/10 h-full flex flex-col overflow-hidden bg-white/70 dark:bg-[#111111]/60 backdrop-blur-xl shadow-xl transition-all">
+                        <div class="h-48 overflow-hidden relative">
+                            <img src="${p.image || 'https://images.unsplash.com/photo-1611162617213-7d7a39e9b1d7?q=80&w=1000&auto=format&fit=crop'}" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" alt="${p.title}">
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
+                            <span class="absolute bottom-4 left-6 text-3xl p-3 bg-white/10 backdrop-blur-md rounded-2xl">${p.icon}</span>
+                        </div>
+                        <div class="p-8 flex-1 flex flex-col bg-white dark:bg-transparent">
+                            <div class="flex items-center justify-between mb-4">
+                                <h3 class="font-black text-xl tracking-tight text-gray-900 dark:text-white group-hover:text-figma-purple transition-colors">${p.title}</h3>
+                                <div class="flex gap-2">
+                                    ${p.tags.map(t => `<span class="text-[9px] font-black px-2 py-0.5 rounded-full bg-figma-purple/10 text-figma-purple uppercase tracking-wider">${t}</span>`).join('')}
+                                </div>
+                            </div>
+                            <p class="text-xs text-gray-500 dark:text-gray-400 font-medium leading-relaxed mb-6 flex-1">${p.desc}</p>
+                            <button onclick="window.open('${p.link || '#'}', '_blank')" 
+                                class="w-full py-3 rounded-xl bg-gradient-to-r from-figma-purple via-figma-pink to-figma-orange text-white text-[10px] font-black uppercase tracking-[0.2em] shadow-lg shadow-figma-purple/20 hover:shadow-figma-purple/40 hover:scale-[1.02] transition-all flex items-center justify-center gap-2">
+                                INITIALIZE PROJECT <span class="text-sm">→</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+            setActive('hub');
+        }
+
+        function showVault() {
+            const grid = document.getElementById('content-grid');
+            const headerTitle = "INTERFACE SYSTEMS";
+            const headerDesc = "Scale your design workflow with atomic principles. Build robust component libraries and interactive prototypes that mirror production.";
+
+            const headerHTML = `
+                <div class="col-span-1 md:col-span-2 lg:col-span-3 p-8 rounded-3xl bg-opacity-50 border border-figma-purple/20 mb-4 relative overflow-hidden group">
+                    <div class="absolute inset-0 bg-gradient-to-r from-figma-purple/10 to-transparent opacity-0 group-hover:opacity-20 transition-opacity"></div>
+                    <h2 class="text-3xl font-black uppercase mb-4 tracking-tighter text-[#201f1e] dark:text-white">${headerTitle}</h2>
+                    <p class="text-gray-400 font-medium max-w-2xl text-sm sm:text-base">${headerDesc}</p>
+                </div>
+            `;
+
+            const cardsHTML = curriculumVault.map((v, i) => `
+                <div class="kpi-card fade-in-3d" style="animation-delay: ${i * 0.1}s">
+                    <div class="kpi-inner p-6 rounded-2xl border border-figma-purple/10 h-full bg-white/40 dark:bg-gray-900/40 hover:bg-white/60 dark:hover:bg-gray-900/60 transition-all shadow-sm">
+                        <div class="flex items-center gap-4 mb-6">
+                            <span class="text-2xl bg-figma-purple/10 p-3 rounded-lg">${v.icon}</span>
+                            <h3 class="font-bold text-lg text-gray-900 dark:text-white tracking-tight">${v.title}</h3>
+                        </div>
+                        <ul class="space-y-3">
+                            ${v.points.map(p => `
+                                <li class="flex items-start text-[11px] text-gray-600 dark:text-gray-400 font-mono tracking-wide">
+                                    <span class="text-figma-purple mr-3 font-bold opacity-80">//</span>
+                                    <span class="leading-relaxed hover:text-gray-900 dark:hover:text-gray-200 transition-colors">${p}</span>
+                                </li>
+                            `).join('')}
+                        </ul>
+                    </div>
+                </div>
+            `).join('');
+
+            grid.innerHTML = headerHTML + cardsHTML;
+            setActive('vault');
+        }
+
+        function setHeroActive(mode) {
+            const sBtn = document.getElementById('hero-system-btn');
+            const vBtn = document.getElementById('hero-vault-btn');
+            const act = "inline-flex items-center justify-center px-8 py-3 rounded-xl text-sm font-bold bg-figma-purple text-white shadow-lg hover:shadow-figma-purple/30 transition-all";
+            const inact = "inline-flex items-center justify-center px-8 py-3 rounded-xl text-sm font-bold border border-figma-purple/20 hover:bg-figma-purple/5 transition-all text-gray-500 dark:text-gray-400";
+            sBtn.className = mode === 'hub' ? act : inact;
+            vBtn.className = mode === 'vault' ? act : inact;
+        }
+
+        function updateFooterLinks(mode) {
+            document.querySelectorAll('.footer-nav-link').forEach(btn => {
+                const label = btn.textContent.replace(/\s+/g, ' ').trim().toLowerCase();
+                const isActive = (mode === 'hub' && label === 'projects') || (mode === 'vault' && label === 'figma fundamentals');
+                btn.className = `footer-nav-link px-5 py-2 rounded-full text-[10px] font-black uppercase tracking-widest transition-all ${isActive ? 'bg-figma-purple text-white shadow-lg' : 'border border-transparent text-gray-500 hover:text-figma-purple'}`;
+            });
+        }
+
+        function setActive(mode) {
+            const hBtn = document.getElementById('nav-system-btn');
+            const vBtn = document.getElementById('nav-vault-btn');
+            const act = "px-4 py-1.5 rounded-full text-xs font-bold transition-all bg-figma-purple text-white shadow-lg";
+            const inact = "px-4 py-1.5 rounded-full text-xs font-bold transition-all text-gray-400 hover:text-figma-purple";
+            hBtn.className = mode === 'hub' ? act : inact;
+            vBtn.className = mode === 'vault' ? act : inact;
+            setHeroActive(mode);
+            updateFooterLinks(mode);
+        }
+
+        function toggleTheme() {
+            document.documentElement.classList.toggle('dark');
+            const isDark = document.documentElement.classList.contains('dark');
+            localStorage.setItem('theme', isDark ? 'dark' : 'light');
+        }
+
+        window.onload = () => { initThree(); showHub(); if (localStorage.getItem('theme') === 'dark') toggleTheme(); };
+    </script>
+</body>
+
+</html>

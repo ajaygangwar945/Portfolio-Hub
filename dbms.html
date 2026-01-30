@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DBMS PORTFOLIO</title>
+    <link rel="icon" type="image/svg+xml" href="database-svgrepo-com.svg">
+
+    <!-- Tailwind -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Three.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        dbms: {
+                            teal: '#008080',
+                            cyan: '#00ffff',
+                            dark: '#0a1a1a',
+                            lightBg: '#f4fcfc',
+                            darkBg: '#050a0a',
+                            accent: '#008080'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;600&display=swap');
+
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        code {
+            font-family: 'Fira Code', monospace;
+        }
+
+        #three-canvas {
+            position: fixed;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            pointer-events: none;
+            opacity: 0.6;
+        }
+
+        .glass-nav {
+            background: rgba(255, 255, 255, 0.7);
+            -webkit-backdrop-filter: blur(12px);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(0, 128, 128, 0.1);
+        }
+
+        .dark .glass-nav {
+            background: rgba(10, 6, 1, 0.7);
+            border-bottom: 1px solid rgba(0, 255, 255, 0.1);
+        }
+
+        .kpi-card {
+            perspective: 1000px;
+        }
+
+        .kpi-inner {
+            transform-style: preserve-3d;
+            transition: all 0.25s ease;
+            background: rgba(255, 255, 255, 0.6);
+            -webkit-backdrop-filter: blur(10px);
+            backdrop-filter: blur(10px);
+        }
+
+        .dark .kpi-inner {
+            background: rgba(26, 16, 2, 0.6);
+        }
+
+        .kpi-card:hover .kpi-inner {
+            transform: translateY(-8px) rotateX(2deg);
+            box-shadow: 0 20px 40px -15px rgba(0, 128, 128, 0.3);
+            border-color: rgba(0, 128, 128, 0.5);
+        }
+
+        .fade-in-3d {
+            animation: fadeIn3D 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+        }
+
+        @keyframes fadeIn3D {
+            from {
+                opacity: 0;
+                transform: perspective(1000px) rotateX(-20deg) translateZ(-50px);
+            }
+
+            to {
+                opacity: 1;
+                transform: perspective(1000px) rotateX(0deg) translateZ(0);
+            }
+        }
+
+        button:active {
+            transform: scale(0.95);
+        }
+    </style>
+</head>
+
+<body
+    class="min-h-screen flex flex-col bg-dbms-lightBg dark:bg-dbms-darkBg text-[#212121] dark:text-[#f3f2f1] overflow-x-hidden">
+    <canvas id="three-canvas"></canvas>
+
+    <header class="relative z-20 border-b border-dbms-teal/20 glass-nav">
+        <div class="max-w-6xl mx-auto flex items-center justify-between px-4 sm:px-6 h-16">
+            <div class="flex items-center gap-3">
+                <div class="flex items-center transition-transform hover:rotate-12">
+                    <img src="database-svgrepo-com.svg" class="w-8 h-8 rounded-lg shadow-lg" alt="DBMS Portfolio Logo">
+                </div>
+                <div>
+                    <p class="text-sm font-bold uppercase tracking-tighter text-dbms-teal">DBMS PORTFOLIO</p>
+                    <p class="text-[10px] text-gray-500 font-bold uppercase tracking-widest">Query • Index • Store</p>
+                </div>
+            </div>
+            <div class="flex items-center gap-3">
+                <button onclick="location.href='index.html'" aria-label="View all language portals"
+                    class="px-4 py-1.5 rounded-full text-xs font-bold border border-gray-200 dark:border-gray-700 bg-transparent text-gray-500 hover:bg-dbms-teal hover:text-white transition-all">All
+                    Portals</button>
+                <div class="h-4 w-[1px] bg-gray-300 dark:bg-gray-700 mx-1"></div>
+                <button id="nav-hub-btn" class="px-4 py-1.5 rounded-full text-xs font-bold transition-all"
+                    onclick="showHub()" aria-label="Show DBMS Projects">Projects</button>
+                <button id="nav-vault-btn" class="px-4 py-1.5 rounded-full text-xs font-bold transition-all"
+                    onclick="showVault()" aria-label="Show DBMS Fundamentals">DBMS Fundamentals</button>
+                <button onclick="toggleTheme()" title="Toggle Theme" aria-label="Toggle dark and light theme"
+                    class="p-2 rounded-full hover:bg-black/5 dark:hover:bg-white/5 transition-all">
+                    <svg id="theme-icon" class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <main class="relative z-10 flex-none pb-20">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 pt-12 space-y-12">
+            <section class="grid gap-12 lg:grid-cols-[1.5fr,1fr] items-center">
+                <div class="space-y-6">
+                    <p
+                        class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-[11px] font-bold bg-dbms-teal/10 text-dbms-teal border border-dbms-teal/20 uppercase tracking-widest">
+                        DATA ARCHITECT <span class="w-1.5 h-1.5 rounded-full bg-dbms-teal animate-ping"></span></p>
+                    <h1
+                        class="text-4xl sm:text-5xl lg:text-7xl font-black leading-[1.1] tracking-tight text-[#212121] dark:text-white">
+                        Relational <br> <span
+                            class="text-transparent bg-clip-text bg-gradient-to-r from-dbms-teal to-dbms-cyan drop-shadow-sm">Prowess.</span>
+                        <br> Data <span
+                            class="text-transparent bg-clip-text bg-gradient-to-r from-dbms-cyan to-blue-400">Integrity.</span>
+                    </h1>
+                    <p class="text-sm sm:text-lg text-gray-500 dark:text-gray-400 font-medium leading-relaxed">Master
+                        the logic of structure. I architect robust schemas and high-performance querying systems that
+                        ensure consistency and speed across massive datasets.</p>
+                    <div class="flex gap-4">
+                        <button id="hero-hub-btn" onclick="showHub()" title="View DBMS Projects"
+                            class="inline-flex items-center justify-center px-8 py-3 rounded-xl text-sm font-bold bg-dbms-teal text-white shadow-lg hover:shadow-dbms-teal/30 transition-all">Projects</button>
+                        <button id="hero-vault-btn" onclick="showVault()" title="View DBMS Fundamentals"
+                            class="inline-flex items-center justify-center px-8 py-3 rounded-xl text-sm font-bold border border-dbms-teal/20 hover:bg-dbms-teal/5 transition-all text-gray-500 dark:text-gray-400">DBMS
+                            Fundamentals</button>
+                    </div>
+                </div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div class="kpi-card shadow-xl rounded-2xl">
+                        <div class="kpi-inner p-6 rounded-2xl border border-dbms-teal/10">
+                            <p class="text-[10px] font-bold text-dbms-teal uppercase tracking-widest mb-1">Architecture
+                            </p>
+                            <h3 class="text-lg font-black uppercase text-gray-900 dark:text-white">SCALABLE</h3>
+                            <div class="flex items-center gap-2 mt-4"><span
+                                    class="w-2 h-2 rounded-full bg-dbms-teal animate-pulse"></span><span
+                                    class="text-[10px] font-bold text-gray-400 italic">25+_SCHEMAS</span></div>
+                        </div>
+                    </div>
+                    <div class="kpi-card shadow-xl rounded-2xl">
+                        <div class="kpi-inner p-6 rounded-2xl border border-dbms-teal/10">
+                            <p class="text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-1">Stack</p>
+                            <h3 class="text-lg font-black text-gray-900 dark:text-white">SQL / NoSQL</h3>
+                            <p class="text-[10px] font-bold text-dbms-teal mt-2 italic capitalize">ACID_COMPLIANT</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="content-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 fade-in-3d">
+                <!-- Data Population -->
+            </section>
+        </div>
+    </main>
+
+    <footer class="relative z-10 py-8 border-t border-dbms-teal/20 glass-nav">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 flex flex-col md:flex-row items-center justify-between gap-6">
+            <div class="flex items-center gap-4">
+                <div class="flex items-center gap-2">
+                    <img src="database-svgrepo-com.svg" class="w-5 h-5 opacity-90">
+                    <span class="text-sm font-black tracking-widest uppercase text-dbms-teal">DBMS PORTFOLIO</span>
+                </div>
+                <div class="w-[1px] h-3 bg-gray-300 dark:bg-gray-800"></div>
+                <p class="text-[10px] text-gray-600 dark:text-gray-400 font-bold uppercase tracking-widest">© 2026
+                    PORTFOLIO HUB</p>
+            </div>
+            <div class="flex items-center gap-6">
+                <button onclick="showHub()"
+                    class="footer-nav-link text-xs font-bold uppercase tracking-widest transition-all">Projects</button>
+                <button onclick="showVault()"
+                    class="footer-nav-link text-xs font-bold uppercase tracking-widest transition-all">DBMS
+                    Fundamentals</button>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        const hubProjects = [
+            { icon: '🌐', title: 'Social Media DB', desc: 'Designed a normalized relational schema for user connections, posts, and interaction metrics with foreign key constraints.', tags: ['SCHEMA', 'GRAPH'], image: 'social_media_db_viz_1769531173211.png', link: '#' },
+            { icon: '📦', title: 'E-commerce Inventory', desc: 'Implemented High-volume transaction database with stored procedures for real-time stock management and order processing.', tags: ['TRANSACTION', 'ACID'], image: 'ecommerce_inventory_viz_1769531201448.png', link: '#' },
+            { icon: '⚡', title: 'Query Performance', desc: 'Optimized complex reporting queries by analyzing execution plans and implementing composite indexes, reducing load time by 40%.', tags: ['PERFORMANCE', 'INDEX'], image: 'query_performance_viz_1769531229957.png', link: '#' }
+        ];
+
+        const vaultLessons = [
+            { icon: '🏗️', title: 'Data Design', points: ['Blueprints & ER Diagrams', 'Efficient Normalization', 'Schema Architecture', 'Reliability Constraints'] },
+            { icon: '🔍', title: 'Querying (SQL)', points: ['Complex Data Joins', 'Advanced Data Logic', 'Intelligent Subqueries', 'Fast Aggregations'] },
+            { icon: '⚡', title: 'Speed Tuning', points: ['High-Speed Indexing', 'Fast Execution Plans', 'Storage Optimization', 'Performance Auditing'] },
+            { icon: '🛡️', title: 'Reliability', points: ['Data Safety (ACID)', 'Safe Transactions', 'Conflict Handling', 'System Fail-safes'] },
+            { icon: '☁️', title: 'Modern DBs', points: ['Flexible NoSQL Data', 'Document & Key-Value', 'Scaling Strategies', 'Global Distribution'] },
+            { icon: '🔐', title: 'Security', points: ['User Permissions', 'Backup & Recovery', 'Automated Procedures', 'Security Audits'] }
+        ];
+
+        let scene, camera, renderer, cubes = [];
+        function initThree() {
+            const canvas = document.getElementById('three-canvas');
+            scene = new THREE.Scene();
+            camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+            camera.position.z = 100;
+            renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true });
+            renderer.setSize(window.innerWidth, window.innerHeight);
+
+            for (let i = 0; i < 30; i++) {
+                const geometry = new THREE.BoxGeometry(6, 6, 6);
+                const material = new THREE.MeshBasicMaterial({ color: 0x1f457e, transparent: true, opacity: Math.random() * 0.3 + 0.1, wireframe: true });
+                const cube = new THREE.Mesh(geometry, material);
+                cube.position.set((Math.random() - 0.5) * 400, (Math.random() - 0.5) * 200, (Math.random() - 0.5) * 200);
+                cube.userData = { sx: (Math.random() - 0.5) * 0.1, sy: (Math.random() - 0.5) * 0.1, rs: Math.random() * 0.02 };
+                scene.add(cube); cubes.push(cube);
+            }
+            animate();
+        }
+
+        function animate() {
+            requestAnimationFrame(animate);
+            cubes.forEach(c => { c.position.x += c.userData.sx; c.rotation.y += c.userData.rs; if (Math.abs(c.position.x) > 250) c.position.x *= -1; });
+            renderer.render(scene, camera);
+        }
+
+        function showHub() {
+            const grid = document.getElementById('content-grid');
+            grid.innerHTML = hubProjects.map((p, i) => `
+                <div class="kpi-card fade-in-3d group" style="animation-delay: ${i * 0.1}s">
+                    <div class="kpi-inner rounded-3xl border border-dbms-teal/10 h-full flex flex-col overflow-hidden bg-white/70 dark:bg-dbms-dark/60 backdrop-blur-xl shadow-xl transition-all">
+                        <div class="h-48 overflow-hidden relative">
+                            <img src="${p.image}" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" alt="${p.title}">
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
+                            <span class="absolute bottom-4 left-6 text-3xl p-3 bg-white/10 backdrop-blur-md rounded-2xl">${p.icon}</span>
+                        </div>
+                        <div class="p-8 flex-1 flex flex-col bg-white dark:bg-transparent">
+                            <div class="flex items-center justify-between mb-4">
+                                <h3 class="font-black text-xl tracking-tight text-gray-900 dark:text-white group-hover:text-dbms-teal transition-colors">${p.title}</h3>
+                                <div class="flex gap-2">
+                                    ${p.tags.map(t => `<span class="text-[9px] font-black px-2 py-0.5 rounded-full bg-dbms-teal/10 text-dbms-teal uppercase tracking-wider">${t}</span>`).join('')}
+                                </div>
+                            </div>
+                            <p class="text-xs text-gray-500 dark:text-gray-400 font-medium leading-relaxed mb-6 flex-1">${p.desc}</p>
+                            <button onclick="window.open('${p.link}', '_blank')" 
+                                class="w-full py-3 rounded-xl bg-gradient-to-r from-dbms-teal to-dbms-cyan text-white text-[10px] font-black uppercase tracking-[0.2em] shadow-lg shadow-dbms-teal/20 hover:shadow-dbms-teal/40 hover:scale-[1.02] transition-all flex items-center justify-center gap-2">
+                                INITIALIZE DATABASE <span class="text-sm">→</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+            setActive('hub');
+        }
+
+        function escapeHTML(str) {
+            const div = document.createElement('div');
+            div.textContent = str;
+            return div.innerHTML;
+        }
+
+        function showVault() {
+            const grid = document.getElementById('content-grid');
+            const headerTitle = "CORE COMPETENCIES";
+            const headerDesc = "My technical foundation in database systems. Covering everything from initial schema design to advanced transaction management and security.";
+
+            const headerHTML = `
+                <div class="col-span-1 md:col-span-2 lg:col-span-3 p-8 rounded-3xl bg-opacity-50 border border-dbms-teal/20 mb-4 relative overflow-hidden group">
+                    <div class="absolute inset-0 bg-gradient-to-r from-dbms-teal/10 to-transparent opacity-0 group-hover:opacity-20 transition-opacity"></div>
+                    <h2 class="text-3xl font-black uppercase mb-4 tracking-tighter text-gray-900 dark:text-white">${headerTitle}</h2>
+                    <p class="text-gray-600 dark:text-gray-400 font-medium max-w-2xl text-sm sm:text-base">${headerDesc}</p>
+                </div>
+            `;
+
+            const cardsHTML = vaultLessons.map((v, i) => `
+                <div class="kpi-card fade-in-3d" style="animation-delay: ${i * 0.1}s">
+                    <div class="kpi-inner p-6 rounded-2xl border border-dbms-teal/10 h-full bg-white/40 dark:bg-dbms-dark/40 hover:bg-white/60 dark:hover:bg-dbms-dark/60 transition-all shadow-sm">
+                        <div class="flex items-center gap-4 mb-6">
+                            <span class="text-2xl bg-dbms-teal/10 dark:bg-dbms-teal/20 p-3 rounded-lg">${v.icon}</span>
+                            <h3 class="font-bold text-lg text-gray-900 dark:text-white tracking-tight">${v.title}</h3>
+                        </div>
+                        <ul class="space-y-3">
+                            ${v.points.map(p => `
+                                <li class="flex items-start text-[11px] text-gray-600 dark:text-gray-400 font-mono tracking-wide">
+                                    <span class="text-dbms-teal mr-3 font-bold opacity-80">//</span>
+                                    <span class="leading-relaxed hover:text-gray-900 dark:hover:text-gray-200 transition-colors">${escapeHTML(p)}</span>
+                                </li>
+                            `).join('')}
+                        </ul>
+                    </div>
+                </div>
+            `).join('');
+
+            grid.innerHTML = headerHTML + cardsHTML;
+            setActive('vault');
+        }
+
+        function setHeroActive(mode) {
+            const hBtn = document.getElementById('hero-hub-btn');
+            const vBtn = document.getElementById('hero-vault-btn');
+            const act = "inline-flex items-center justify-center px-8 py-3 rounded-xl text-sm font-bold bg-dbms-teal text-white shadow-lg hover:shadow-dbms-teal/30 transition-all";
+            const inact = "inline-flex items-center justify-center px-8 py-3 rounded-xl text-sm font-bold border border-dbms-teal/20 hover:bg-dbms-teal/5 transition-all text-gray-500 dark:text-gray-400";
+            hBtn.className = mode === 'hub' ? act : inact;
+            vBtn.className = mode === 'vault' ? act : inact;
+        }
+
+        function updateFooterLinks(mode) {
+            document.querySelectorAll('.footer-nav-link').forEach(btn => {
+                const label = btn.textContent.replace(/\s+/g, ' ').trim().toLowerCase();
+                const isActive = (mode === 'hub' && label === 'projects') || (mode === 'vault' && label === 'dbms fundamentals');
+                btn.className = `footer-nav-link px-5 py-2 rounded-full text-[10px] font-black uppercase tracking-widest transition-all ${isActive ? 'bg-dbms-teal text-white shadow-lg' : 'border border-transparent text-gray-500 hover:text-dbms-teal'}`;
+            });
+        }
+
+        function setActive(mode) {
+            const hBtn = document.getElementById('nav-hub-btn');
+            const vBtn = document.getElementById('nav-vault-btn');
+            const act = "px-4 py-1.5 rounded-full text-xs font-bold transition-all bg-dbms-teal text-white shadow-lg";
+            const inact = "px-4 py-1.5 rounded-full text-xs font-bold transition-all text-gray-400 hover:text-dbms-teal";
+            hBtn.className = mode === 'hub' ? act : inact;
+            vBtn.className = mode === 'vault' ? act : inact;
+            setHeroActive(mode);
+            updateFooterLinks(mode);
+        }
+
+        function toggleTheme() {
+            document.documentElement.classList.toggle('dark');
+            const isDark = document.documentElement.classList.contains('dark');
+            localStorage.setItem('theme', isDark ? 'dark' : 'light');
+            cubes.forEach(c => c.material.color.setHex(isDark ? 0x00ffff : 0x008080));
+        }
+
+        window.onload = () => { initThree(); showHub(); if (localStorage.getItem('theme') === 'dark') toggleTheme(); };
+    </script>
+</body>
+
+</html>

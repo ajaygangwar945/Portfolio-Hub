@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CANVA PORTFOLIO</title>
+    <link rel="icon" type="image/svg+xml" href="canva-icon.svg">
+
+    <!-- Tailwind -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Three.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        canva: {
+                            purple: '#6420ff',
+                            teal: '#00c4cc',
+                            bright: '#00c4cc',
+                            dark: '#1e0a4f',
+                            lightBg: '#f6faff',
+                            darkBg: '#05020a',
+                            accent: '#6420ff'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Segoe+UI:wght@300;400;600;700&display=swap');
+
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        #three-canvas {
+            position: fixed;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            pointer-events: none;
+            opacity: 0.6;
+        }
+
+        .glass-nav {
+            background: rgba(255, 255, 255, 0.7);
+            -webkit-backdrop-filter: blur(12px);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(100, 32, 255, 0.1);
+        }
+
+        .dark .glass-nav {
+            background: rgba(2, 10, 10, 0.8);
+        }
+
+        .kpi-card {
+            perspective: 1000px;
+        }
+
+        .kpi-inner {
+            transform-style: preserve-3d;
+            transition: all 0.25s ease;
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(10px);
+        }
+
+        .dark .kpi-inner {
+            background: rgba(5, 26, 27, 0.8);
+        }
+
+        .kpi-card:hover .kpi-inner {
+            transform: translateY(-8px) rotateX(2deg);
+            box-shadow: 0 20px 40px -15px rgba(0, 196, 204, 0.3);
+            border-color: rgba(0, 196, 204, 0.5);
+        }
+
+        .fade-in-3d {
+            animation: fadeIn3D 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+        }
+
+        @keyframes fadeIn3D {
+            from {
+                opacity: 0;
+                transform: perspective(1000px) rotateX(-20deg) translateZ(-50px);
+            }
+
+            to {
+                opacity: 1;
+                transform: perspective(1000px) rotateX(0deg) translateZ(0);
+            }
+        }
+
+        button:active {
+            transform: scale(0.95);
+        }
+    </style>
+</head>
+
+<body
+    class="min-h-screen flex flex-col bg-canva-lightBg dark:bg-canva-darkBg text-[#212121] dark:text-[#f3f2f1] overflow-x-hidden">
+    <canvas id="three-canvas"></canvas>
+
+    <header class="relative z-20 border-b border-canva-purple/20 glass-nav">
+        <div class="max-w-6xl mx-auto flex items-center justify-between px-4 sm:px-6 h-16">
+            <div class="flex items-center gap-3 group">
+                <div class="flex items-center transition-transform hover:rotate-12">
+                    <img src="canva-icon.svg" class="w-8 h-8 rounded-lg shadow-lg" alt="Canva Logo">
+                </div>
+                <div>
+                    <p class="text-sm font-bold uppercase tracking-tighter">CANVA PORTFOLIO</p>
+                    <p class="text-[10px] text-gray-500 font-bold uppercase tracking-widest">Architect • Designer •
+                        Developer</p>
+                </div>
+            </div>
+            <div class="flex items-center gap-3">
+                <button onclick="location.href='index.html'" aria-label="View all language portals"
+                    class="px-4 py-1.5 rounded-full text-xs font-bold border border-canva-purple/20 bg-transparent text-canva-purple hover:bg-gradient-to-r hover:from-canva-purple hover:to-canva-teal hover:text-white transition-all">All
+                    Portals</button>
+                <div class="h-4 w-[1px] bg-gray-300 dark:bg-gray-700 mx-1"></div>
+                <button id="nav-hub-btn" class="px-4 py-1.5 rounded-full text-xs font-bold transition-all"
+                    onclick="showHub()" aria-label="Show Canva Projects">Projects</button>
+                <button id="nav-vault-btn" class="px-4 py-1.5 rounded-full text-xs font-bold transition-all"
+                    onclick="showVault()" aria-label="Show Canva Fundamentals">Canva Fundamentals</button>
+                <button onclick="toggleTheme()" title="Toggle Theme" aria-label="Toggle dark and light theme"
+                    class="p-2 rounded-full hover:bg-black/5 dark:hover:bg-white/5 transition-all">
+                    <svg id="theme-icon" class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <main class="relative z-10 flex-none pb-20">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 pt-12 space-y-12">
+            <section class="grid gap-12 lg:grid-cols-[1.5fr,1fr] items-center">
+                <div class="space-y-6">
+                    <p
+                        class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-[11px] font-bold bg-gradient-to-r from-canva-purple/10 to-canva-teal/10 text-canva-purple border border-canva-purple/20 uppercase tracking-widest">
+                        VISUAL ARCHITECT <span class="w-1.5 h-1.5 rounded-full bg-canva-teal animate-ping"></span></p>
+                    <h1
+                        class="text-4xl sm:text-5xl lg:text-7xl font-black leading-[1.1] tracking-tight text-[#212121] dark:text-white">
+                        Rapid <br> <span
+                            class="text-transparent bg-clip-text bg-gradient-to-r from-canva-purple to-canva-teal drop-shadow-sm">Visuals.</span>
+                        <br> Creative <span
+                            class="text-transparent bg-clip-text bg-gradient-to-r from-canva-teal to-blue-400">Impact.</span>
+                    </h1>
+                    <p class="text-sm sm:text-lg text-gray-500 dark:text-gray-400 font-medium leading-relaxed">
+                        Accelerate your visual output. Master the high-speed design engine of Canva. I develop
+                        professional visuals and brand assets that drive personal project identity.</p>
+                    <div class="flex gap-4">
+                        <button id="hero-hub-btn" onclick="showHub()" title="View Canva Projects"
+                            class="inline-flex items-center justify-center px-8 py-3 rounded-xl text-sm font-bold bg-canva-purple text-white shadow-lg shadow-canva-purple/30 hover:shadow-canva-purple/50 transition-all">Projects</button>
+                        <button id="hero-vault-btn" onclick="showVault()" title="View Canva Fundamentals"
+                            class="inline-flex items-center justify-center px-8 py-3 rounded-xl text-sm font-bold border border-canva-purple/20 hover:bg-canva-purple/5 transition-all">Canva
+                            Fundamentals</button>
+                    </div>
+                </div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div class="kpi-card shadow-xl rounded-2xl">
+                        <div class="kpi-inner p-6 rounded-2xl border border-canva-teal/10">
+                            <p class="text-[10px] font-bold text-canva-teal uppercase tracking-widest mb-1">Creative</p>
+                            <h3 class="text-lg font-black uppercase">PORTFOLIO</h3>
+                            <div class="flex items-center gap-2 mt-4"><span
+                                    class="w-2 h-2 rounded-full bg-canva-teal animate-pulse"></span><span
+                                    class="text-[10px] font-bold text-gray-400 italic">IDENTITY_DESIGN</span></div>
+                        </div>
+                    </div>
+                    <div class="kpi-card shadow-xl rounded-2xl">
+                        <div class="kpi-inner p-6 rounded-2xl border border-canva-teal/10">
+                            <p class="text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-1">Output</p>
+                            <h3 class="text-lg font-black">Print & Digital</h3>
+                            <p class="text-[10px] font-bold text-canva-teal mt-2 italic capitalize">SOCIAL_MEDIA_KIT
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="content-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 fade-in-3d">
+                <!-- Data Population -->
+            </section>
+        </div>
+    </main>
+
+    <footer class="relative z-10 py-8 border-t border-canva-purple/20 glass-nav">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 flex flex-col md:flex-row items-center justify-between gap-6">
+            <div class="flex items-center gap-4">
+                <div class="flex items-center gap-2">
+                    <img src="canva-icon.svg" class="w-5 h-5 opacity-90" alt="Canva footer logo"
+                        title="Canva Portfolio Logo">
+                    <span class="text-sm font-black tracking-widest uppercase text-canva-purple">CANVA PORTFOLIO</span>
+                </div>
+                <div class="w-[1px] h-3 bg-gray-300 dark:bg-gray-800"></div>
+                <p class="text-[10px] text-gray-600 dark:text-gray-400 font-bold uppercase tracking-widest">© 2026
+                    PORTFOLIO HUB</p>
+            </div>
+            <div class="flex items-center gap-6">
+                <button onclick="showHub()" aria-label="Go to Projects"
+                    class="footer-nav-link px-5 py-2 rounded-full text-[10px] font-black uppercase tracking-widest transition-all">Projects</button>
+                <button onclick="showVault()" aria-label="Go to Canva Fundamentals"
+                    class="footer-nav-link px-5 py-2 rounded-full text-[10px] font-black uppercase tracking-widest transition-all">Canva
+                    Fundamentals</button>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        const hubProjects = [
+            {
+                icon: '📱',
+                title: 'Social Campaign',
+                desc: 'Unified multi-platform content system for Instagram, LinkedIn, and Facebook with scheduled automation.',
+                tags: ['MARKETING', 'SOLO'],
+                image: 'C:/Users/ajayg/.gemini/antigravity/brain/6a7bf6d5-90aa-44fd-aaa8-997bcff5848c/canva_social_campaign_viz_1769666361025.png'
+            },
+            {
+                icon: '📐',
+                title: 'Brand Style Guide',
+                desc: 'Comprehensive visual identity system including logo variants, palettes, and typography tokens.',
+                tags: ['BRAND', 'DESIGN'],
+                image: 'C:/Users/ajayg/.gemini/antigravity/brain/6a7bf6d5-90aa-44fd-aaa8-997bcff5848c/canva_brand_guide_viz_1769666376683.png'
+            },
+            {
+                icon: '📹',
+                title: 'Video Presentation',
+                desc: 'High-speed cinematic presentation with animated elements and embedded brand assets.',
+                tags: ['VIDEO', 'PRES'],
+                image: 'C:/Users/ajayg/.gemini/antigravity/brain/6a7bf6d5-90aa-44fd-aaa8-997bcff5848c/canva_video_pres_viz_1769666392219.png'
+            }
+        ];
+
+        const vaultLessons = [
+            { icon: '📐', title: 'Layout', points: ['Grid systems', 'Snapping rules', 'Layer ordering', 'Grouping logic'] },
+            { icon: '🅰️', title: 'Typography', points: ['Font pairing', 'Text effects', 'Spacing control', 'Hierarchy rules'] },
+            { icon: '🎨', title: 'Brand Kit', points: ['Logo management', 'Color palettes', 'Font definition', 'Style application'] },
+            { icon: '🖼️', title: 'Elements', points: ['Frame usage', 'Shape editing', 'Photo filters', 'Mockup generator'] },
+            { icon: '✨', title: 'Magic Tools', points: ['Background remover', 'Magic resize', 'Text to Image', 'Beat sync'] },
+            { icon: '📤', title: 'Production', points: ['Print bleed', 'PDF formats', 'Social resize', 'Transparent PNG'] }
+        ];
+
+        let scene, camera, renderer, starts = [];
+        function initThree() {
+            const canvas = document.getElementById('three-canvas');
+            scene = new THREE.Scene();
+            camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+            camera.position.z = 100;
+            renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true });
+            renderer.setSize(window.innerWidth, window.innerHeight);
+
+            for (let i = 0; i < 40; i++) {
+                const geometry = new THREE.TorusGeometry(3, 0.5, 16, 100);
+                const color = i % 2 === 0 ? 0x7d2ae7 : 0x00c4cc;
+                const material = new THREE.MeshBasicMaterial({ color: color, transparent: true, opacity: Math.random() * 0.3 + 0.1, wireframe: true });
+                const star = new THREE.Mesh(geometry, material);
+                star.position.set((Math.random() - 0.5) * 400, (Math.random() - 0.5) * 200, (Math.random() - 0.5) * 200);
+                star.userData = { sx: (Math.random() - 0.5) * 0.1, sy: (Math.random() - 0.5) * 0.1, rs: Math.random() * 0.02 };
+                scene.add(star); starts.push(star);
+            }
+            animate();
+        }
+
+        function animate() {
+            requestAnimationFrame(animate);
+            starts.forEach(s => { s.position.x += s.userData.sx; s.position.y += s.userData.sy; s.rotation.x += s.userData.rs; if (Math.abs(s.position.x) > 250) s.position.x *= -1; });
+            renderer.render(scene, camera);
+        }
+
+        function showHub() {
+            const grid = document.getElementById('content-grid');
+            grid.innerHTML = hubProjects.map((p, i) => `
+                <div class="kpi-card fade-in-3d group" style="animation-delay: ${i * 0.1}s">
+                    <div class="kpi-inner rounded-3xl border border-canva-purple/10 h-full flex flex-col overflow-hidden bg-white/70 dark:bg-[#1e0a4f]/40 backdrop-blur-xl shadow-xl transition-all">
+                        <div class="h-48 overflow-hidden relative">
+                            <img src="${p.image}" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" alt="${p.title}">
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
+                            <span class="absolute bottom-4 left-6 text-3xl p-3 bg-white/10 backdrop-blur-md rounded-2xl">${p.icon}</span>
+                        </div>
+                        <div class="p-8 flex-1 flex flex-col bg-white dark:bg-transparent">
+                            <div class="flex items-center justify-between mb-4">
+                                <h3 class="font-black text-xl tracking-tight text-gray-900 dark:text-white group-hover:text-canva-purple transition-colors">${p.title}</h3>
+                                <div class="flex gap-2">
+                                    ${p.tags.map(t => `<span class="text-[9px] font-black px-2 py-0.5 rounded-full bg-canva-purple/10 text-canva-purple uppercase tracking-wider">${t}</span>`).join('')}
+                                </div>
+                            </div>
+                            <p class="text-xs text-gray-500 dark:text-gray-400 font-medium leading-relaxed mb-6 flex-1">${p.desc}</p>
+                            <button onclick="window.open('#')" 
+                                class="w-full py-3 rounded-xl bg-gradient-to-r from-canva-purple to-canva-teal text-white text-[10px] font-black uppercase tracking-[0.2em] shadow-lg shadow-canva-purple/20 hover:shadow-canva-purple/40 hover:scale-[1.02] transition-all flex items-center justify-center gap-2">
+                                INITIALIZE PROJECT <span class="text-sm">→</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+            setActive('hub');
+        }
+
+        function escapeHTML(str) {
+            const div = document.createElement('div');
+            div.textContent = str;
+            return div.innerHTML;
+        }
+
+        function showVault() {
+            const grid = document.getElementById('content-grid');
+            const headerTitle = "RAPID VISUALS";
+            const headerDesc = "Accelerate your creative output. Master the balance between template efficiency and brand consistency for high-impact deliverables.";
+
+            // Header Section - precise match to image
+            const headerHTML = `
+                <div class="col-span-1 md:col-span-2 lg:col-span-3 mb-8 relative">
+                    <div class="bg-white dark:bg-[#0a051b] border border-[#7d2ae7]/20 rounded-[2.5rem] p-8 md:p-12 relative overflow-hidden">
+                         <!-- Floating shapes similar to image -->
+                        <div class="absolute top-4 left-4 w-4 h-4 rounded-full border-2 border-[#00c4cc] opacity-60"></div>
+                        <div class="absolute bottom-8 right-12 w-3 h-3 rounded-full border-2 border-[#7d2ae7] opacity-60"></div>
+                        
+                        <div class="relative z-10">
+                            <h2 class="inline-block text-3xl md:text-4xl font-black italic tracking-tighter text-white bg-[#6420ff] px-4 py-1 transform -skew-x-6 mb-6 uppercase shadow-lg select-none">
+                                ${headerTitle}
+                            </h2>
+                            <p class="text-gray-400 font-bold text-base md:text-lg max-w-2xl leading-relaxed">
+                                ${headerDesc}
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            `;
+
+            // Cards Section - Glassmorphic design
+            const cardsHTML = vaultLessons.map((v, i) => `
+                <div class="kpi-card fade-in-3d group" style="animation-delay: ${i * 0.1}s">
+                    <div class="kpi-inner p-8 rounded-3xl h-full bg-white/80 dark:bg-[#0a051b]/80 backdrop-blur-xl border border-canva-purple/10 hover:border-canva-purple/30 transition-all shadow-xl">
+                        
+                        <!-- Header: Icon + Title -->
+                        <div class="flex items-center gap-4 mb-8">
+                            <div class="w-12 h-12 rounded-xl flex items-center justify-center bg-canva-purple/10 shadow-inner">
+                                <span class="text-2xl">${v.icon}</span>
+                            </div>
+                            <h3 class="font-black text-xl text-[#212121] dark:text-white tracking-tight">${v.title}</h3>
+                        </div>
+
+                        <!-- List Items -->
+                        <ul class="space-y-4">
+                            ${v.points.map(p => `
+                                <li class="flex items-center text-xs font-bold text-gray-600 dark:text-gray-400 tracking-widest uppercase">
+                                    <span class="text-canva-teal mr-3 font-black text-sm">//</span>
+                                    <span>${escapeHTML(p)}</span>
+                                </li>
+                            `).join('')}
+                        </ul>
+                        
+                         <!-- Decor -->
+                         <div class="absolute bottom-4 right-4 opacity-10">
+                            <div class="w-2 h-2 rounded-full border border-canva-purple"></div>
+                         </div>
+                    </div>
+                </div>
+            `).join('');
+
+            grid.innerHTML = headerHTML + cardsHTML;
+            setActive('vault');
+        }
+
+        function setHeroActive(mode) {
+            const hBtn = document.getElementById('hero-hub-btn');
+            const vBtn = document.getElementById('hero-vault-btn');
+            const act = "inline-flex items-center justify-center px-8 py-3 rounded-xl text-sm font-bold bg-canva-purple text-white shadow-lg hover:shadow-canva-purple/30 transition-all";
+            const inact = "inline-flex items-center justify-center px-8 py-3 rounded-xl text-sm font-bold border border-canva-purple/20 hover:bg-canva-purple/5 transition-all text-gray-500 dark:text-gray-400";
+            hBtn.className = mode === 'hub' ? act : inact;
+            vBtn.className = mode === 'vault' ? act : inact;
+        }
+
+        function updateFooterLinks(mode) {
+            document.querySelectorAll('.footer-nav-link').forEach(btn => {
+                const label = btn.textContent.replace(/\s+/g, ' ').trim().toLowerCase();
+                const isActive = (mode === 'hub' && label === 'projects') || (mode === 'vault' && label === 'canva fundamentals');
+                btn.className = `footer-nav-link px-5 py-2 rounded-full text-[10px] font-black uppercase tracking-widest transition-all ${isActive ? 'bg-canva-purple text-white shadow-lg shadow-canva-purple/30' : 'border border-transparent text-gray-500 hover:text-canva-purple'}`;
+            });
+        }
+
+        function setActive(mode) {
+            const hBtn = document.getElementById('nav-hub-btn');
+            const vBtn = document.getElementById('nav-vault-btn');
+            const act = "px-4 py-1.5 rounded-full text-xs font-bold transition-all bg-canva-purple text-white shadow-lg";
+            const inact = "px-4 py-1.5 rounded-full text-xs font-bold transition-all text-gray-400 hover:text-canva-purple";
+            hBtn.className = mode === 'hub' ? act : inact;
+            vBtn.className = mode === 'vault' ? act : inact;
+            setHeroActive(mode);
+            updateFooterLinks(mode);
+        }
+
+        function toggleTheme() {
+            document.documentElement.classList.toggle('dark');
+            const isDark = document.documentElement.classList.contains('dark');
+            localStorage.setItem('theme', isDark ? 'dark' : 'light');
+            starts.forEach(s => s.material.color.setHex(isDark ? 0x6420ff : 0x7d2ae7));
+        }
+
+        window.onload = () => { initThree(); showHub(); if (localStorage.getItem('theme') === 'dark') toggleTheme(); };
+    </script>
+</body>
+
+</html>

@@ -73,9 +73,9 @@ Featuring a **glassmorphic UI**, **3D particle backgrounds**, and **real-time th
    ```
 
 2. **Open the project**:
-   Simply open `index.html` in any modern web browser.
+   Simply open `powerbi.html` in any modern web browser.
 3. **Customize Dashboards**:
-   Update the `dashboards` array in the `<script>` section of `index.html` with your own Power BI URLs.
+   Update the `dashboards` array in the `<script>` section of `powerbi.html` with your own Power BI URLs.
 
 ---
 

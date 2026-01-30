@@ -1,0 +1,619 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EXCEL PORTFOLIO</title>
+    <link rel="icon" type="image/svg+xml" href="Microsoft_Office_Excel_(2025–present).svg">
+
+    <!-- Tailwind -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Three.js (3D background) -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        excel: {
+                            green: '#217346',
+                            dark: '#0a2e1d',
+                            grey: '#605e5c',
+                            lightBg: '#f4fcf7',
+                            darkBg: '#050a07',
+                            accent: '#1d6f42',
+                            neon: '#107c10'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Segoe+UI:wght@300;400;600;700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;600&display=swap');
+
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        code {
+            font-family: 'Fira Code', monospace;
+        }
+
+        #three-canvas {
+            position: fixed;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            pointer-events: none;
+            opacity: 0.5;
+        }
+
+        .hero-glow {
+            filter: drop-shadow(0 0 20px rgba(33, 115, 70, 0.4));
+        }
+
+        .glass-nav {
+            background: rgba(255, 255, 255, 0.7);
+            -webkit-backdrop-filter: blur(12px);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(33, 115, 70, 0.1);
+        }
+
+        .dark .glass-nav {
+            background: rgba(10, 6, 1, 0.7);
+            border-bottom: 1px solid rgba(82, 209, 124, 0.1);
+        }
+
+        .kpi-card {
+            perspective: 1000px;
+        }
+
+        .kpi-inner {
+            transform-style: preserve-3d;
+            transition: all 0.25s ease;
+            background: rgba(255, 255, 255, 0.6);
+            -webkit-backdrop-filter: blur(10px);
+            backdrop-filter: blur(10px);
+        }
+
+        .dark .kpi-inner {
+            background: rgba(27, 26, 25, 0.8);
+        }
+
+        .kpi-card:hover .kpi-inner {
+            transform: translateY(-8px) rotateX(2deg);
+            box-shadow: 0 20px 40px -15px rgba(33, 115, 70, 0.3);
+            border-color: rgba(33, 115, 70, 0.5);
+        }
+
+        .tips-card {
+            perspective: 1000px;
+            transform-style: preserve-3d;
+            transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+        }
+
+        .tips-card-inner {
+            transform-style: preserve-3d;
+            transition: all 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+            position: relative;
+        }
+
+        .tips-card:hover .tips-card-inner {
+            transform: scale(1.02);
+            box-shadow:
+                0 20px 40px -12px rgba(0, 0, 0, 0.35),
+                0 0 0 1px rgba(33, 115, 70, 0.3);
+        }
+
+        .kpi-inner {
+            background: rgba(255, 255, 255, 0.7);
+            border: 1px solid rgba(33, 115, 70, 0.1);
+        }
+
+        .dark .kpi-inner {
+            background: rgba(10, 26, 15, 0.6);
+        }
+
+        .fade-in-3d {
+            animation: fadeIn3D 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+        }
+
+        @keyframes fadeIn3D {
+            from {
+                opacity: 0;
+                transform: perspective(1000px) rotateX(-20deg) translateZ(-50px);
+            }
+
+            to {
+                opacity: 1;
+                transform: perspective(1000px) rotateX(0deg) translateZ(0);
+            }
+        }
+
+        button:active {
+            transform: scale(0.95);
+        }
+
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #217346;
+            border-radius: 10px;
+        }
+
+        .dark ::-webkit-scrollbar-thumb {
+            background: #484644;
+        }
+
+        .glass-nav {
+            background: rgba(255, 255, 255, 0.8);
+            -webkit-backdrop-filter: blur(12px);
+            backdrop-filter: blur(12px);
+        }
+
+        .dark .glass-nav {
+            background: rgba(11, 11, 10, 0.8);
+        }
+    </style>
+</head>
+
+<body
+    class="min-h-screen flex flex-col bg-excel-lightBg dark:bg-excel-darkBg text-[#323130] dark:text-[#f3f2f1] overflow-x-hidden">
+
+    <canvas id="three-canvas"></canvas>
+
+    <!-- Top bar -->
+    <header class="relative z-20 border-b border-[#edebe9] dark:border-[#3b3a39] glass-nav">
+        <div class="max-w-6xl mx-auto flex items-center justify-between px-4 sm:px-6 h-16">
+            <div class="flex items-center gap-3 group">
+                <div class="flex items-center transition-transform hover:rotate-12">
+                    <img src="Microsoft_Office_Excel_(2025–present).svg"
+                        class="w-8 h-8 rounded shadow-lg shadow-excel-green/20" alt="Excel Logo">
+                </div>
+                <div>
+                    <p class="text-sm font-bold text-[#201f1e] dark:text-white uppercase tracking-tighter">EXCEL
+                        PORTFOLIO</p>
+                    <p class="text-[11px] text-[#605e5c] dark:text-[#a19f9d] font-semibold">Analyst • Auditor •
+                        Automation</p>
+                </div>
+            </div>
+
+            <div class="flex items-center gap-3">
+                <button onclick="location.href='index.html'" aria-label="View all language portals"
+                    class="px-4 py-1.5 rounded-full text-xs font-bold border border-gray-200 dark:border-gray-700 bg-transparent text-gray-500 hover:bg-excel-green hover:text-white transition-all">All
+                    Portals</button>
+                <div class="h-4 w-[1px] bg-gray-300 dark:bg-gray-700 mx-1"></div>
+                <button id="nav-insights-btn" class="px-4 py-1.5 rounded-full text-xs font-bold transition-all"
+                    onclick="showHub()" aria-label="Show Excel Projects">Projects</button>
+                <button id="nav-vault-btn" class="px-4 py-1.5 rounded-full text-xs font-bold transition-all"
+                    onclick="showVault()" aria-label="Show Excel Fundamentals">Excel Fundamentals</button>
+                <button onclick="toggleTheme()" title="Toggle Theme" aria-label="Toggle dark and light theme"
+                    class="p-2 rounded-full hover:bg-black/5 dark:hover:bg-white/5 transition-all">
+                    <svg id="theme-icon" class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <main class="relative z-10 flex-none pb-20">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 pt-12 space-y-12">
+
+            <!-- Hero Section -->
+            <section class="grid gap-12 lg:grid-cols-[1.5fr,1fr] items-center">
+                <div class="space-y-6">
+                    <p
+                        class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-[11px] font-bold bg-excel-green/10 text-excel-green border border-excel-green/30">
+                        DATA ANALYST
+                        <span class="w-1.5 h-1.5 rounded-full bg-excel-green animate-ping"></span>
+                    </p>
+                    <h1
+                        class="text-4xl sm:text-5xl lg:text-7xl font-black leading-[1.1] text-[#201f1e] dark:text-white tracking-tight">
+                        Power <br> <span
+                            class="text-transparent bg-clip-text bg-gradient-to-r from-excel-green to-excel-accent drop-shadow-sm">The
+                            World.</span> <br>
+                        Quantify <span
+                            class="text-transparent bg-clip-text bg-gradient-to-r from-excel-accent to-excel-neon">Reality.</span>
+                    </h1>
+                    <p
+                        class="text-sm sm:text-lg text-[#605e5c] dark:text-[#a19f9d] max-w-xl leading-relaxed font-medium">
+                        Explore my portfolio of professional spreadsheets and automated models. Learn the core
+                        principles of building clean, fast,
+                        and beautiful spreadsheets that solve real-world problems.
+                    </p>
+                    <div class="flex gap-4">
+                        <button id="hero-dashboard-btn" onclick="showHub()" title="View Excel Projects"
+                            class="inline-flex items-center justify-center px-8 py-3 rounded-xl text-sm font-bold bg-excel-green text-white shadow-lg hover:shadow-excel-green/30 transition-all">Projects</button>
+                        <button id="hero-basics-btn" onclick="showVault()" title="View Excel Fundamentals"
+                            class="inline-flex items-center justify-center px-8 py-3 rounded-xl text-sm font-bold border border-excel-green/20 hover:bg-excel-green/5 transition-all text-gray-500 dark:text-gray-400">Excel
+                            Fundamentals</button>
+                    </div>
+                </div>
+
+                <!-- KPI Quick View -->
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div class="kpi-card shadow-xl rounded-2xl">
+                        <div class="kpi-inner p-6 rounded-2xl border border-excel-green/20">
+                            <p class="text-[10px] font-bold text-excel-green uppercase tracking-widest mb-1">Current
+                                Mode</p>
+                            <h3 id="mode-status" class="text-lg font-black text-[#201f1e] dark:text-white uppercase">
+                                PORTFOLIO</h3>
+                            <div class="flex items-center gap-2 mt-4">
+                                <span class="w-2 h-2 rounded-full bg-excel-green animate-pulse"></span>
+                                <span class="text-[11px] font-semibold text-gray-500 italic">LIVE_DATA</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="kpi-card shadow-xl rounded-2xl">
+                        <div class="kpi-inner p-6 rounded-2xl border border-excel-green/20">
+                            <p class="text-[10px] font-bold text-gray-500 uppercase tracking-widest mb-1">Learning</p>
+                            <h3 class="text-lg font-black text-[#201f1e] dark:text-white">Basics</h3>
+                            <p class="text-[11px] font-semibold text-excel-green mt-2 italic tracking-tighter">
+                                FORMULAS_&_VBA</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Dashboard Section -->
+            <section id="dashboard-section" class="space-y-8 fade-in-3d">
+                <div class="flex flex-col md:flex-row items-stretch justify-between gap-6">
+                    <div
+                        class="bg-white dark:bg-[#1b1a19] p-4 rounded-2xl border border-excel-green/10 flex flex-col justify-center min-w-[280px] hover:border-excel-green/30 transition-all shadow-sm group">
+                        <label for="dashboard-selector"
+                            class="text-[9px] font-black text-gray-400 dark:text-gray-500 uppercase tracking-widest mb-1 group-hover:text-excel-green transition-colors">Configuration</label>
+                        <div class="relative">
+                            <select id="dashboard-selector" onchange="switchDashboard(this.value)"
+                                aria-label="Dashboard Configuration Selector"
+                                class="w-full bg-transparent text-lg font-black text-[#201f1e] dark:text-white outline-none border-none p-0 cursor-pointer appearance-none truncate pr-8">
+                                <!-- Populated by JS -->
+                            </select>
+                            <div class="absolute right-0 top-1/2 -translate-y-1/2 pointer-events-none text-excel-green">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M19 9l-7 7-7-7" />
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="stats-container" class="flex-1 grid grid-cols-1 sm:grid-cols-2 gap-4 w-full">
+                        <!-- Stats populated by JS -->
+                    </div>
+                </div>
+
+                <div class="grid gap-8 lg:grid-cols-[3fr,2fr] items-start">
+                    <div class="relative group">
+                        <div
+                            class="absolute -inset-1 bg-gradient-to-r from-excel-green to-[#52d17c] rounded-3xl blur opacity-25 group-hover:opacity-40 transition duration-1000">
+                        </div>
+                        <div
+                            class="relative bg-white dark:bg-[#1b1a19] p-1.5 rounded-3xl border border-excel-green/20 shadow-2xl overflow-hidden lg:h-[520px] flex flex-col">
+                            <div id="loading-overlay"
+                                class="absolute inset-0 z-30 flex flex-col items-center justify-center bg-white/95 dark:bg-[#0b0b0a]/95 backdrop-blur-xl transition-opacity duration-500">
+                                <div class="relative w-24 h-24">
+                                    <div class="absolute inset-0 rounded-full border-[8px] border-excel-green/10"></div>
+                                    <div
+                                        class="absolute inset-0 rounded-full border-[8px] border-t-excel-green animate-spin">
+                                    </div>
+                                </div>
+                                <p
+                                    class="mt-6 text-xs font-black text-excel-green tracking-widest uppercase animate-pulse">
+                                    Accessing Workbook</p>
+                            </div>
+                            <div class="flex-1 overflow-hidden rounded-2xl bg-[#f8f9fa] dark:bg-black/20">
+                                <iframe id="pbi-frame" title="Excel Dashboard" src="about:blank" allowfullscreen="true"
+                                    class="w-full h-full border-0"></iframe>
+                            </div>
+                        </div>
+                    </div>
+
+                    <aside class="space-y-6 sticky top-24">
+                        <div
+                            class="bg-white/40 dark:bg-white/5 backdrop-blur-xl border border-excel-green/20 p-8 shadow-2xl rounded-3xl lg:h-[520px] flex flex-col">
+                            <h2 id="main-title"
+                                class="text-xs font-black text-excel-green uppercase tracking-[0.3em] mb-6 flex-none">
+                                WORKBOOK_INSIGHTS</h2>
+                            <div id="explanation-content"
+                                class="text-sm leading-relaxed flex-1 overflow-y-auto pr-4 font-medium text-gray-600 dark:text-[#a19f9d] custom-scrollbar">
+                                <!-- Populated by JS -->
+                            </div>
+                        </div>
+                    </aside>
+                </div>
+            </section>
+
+            <!-- Basics section -->
+            <section id="basics-section" class="hidden space-y-10">
+                <div
+                    class="p-8 rounded-3xl bg-white/50 dark:bg-[#0b0b0a]/50 border border-excel-green/20 backdrop-blur-xl shadow-2xl">
+                    <div class="max-w-3xl">
+                        <h2 class="text-3xl font-black text-[#201f1e] dark:text-white mb-4 uppercase tracking-tighter">
+                            Excel Fundamentals</h2>
+                        <p class="text-gray-600 dark:text-gray-400 font-medium leading-relaxed">
+                            Master the core mechanics of the world's most popular data tool. From foundational formulas
+                            to advanced VBA automation, these cards are your blueprint for spreadsheet success.
+                        </p>
+                    </div>
+                </div>
+
+                <div id="basics-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <!-- Cards populated by JS -->
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <footer class="relative z-10 py-8 border-t border-excel-green/20 glass-nav">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 flex flex-col md:flex-row items-center justify-between gap-6">
+            <div class="flex items-center gap-4">
+                <div class="flex items-center gap-2">
+                    <img src="Microsoft_Office_Excel_(2025–present).svg" class="w-5 h-5 opacity-90"
+                        alt="Excel footer logo" title="Excel Portfolio Logo">
+                    <span class="text-sm font-black tracking-widest uppercase text-excel-green">EXCEL PORTFOLIO</span>
+                </div>
+                <div class="w-[1px] h-3 bg-gray-300 dark:bg-gray-800"></div>
+                <p class="text-[10px] text-gray-600 dark:text-gray-400 font-bold uppercase tracking-widest">© 2026
+                    PORTFOLIO HUB</p>
+            </div>
+            <div class="flex items-center gap-6">
+                <button onclick="showHub()" aria-label="Go to Projects"
+                    class="footer-nav-link text-xs font-bold uppercase tracking-widest transition-all">Projects</button>
+                <button onclick="showVault()" aria-label="Go to Excel Fundamentals"
+                    class="footer-nav-link text-xs font-bold uppercase tracking-widest transition-all">Excel
+                    Fundamentals</button>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        const dashboards = [
+            {
+                id: 'sales_performance',
+                title: 'Global Sales Performance',
+                url: 'https://app.powerbi.com/view?r=eyJrIjoiNTY4YWQxMGItNGFhMC00ZWQ4LThlZjUtMDY0NWY4OGJkYjdhIiwidCI6ImUxNGU3M2ViLTUyNTEtNDM4OC04ZDY3LThmOWYyZTJkNWE0NiIsImMiOjEwfQ%3D%3D',
+                stats: [
+                    { label: 'Total Revenue', value: '$2.4M', trend: '↑ 14%', color: 'text-excel-green' },
+                    { label: 'Avg Order', value: '$840', trend: '↑ 3%', color: 'text-excel-green' }
+                ],
+                explanation: `
+                    <p class="mb-6 font-bold text-[#201f1e] dark:text-white uppercase tracking-wider">High-Fidelity: Group Operations</p>
+                    <p class="mb-6">Global sales monitoring utilizing Power Pivot and advanced DAX integration. This workbook aggregates high-frequency transactional data into executive KPI summaries.</p>
+                    <div class="space-y-4">
+                        <div class="flex gap-4 p-4 rounded-2xl bg-black/5 dark:bg-white/5 border border-excel-green/10 hover:border-excel-green/30 transition-all">
+                            <span class="text-excel-green font-black">✦</span>
+                            <p class="text-xs font-medium italic">Unified reporting across regional siloes using Power Pivot data modeling.</p>
+                        </div>
+                        <div class="flex gap-4 p-4 rounded-2xl bg-black/5 dark:bg-white/5 border border-excel-green/10 hover:border-excel-green/30 transition-all">
+                            <span class="text-excel-green font-black">✦</span>
+                            <p class="text-xs font-medium italic">Automated forecasting models with historical trend correlation.</p>
+                        </div>
+                        <div class="flex gap-4 p-4 rounded-2xl bg-black/5 dark:bg-white/5 border border-excel-green/10 hover:border-excel-green/30 transition-all">
+                            <span class="text-excel-green font-black">✦</span>
+                            <p class="text-xs font-medium italic">Interactive slicer-driven drill-downs for granular market analysis.</p>
+                        </div>
+                    </div>
+                `
+            },
+            {
+                id: 'inventory_control',
+                title: 'Inventory & Supply Chain',
+                url: 'https://app.powerbi.com/view?r=eyJrIjoiMDY0ZWM2MDMtY2Y2OC00NTM4LTk0ZDAtMGY5NGE1YzE1OWZlIiwidCI6ImM0YTYwOWY0LWZlMmYtNGU3Ni1hOGYxLWIzYWRiYmE3ZGEyYyIsImMiOjF9',
+                stats: [
+                    { label: 'Stock Value', value: '$840K', trend: 'Stable', color: 'text-blue-500' },
+                    { label: 'Turnover', value: '4.2x', trend: '↑ 0.8', color: 'text-excel-green' }
+                ],
+                explanation: `
+                    <p class="mb-6 font-bold text-[#201f1e] dark:text-white uppercase tracking-wider">Tactical: Supply Chain Ops</p>
+                    <p class="mb-6">Modern supply chain monitoring built on XLOOKUP logic and dynamic array engines. Designed for real-time inventory tracking and demand planning.</p>
+                    <div class="space-y-4">
+                        <div class="flex gap-4 p-4 rounded-2xl bg-black/5 dark:bg-white/5 border border-excel-green/10 hover:border-excel-green/30 transition-all">
+                            <span class="text-excel-green font-black">✦</span>
+                            <p class="text-xs font-medium italic">Dynamic stock aging analysis with automated reorder triggers.</p>
+                        </div>
+                        <div class="flex gap-4 p-4 rounded-2xl bg-black/5 dark:bg-white/5 border border-excel-green/10 hover:border-excel-green/30 transition-all">
+                            <span class="text-excel-green font-black">✦</span>
+                            <p class="text-xs font-medium italic">Supplier performance scorecarding integrated with logistics data.</p>
+                        </div>
+                        <div class="flex gap-4 p-4 rounded-2xl bg-black/5 dark:bg-white/5 border border-excel-green/10 hover:border-excel-green/30 transition-all">
+                            <span class="text-excel-green font-black">✦</span>
+                            <p class="text-xs font-medium italic">Optimized demand forecasting using statistical moving averages.</p>
+                        </div>
+                    </div>
+                `
+            }
+        ];
+
+        const basicsData = [
+            { icon: '🖥️', title: 'UI & Navigation', tips: ['Ribbon & Quick Access', 'Page Layout Views', 'Keyboard Shortcuts', 'Sheet Protection'] },
+            { icon: '📐', title: 'Essential Formulas', tips: ['SUM, AVERAGE, MIN/MAX', 'IF, AND, OR Logic', 'Text: LEFT, RIGHT', 'Date: TODAY, NOW'] },
+            { icon: '🗃️', title: 'Data Management', tips: ['Multi-level Sorting', 'Advanced Filtering', 'Remove Duplicates', 'Excel Tables'] },
+            { icon: '🔍', title: 'Lookup & Reference', tips: ['VLOOKUP Exact Match', 'HLOOKUP Scenarios', 'INDEX-MATCH Power', 'XLOOKUP Modern'] },
+            { icon: '📊', title: 'Pivot Tables', tips: ['Date/Category Grouping', 'Calculated Fields', 'Report Layouts', 'Pivot Charts'] },
+            { icon: '📈', title: 'Data Visualization', tips: ['Column & Line Charts', 'Waterfall & Funnel', 'In-cell Sparklines', 'Dynamic Updates'] }
+        ];
+
+        let scene, camera, renderer, gridGroup;
+        let mouseX = 0, mouseY = 0;
+
+        function initThree() {
+            const canvas = document.getElementById('three-canvas');
+            if (!canvas) return;
+            scene = new THREE.Scene();
+            camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+            camera.position.z = 60;
+            renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true });
+            renderer.setSize(window.innerWidth, window.innerHeight);
+
+            gridGroup = new THREE.Group();
+            const gridCount = 20;
+            const cellSize = 10;
+            const gridMaterial = new THREE.LineBasicMaterial({ color: 0x217346, transparent: true, opacity: 0.1 });
+
+            for (let i = 0; i < gridCount; i++) {
+                const pointsH = [new THREE.Vector3(-100, i * cellSize - 100, 0), new THREE.Vector3(100, i * cellSize - 100, 0)];
+                const lineH = new THREE.Line(new THREE.BufferGeometry().setFromPoints(pointsH), gridMaterial);
+                gridGroup.add(lineH);
+
+                const pointsV = [new THREE.Vector3(i * cellSize - 100, -100, 0), new THREE.Vector3(i * cellSize - 100, 100, 0)];
+                const lineV = new THREE.Line(new THREE.BufferGeometry().setFromPoints(pointsV), gridMaterial);
+                gridGroup.add(lineV);
+            }
+
+            const boxGeom = new THREE.BoxGeometry(cellSize - 1, cellSize / 3, 0.5);
+            const boxMat = new THREE.MeshBasicMaterial({ color: 0x217346, transparent: true, opacity: 0.05 });
+
+            for (let i = 0; i < 40; i++) {
+                const box = new THREE.Mesh(boxGeom, boxMat);
+                box.position.set(Math.floor((Math.random() - 0.5) * 200 / cellSize) * cellSize, Math.floor((Math.random() - 0.5) * 200 / cellSize) * cellSize, (Math.random() - 0.5) * 50);
+                gridGroup.add(box);
+            }
+
+            scene.add(gridGroup);
+            updateThreeTheme();
+            animateThree();
+            window.addEventListener('mousemove', (e) => { mouseX = (e.clientX - window.innerWidth / 2) / 300; mouseY = (e.clientY - window.innerHeight / 2) / 300; });
+            window.addEventListener('resize', () => { camera.aspect = window.innerWidth / window.innerHeight; camera.updateProjectionMatrix(); renderer.setSize(window.innerWidth, window.innerHeight); });
+        }
+
+        function animateThree() {
+            requestAnimationFrame(animateThree);
+            if (!gridGroup) return;
+            gridGroup.rotation.x += 0.0002; gridGroup.rotation.y += 0.0003;
+            gridGroup.position.x += (mouseX * 15 - gridGroup.position.x) * 0.03;
+            gridGroup.position.y += (-mouseY * 15 - gridGroup.position.y) * 0.03;
+            renderer.render(scene, camera);
+        }
+
+        function updateThreeTheme() {
+            if (!gridGroup) return;
+            const isDark = document.documentElement.classList.contains('dark');
+            const color = isDark ? 0x52d17c : 0x217346;
+            gridGroup.children.forEach(child => {
+                if (child.material) {
+                    child.material.color.setHex(color);
+                    child.material.opacity = child instanceof THREE.Line ? (isDark ? 0.15 : 0.08) : (isDark ? 0.2 : 0.05);
+                }
+            });
+        }
+
+        function toggleTheme() {
+            document.documentElement.classList.toggle('dark');
+            const isDark = document.documentElement.classList.contains('dark');
+            localStorage.setItem('theme', isDark ? 'dark' : 'light');
+            updateThreeTheme();
+        }
+
+        function showHub() {
+            document.getElementById('dashboard-section').classList.remove('hidden');
+            document.getElementById('basics-section').classList.add('hidden');
+            document.getElementById('mode-status').textContent = 'PORTFOLIO';
+            setHeroActive('hub'); setNavbarActive('hub'); setFooterActive('hub');
+            const sel = document.getElementById('dashboard-selector');
+            if (sel) switchDashboard(sel.value || dashboards[0].id);
+        }
+
+        function switchDashboard(id) {
+            const db = dashboards.find(d => d.id === id); if (!db) return;
+            const load = document.getElementById('loading-overlay');
+            const frame = document.getElementById('pbi-frame');
+            const exp = document.getElementById('explanation-content');
+            const stats = document.getElementById('stats-container');
+            load.style.display = 'flex'; load.style.opacity = '1';
+            setTimeout(() => {
+                frame.src = db.url; exp.innerHTML = db.explanation;
+                stats.innerHTML = db.stats.map((s, i) => `
+                    <div class="kpi-inner p-4 rounded-2xl border border-excel-green/10 bg-white/80 dark:bg-[#0b0b0a]/80 backdrop-blur-md shadow-sm">
+                        <p class="text-[9px] font-black text-gray-500 uppercase tracking-widest">${s.label}</p>
+                        <div class="flex items-center justify-between mt-2">
+                            <span class="text-lg font-black">${s.value}</span>
+                            <span class="text-[9px] font-black px-2 py-0.5 rounded ${s.color} bg-excel-green/10 uppercase">${s.trend}</span>
+                        </div>
+                    </div>
+                `).join('');
+            }, 200);
+            frame.onload = () => { load.style.opacity = '0'; setTimeout(() => load.style.display = 'none', 500); };
+        }
+
+        function showVault() {
+            document.getElementById('dashboard-section').classList.add('hidden');
+            document.getElementById('basics-section').classList.remove('hidden');
+            document.getElementById('mode-status').textContent = 'FUNDAMENTALS';
+            setHeroActive('vault'); setNavbarActive('vault'); setFooterActive('vault');
+        }
+
+        function setHeroActive(mode) {
+            const hBtn = document.getElementById('hero-dashboard-btn');
+            const vBtn = document.getElementById('hero-basics-btn');
+            const act = "inline-flex items-center justify-center px-8 py-3 rounded-xl text-sm font-bold bg-excel-green text-white shadow-lg hover:shadow-excel-green/30 transition-all";
+            const inact = "inline-flex items-center justify-center px-8 py-3 rounded-xl text-sm font-bold border border-excel-green/20 hover:bg-excel-green/5 transition-all text-gray-500 dark:text-gray-400";
+            hBtn.className = mode === 'hub' ? act : inact;
+            vBtn.className = mode === 'vault' ? act : inact;
+        }
+
+        function setNavbarActive(mode) {
+            const hBtn = document.getElementById('nav-insights-btn');
+            const vBtn = document.getElementById('nav-vault-btn');
+            const act = "px-4 py-1.5 rounded-full text-xs font-bold transition-all bg-excel-green text-white shadow-lg";
+            const inact = "px-4 py-1.5 rounded-full text-xs font-bold transition-all text-gray-400 hover:text-excel-green";
+            hBtn.className = mode === 'hub' ? act : inact;
+            vBtn.className = mode === 'vault' ? act : inact;
+        }
+
+        function setFooterActive(mode) {
+            document.querySelectorAll('.footer-nav-link').forEach(btn => {
+                const label = btn.textContent.replace(/\s+/g, ' ').trim().toLowerCase();
+                const isActive = (mode === 'hub' && label === 'projects') || (mode === 'vault' && label === 'excel fundamentals');
+                btn.className = `footer-nav-link px-5 py-2 rounded-full text-[10px] font-black uppercase tracking-widest transition-all ${isActive ? 'bg-excel-green text-white shadow-lg' : 'border border-transparent text-gray-500 hover:text-excel-green'}`;
+            });
+        }
+
+        function escapeHTML(str) {
+            const div = document.createElement('div');
+            div.textContent = str;
+            return div.innerHTML;
+        }
+
+        function populate() {
+            const grid = document.getElementById('basics-grid');
+            grid.innerHTML = basicsData.map((b, i) => `
+                <div class="tips-card fade-in-3d" style="animation-delay: ${i * 0.1}s">
+                    <div class="tips-card-inner bg-white/40 dark:bg-white/5 backdrop-blur-xl p-8 rounded-3xl shadow-xl border border-excel-green/10 hover:border-excel-green/50 transition-all h-full">
+                        <div class="flex items-center mb-6">
+                            <span class="text-3xl mr-4">${b.icon}</span>
+                            <h3 class="font-black text-xl tracking-tight">${b.title}</h3>
+                        </div>
+                        <ul class="text-xs text-gray-500 dark:text-gray-400 space-y-4 font-medium">
+                            ${b.tips.map(tip => `<li class="flex items-start"><span class="text-excel-green font-black mr-3">//</span>${escapeHTML(tip)}</li>`).join('')}
+                        </ul>
+                    </div>
+                </div>
+            `).join('');
+
+            const sel = document.getElementById('dashboard-selector');
+            sel.innerHTML = dashboards.map(db => `<option value="${db.id}" class="bg-white dark:bg-[#1b1a19] text-[#201f1e] dark:text-gray-200 py-2">${db.title}</option>`).join('');
+        }
+
+        window.onload = () => {
+            initThree(); populate(); showHub();
+            if (localStorage.getItem('theme') === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+                if (!document.documentElement.classList.contains('dark')) toggleTheme();
+            }
+        };
+    </script>
+</body>
+
+</html>
