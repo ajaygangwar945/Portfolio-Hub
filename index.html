@@ -163,22 +163,31 @@
         <div class="max-w-6xl mx-auto px-4 sm:px-6 pt-16 space-y-16">
 
             <!-- Hero Section -->
-            <section class="text-center space-y-8 max-w-4xl mx-auto">
-                <div class="flex justify-center">
-                    <p
-                        class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-[11px] font-bold bg-indigo-100 text-proj-purple dark:bg-indigo-900/30 border border-indigo-200 dark:border-indigo-800/50 uppercase tracking-widest">
-                        Project Archive
-                        <span class="w-1.5 h-1.5 rounded-full bg-proj-purple animate-pulse"></span>
+            <section class="grid lg:grid-cols-2 gap-12 items-center">
+                <div class="space-y-8 text-center lg:text-left">
+                    <div class="flex justify-center lg:justify-start">
+                        <p
+                            class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-[11px] font-bold bg-indigo-100 text-proj-purple dark:bg-indigo-900/30 border border-indigo-200 dark:border-indigo-800/50 uppercase tracking-widest">
+                            Project Archive
+                            <span class="w-1.5 h-1.5 rounded-full bg-proj-purple animate-pulse"></span>
+                        </p>
+                    </div>
+                    <h1
+                        class="text-5xl sm:text-6xl lg:text-7xl font-black leading-[1.1] text-[#201f1e] dark:text-white tracking-tight">
+                        Explore my <br> <span class="text-proj-purple drop-shadow-sm">Technical Universe</span>
+                    </h1>
+                    <p class="text-lg sm:text-xl text-[#605e5c] dark:text-[#a19f9d] leading-relaxed font-medium">
+                        Welcome to my central project hub. Explore various technical clusters where I showcase specific
+                        projects and core fundamentals for each field of study.
                     </p>
                 </div>
-                <h1
-                    class="text-5xl sm:text-6xl lg:text-7xl font-black leading-[1.1] text-[#201f1e] dark:text-white tracking-tight">
-                    Explore my <br> <span class="text-proj-purple drop-shadow-sm">Technical Universe</span>
-                </h1>
-                <p class="text-lg sm:text-xl text-[#605e5c] dark:text-[#a19f9d] leading-relaxed font-medium">
-                    Welcome to my central project hub. Explore various technical clusters where I showcase specific
-                    projects and core fundamentals for each field of study.
-                </p>
+
+                <!-- 3D Avatar Container -->
+                <div class="relative h-[300px] sm:h-[400px] flex items-center justify-center">
+                    <div id="avatar-container" class="w-full h-full relative z-10"></div>
+                    <!-- Decorative backglow -->
+                    <div class="absolute inset-0 bg-proj-purple/10 blur-[100px] rounded-full"></div>
+                </div>
             </section>
 
             <!-- Projects Grid -->
@@ -213,46 +222,6 @@
     <script>
         const projects = [
             {
-                title: 'Power BI Portfolio',
-                description: 'High-performance interactive dashboards and structural data modeling. Built with official PBI embedded patterns.',
-                image: `<img src="New_Power_BI_Logo.svg" class="w-10 h-10" alt="PBI">`,
-                tag: 'DATA',
-                color: '#f2c811',
-                link: 'powerbi.html'
-            },
-            {
-                title: 'Excel Portfolio',
-                description: 'Advanced data architecture and grid-based logic. From complex modeling to automated web analytics integration.',
-                image: `<img src="Microsoft_Office_Excel_(2025–present).svg" class="w-10 h-10" alt="Microsoft Excel">`,
-                tag: 'LOGIC',
-                color: '#217346',
-                link: 'excel.html'
-            },
-            {
-                title: 'Tableau Portfolio',
-                description: 'Cinematic visual storytelling and complex data narratives. Mastering LOD expressions and visual hierarchy.',
-                image: `<img src="tableau-software.svg" class="w-10 h-10" alt="Tableau">`,
-                tag: 'VISUALS',
-                color: '#e95420',
-                link: 'tableau.html'
-            },
-            {
-                title: 'HTML Portfolio',
-                description: 'Semantic structural integrity and modern web architecture. Building robust foundations for high-end web projects.',
-                image: `<img src="HTML5_Badge.svg" class="w-10 h-10" alt="HTML5">`,
-                tag: 'STRUCTURE',
-                color: '#E34F26',
-                link: 'html.html'
-            },
-            {
-                title: 'CSS Portfolio',
-                description: 'Modern design systems and high-performance layout engines. Exploring advanced animations and responsive design.',
-                image: `<img src="CSS3_logo.svg" class="w-10 h-10" alt="CSS">`,
-                tag: 'STYLE',
-                color: '#264de4',
-                link: 'css.html'
-            },
-            {
                 title: 'Paint Portfolio',
                 description: 'Exploring the mechanics of raster artistry. From pixel-perfect textures to structural digital painting.',
                 image: `<img src="Microsoft_Paint.svg" class="w-10 h-10" alt="Paint">`,
@@ -277,12 +246,76 @@
                 link: 'ppt.html'
             },
             {
-                title: 'Figma Portfolio',
-                description: 'Scalable design systems and high-fidelity interaction models. Prototyping complex digital experiences.',
-                image: `<img src="Figma-logo.svg" class="w-10 h-10" alt="Figma">`,
-                tag: 'DESIGN',
-                color: '#A259FF',
-                link: 'figma.html'
+                title: 'Excel Portfolio',
+                description: 'Advanced data architecture and grid-based logic. From complex modeling to automated web analytics integration.',
+                image: `<img src="Microsoft_Office_Excel_(2025–present).svg" class="w-10 h-10" alt="Microsoft Excel">`,
+                tag: 'LOGIC',
+                color: '#217346',
+                link: 'excel.html'
+            },
+            {
+                title: 'HTML5 Portfolio',
+                description: 'Semantic structural integrity and modern web architecture. Building robust foundations for high-end web projects.',
+                image: `<img src="HTML5_Badge.svg" class="w-10 h-10" alt="HTML5">`,
+                tag: 'STRUCTURE',
+                color: '#E34F26',
+                link: 'html.html'
+            },
+            {
+                title: 'CSS Portfolio',
+                description: 'Modern design systems and high-performance layout engines. Exploring advanced animations and responsive design.',
+                image: `<img src="CSS3_logo.svg" class="w-10 h-10" alt="CSS">`,
+                tag: 'STYLE',
+                color: '#264de4',
+                link: 'css.html'
+            },
+            {
+                title: 'Python Portfolio',
+                description: 'Intelligent logic systems and automated analytics pipelines. From AI experiments to structural backend scripts.',
+                image: `<img src="python-logo-notext.svg" class="w-10 h-10" alt="Python">`,
+                tag: 'SYSTEMS',
+                color: '#3776ab',
+                link: 'python.html'
+            },
+            {
+                title: 'DBMS Portfolio',
+                description: 'Relational logic and structural schema design. Engineering the backbone of modern data-driven ecosystems.',
+                image: `<img src="database-icon.svg" class="w-10 h-10" alt="DBMS">`,
+                tag: 'SCHEMA',
+                color: '#f29111',
+                link: 'dbms.html'
+            },
+            {
+                title: 'Power BI Portfolio',
+                description: 'High-performance interactive dashboards and structural data modeling. Built with official PBI embedded patterns.',
+                image: `<img src="New_Power_BI_Logo.svg" class="w-10 h-10" alt="PBI">`,
+                tag: 'DATA',
+                color: '#f2c811',
+                link: 'powerbi.html'
+            },
+            {
+                title: 'Tableau Portfolio',
+                description: 'Cinematic visual storytelling and complex data narratives. Mastering LOD expressions and visual hierarchy.',
+                image: `<img src="tableau-software.svg" class="w-10 h-10" alt="Tableau">`,
+                tag: 'VISUALS',
+                color: '#e95420',
+                link: 'tableau.html'
+            },
+            {
+                title: 'C++ Portfolio',
+                description: 'Low-level systems architecting and deterministic runtime control. Engineering high-performance core infrastructure.',
+                image: `<img src="cpp_logo_official.svg" class="w-10 h-10" alt="CPP">`,
+                tag: 'SYSTEMS',
+                color: '#00599c',
+                link: 'cpp.html'
+            },
+            {
+                title: 'Java Portfolio',
+                description: 'Robust server-side architecture and concurrent system design. Engineering high-availability enterprise services.',
+                image: `<img src="java.svg" class="w-10 h-10" alt="Java">`,
+                tag: 'BACKEND',
+                color: '#f89820',
+                link: 'java.html'
             },
             {
                 title: 'Canva Portfolio',
@@ -301,44 +334,12 @@
                 link: 'photoshop.html'
             },
             {
-                title: 'Flutter Portfolio',
-                description: 'Multi-platform application engineering and reactive UI architectures. Building native experiences at scale.',
-                image: `<img src="flutter_logo.svg" class="w-10 h-10" alt="Flutter">`,
-                tag: 'MOBILE',
-                color: '#02569b',
-                link: 'flutter.html'
-            },
-            {
-                title: 'Python Portfolio',
-                description: 'Intelligent logic systems and automated analytics pipelines. From AI experiments to structural backend scripts.',
-                image: `<img src="python-logo-notext.svg" class="w-10 h-10" alt="Python">`,
-                tag: 'SYSTEMS',
-                color: '#3776ab',
-                link: 'python.html'
-            },
-            {
-                title: 'Java Portfolio',
-                description: 'Robust server-side architecture and concurrent system design. Engineering high-availability enterprise services.',
-                image: `<img src="java.svg" class="w-10 h-10" alt="Java">`,
-                tag: 'BACKEND',
-                color: '#f89820',
-                link: 'java.html'
-            },
-            {
-                title: 'C++ Portfolio',
-                description: 'Low-level systems architecting and deterministic runtime control. Engineering high-performance core infrastructure.',
-                image: `<img src="cpp_logo_official.svg" class="w-10 h-10" alt="CPP">`,
-                tag: 'SYSTEMS',
-                color: '#00599c',
-                link: 'cpp.html'
-            },
-            {
-                title: 'DBMS Portfolio',
-                description: 'Relational logic and structural schema design. Engineering the backbone of modern data-driven ecosystems.',
-                image: `<img src="database-icon.svg" class="w-10 h-10" alt="DBMS">`,
-                tag: 'SCHEMA',
-                color: '#f29111',
-                link: 'dbms.html'
+                title: 'Figma Portfolio',
+                description: 'Scalable design systems and high-fidelity interaction models. Prototyping complex digital experiences.',
+                image: `<img src="Figma-logo.svg" class="w-10 h-10" alt="Figma">`,
+                tag: 'DESIGN',
+                color: '#A259FF',
+                link: 'figma.html'
             }
         ];
 
@@ -387,10 +388,7 @@
 
             animateThree();
 
-            window.addEventListener('mousemove', (e) => {
-                mouseX = (e.clientX - window.innerWidth / 2) / 100;
-                mouseY = (e.clientY - window.innerHeight / 2) / 100;
-            });
+            animateThree();
 
             window.addEventListener('resize', () => {
                 camera.aspect = window.innerWidth / window.innerHeight;
@@ -456,13 +454,163 @@
             `).join('');
         }
 
+        let avatarScene, avatarCamera, avatarRenderer, avatarCore, avatarInner, avatarEyes = [], avatarSatellites = [], avatarRings = [];
+
+        function initAvatar() {
+            const container = document.getElementById('avatar-container');
+            if (!container) return;
+
+            avatarScene = new THREE.Scene();
+            avatarCamera = new THREE.PerspectiveCamera(75, container.clientWidth / container.clientHeight, 0.1, 1000);
+            avatarCamera.position.z = 15;
+
+            avatarRenderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
+            avatarRenderer.setSize(container.clientWidth, container.clientHeight);
+            avatarRenderer.setPixelRatio(window.devicePixelRatio);
+            container.appendChild(avatarRenderer.domElement);
+
+            // The Sentiment Core Group
+            const entityGroup = new THREE.Group();
+
+            // Wireframe Shell
+            const headGeo = new THREE.IcosahedronGeometry(4, 1);
+            const headMat = new THREE.MeshPhongMaterial({
+                color: 0x6366F1,
+                emissive: 0x6366F1,
+                emissiveIntensity: 0.2,
+                wireframe: true,
+                transparent: true,
+                opacity: 0.6
+            });
+            avatarCore = new THREE.Mesh(headGeo, headMat);
+            entityGroup.add(avatarCore);
+
+            // Glowing Inner Core (Intelligence)
+            const innerGeo = new THREE.SphereGeometry(1.2, 32, 32);
+            const innerMat = new THREE.MeshPhongMaterial({
+                color: 0xffffff,
+                emissive: 0x6366F1,
+                emissiveIntensity: 1.5
+            });
+            avatarInner = new THREE.Mesh(innerGeo, innerMat);
+            entityGroup.add(avatarInner);
+
+            // Digital Eyes
+            const eyeGeo = new THREE.SphereGeometry(0.3, 16, 16);
+            const eyeMat = new THREE.MeshPhongMaterial({ color: 0xffffff, emissive: 0x818cf8, emissiveIntensity: 2 });
+
+            for (let i = 0; i < 2; i++) {
+                const eye = new THREE.Mesh(eyeGeo, eyeMat);
+                eye.position.set(i === 0 ? -1 : 1, 0.5, 3.2);
+                avatarEyes.push(eye);
+                avatarCore.add(eye); // Move with shell
+            }
+
+            avatarScene.add(entityGroup);
+
+            // Satellite "Hands"
+            const satGeo = new THREE.BoxGeometry(0.8, 0.8, 0.8);
+            const satMat = new THREE.MeshPhongMaterial({ color: 0x6366F1, wireframe: true });
+
+            for (let i = 0; i < 2; i++) {
+                const satGroup = new THREE.Group();
+                const sat = new THREE.Mesh(satGeo, satMat);
+                satGroup.add(sat);
+                satGroup.position.set(i === 0 ? -6 : 6, 0, 0);
+                avatarSatellites.push(satGroup);
+                avatarScene.add(satGroup);
+            }
+
+            // Orbiting Data Rings
+            for (let i = 0; i < 3; i++) {
+                const ringGeo = new THREE.TorusGeometry(7 + i * 1.5, 0.02, 16, 100);
+                const ringMat = new THREE.MeshBasicMaterial({
+                    color: 0x6366F1,
+                    transparent: true,
+                    opacity: 0.25 - (i * 0.05)
+                });
+                const ring = new THREE.Mesh(ringGeo, ringMat);
+                ring.rotation.x = Math.random() * Math.PI;
+                ring.rotation.y = Math.random() * Math.PI;
+                avatarScene.add(ring);
+                avatarRings.push(ring);
+            }
+
+            // Lights
+            const mainLight = new THREE.PointLight(0xffffff, 1, 100);
+            mainLight.position.set(10, 10, 10);
+            avatarScene.add(mainLight);
+
+            const ambientLight = new THREE.AmbientLight(0x404040, 2);
+            avatarScene.add(ambientLight);
+
+            animateAvatar();
+
+            window.addEventListener('resize', () => {
+                if (!container) return;
+                avatarCamera.aspect = container.clientWidth / container.clientHeight;
+                avatarCamera.updateProjectionMatrix();
+                avatarRenderer.setSize(container.clientWidth, container.clientHeight);
+            });
+        }
+
+        function animateAvatar() {
+            requestAnimationFrame(animateAvatar);
+
+            const time = Date.now() * 0.001;
+
+            if (avatarCore) {
+                // Gentle floating
+                avatarCore.position.y = Math.sin(time) * 0.5;
+
+                // Interaction with mouse
+                avatarCore.rotation.y += (mouseX * 0.3 - avatarCore.rotation.y) * 0.05;
+                avatarCore.rotation.x += (-mouseY * 0.3 - avatarCore.rotation.x) * 0.05;
+
+                // Pulsing Core
+                if (avatarInner) {
+                    avatarInner.material.emissiveIntensity = 1 + Math.sin(time * 3) * 0.5;
+                    avatarInner.scale.setScalar(1 + Math.sin(time * 3) * 0.05);
+                }
+
+                // Eyes tracking (extra sensitivity)
+                avatarEyes.forEach(eye => {
+                    eye.position.x = (eye.position.x > 0 ? 1 : -1) + mouseX * 0.8;
+                    eye.position.y = 0.5 - mouseY * 0.8;
+                });
+            }
+
+            // Satellite "Hands" animation
+            avatarSatellites.forEach((sat, i) => {
+                const side = i === 0 ? -1 : 1;
+                sat.position.y = Math.cos(time * 1.5 + i) * 1.5 + (avatarCore ? avatarCore.position.y : 0);
+                sat.position.x = side * (6 + Math.sin(time) * 0.5);
+                sat.rotation.x += 0.02;
+                sat.rotation.y += 0.02;
+            });
+
+            avatarRings.forEach((ring, i) => {
+                ring.rotation.z += 0.01 * (i + 1);
+                ring.rotation.y += 0.005;
+            });
+
+            avatarRenderer.render(avatarScene, avatarCamera);
+        }
+
         window.onload = () => {
             if (localStorage.getItem('theme') === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
                 document.documentElement.classList.add('dark');
                 document.getElementById('sun-icon').classList.remove('hidden');
                 document.getElementById('moon-icon').classList.add('hidden');
             }
+            // Global mouse tracking
+            window.addEventListener('mousemove', (e) => {
+                mouseX = (e.clientX - window.innerWidth / 2) / 100;
+                mouseY = (e.clientY - window.innerHeight / 2) / 100;
+            });
+
             initThree();
+            initAvatar();
             populate();
         };
     </script>
