@@ -1,13 +1,15 @@
-# 📊 Power BI Analytics Portal
+<img src="portfolio_hub_banner.png" width="100%" height="200" style="object-fit: cover;" alt="Portfolio Hub Banner">
 
-![Project Banner](assets/banner.png)
+<h1 align="center"> 🌌 Portfolio Hub<h1>
 
 <div align="center">
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![GitHub Search](https://img.shields.io/badge/GitHub-Analytics_Portal-181717?logo=github)](https://github.com)
-[![Version](https://img.shields.io/badge/Version-1.0.0-blue.svg)](https://github.com)
-[![Status](https://img.shields.io/badge/Status-Active-success.svg)](https://github.com)
+[![GitHub Repo](https://img.shields.io/badge/GitHub-Portfolio_Hub-181717?style=flat&logo=github)](https://github.com/ajaygangwar945/Portfolio-Hub)
+[![Vercel Deployed](https://img.shields.io/badge/Vercel-Deployed-000000?style=flat&logo=vercel)](https://ajay-portfolio-hub.vercel.app/)
+[![Portfolios](https://img.shields.io/badge/Portfolios-16_Portals-blue?style=flat&logo=docsdotrs)](https://github.com/ajaygangwar945/Portfolio-Hub)
+[![Tech Stack](https://img.shields.io/badge/Stack-HTML5_%7C_JS_%7C_Three.js-orange?style=flat)](https://github.com/ajaygangwar945/Portfolio-Hub)
+[![Design](https://img.shields.io/badge/Design-Glassmorphic-FF69B4?style=flat)](https://github.com/ajaygangwar945/Portfolio-Hub)
+[![Status](https://img.shields.io/badge/Status-Active-success?style=flat)](https://ajay-portfolio-hub.vercel.app/)
 
 </div>
 
@@ -15,52 +17,54 @@
 
 ## 🚀 Overview
 
-The **Power BI Analytics Portal** is a high-performance, interactive web application designed for data enthusiasts and analysts. It seamlessly integrates live Power BI reporting with a modern educational suite, providing both deep insights and a curated learning path for Power BI best practices.
+The **Portfolio Hub** is a centralized, high-integrity ecosystem designed to showcase a diverse range of technical skills across 16 specialized portfolios. From low-level systems engineering in C++ to cinematic visual storytelling in Tableau, this hub provides a unified interface for exploring projects, technical fundamentals, and high-performance visualizations.
 
-Featuring a **glassmorphic UI**, **3D particle backgrounds**, and **real-time theme toggling**, this portal is engineered to provide a premium user experience while showcasing complex data in a simple, digestible format.
-
----
-
-## ✨ Key Features
-
-### 📈 Interactive Dashboards
-
-- **Multi-Report Selector**: Easily switch between different Power BI reports (e.g., Global Terror Analysis, Learning Analytics).
-- **KPI Deep-Dives**: View real-time aggregated metrics and trends before diving into full reports.
-- **Contextual Insights**: Detailed explanations for each dashboard to help users interpret complex visualizations.
-
-### 🎓 Power BI Basics (Educational Suite)
-
-- **Simplified Learning**: 6 modular cards covering **Data Modeling**, **Visual Design**, **Performance**, **DAX**, **Power Query**, and **Security**.
-- **Actionable Tips**: Technical jargon translated into plain English for rapid skill acquisition.
-- **Interactive Design**: Each card features a custom 3D hover effect and HSL-tailored color schemes.
-
-### 🎨 State-of-the-Art UI/UX
-
-- **3D Particle Background**: Dynamic Three.js particle system that reacts to mouse movement.
-- **Theme Awareness**: Complete Light/Dark mode support with synchronized 3D assets.
-- **Fully Responsive**: Optimized for everything from mobile handhelds to ultra-wide displays.
+Featuring **theme-synchronized 3D backgrounds**, **glassmorphic UI components**, and **interactive data portals**, the Hub is engineered to provide a premium, cohesive experience across all technical clusters.
 
 ---
 
-## 🛠️ Tech Stack
+## 🔗 Live Deployment
 
-- **Core**: HTML5, Vanilla JavaScript
+This project is deployed and hosted on Vercel, providing high-performance static rendering and global edge delivery.
+
+<div align="left">
+
+[![Vercel Deployed](https://img.shields.io/badge/Vercel-Deployed-000000?style=flat&logo=vercel)](https://ajay-portfolio-hub.vercel.app/)
+
+</div>
+
+---
+
+## 📂 Available Portfolios
+
+The Hub consists of 16 distinct portals, each tailored to a specific technology or domain:
+
+| Domain | Portfolios |
+| :--- | :--- |
+| **Creative & Design** | [🎨 Paint](paint.html) • [📷 Photoshop](photoshop.html) • [💎 Figma](figma.html) • [✨ Canva](canva.html) |
+| **Office & Productivity**| [📝 Word](word.html) • [📽️ PowerPoint](ppt.html) • [📈 Excel master](excel.html) |
+| **Web Development** | [🌐 HTML5 Architecture](html.html) • [🎨 CSS3 Design](css.html) • [📱 Flutter Mobile](flutter.html) |
+| **Programming & Data** | [🐍 Python Systems](python.html) • [☕ Java Backend](java.html) • [⚙️ C++ Infrastructure](cpp.html) • [📊 DBMS Logic](dbms.html) |
+| **Business Intelligence** | [📉 Power BI Analytics](powerbi.html) • [📊 Tableau Visual Hub](tableau.html) |
+
+---
+
+## ✨ Key Global Features
+
+- **Theme Synchronization**: Integrated Three.js backgrounds that adapt dynamically to Light and Dark modes across all 16 pages.
+- **High-Fidelity Visuals**: Custom-generated project previews and glassmorphic KPI cards for a professional aesthetic.
+- **Cross-Link Architecture**: A standardized navigation system allowing seamless transitions between the central hub and specialized portals.
+- **Interactive Data**: Real-time dashboard embedding for Power BI, Tableau, and Excel portfolios.
+
+---
+
+## 🛠️ Global Tech Stack
+
+- **Core**: HTML5, Vanilla JavaScript, CSS3
 - **Styling**: [Tailwind CSS](https://tailwindcss.com/)
 - **3D Engine**: [Three.js](https://threejs.org/)
-- **Typography**: Segoe UI / Inter (via Google Fonts)
-- **Integration**: Power BI Embedded (iFrame-based integration)
-
----
-
-## 📸 Live Demo & Screenshots
-
-> [!TIP]
-> **View Live Portal**: [Enter Analytics Universe](https://your-live-link-here.com) *(Placeholder)*
-
-| Desktop View | Mobile Optimization |
-| :--- | :--- |
-| ![Desktop](/api/placeholder/400/225) | ![Mobile](/api/placeholder/150/300) |
+- **Typography**: [Segoe UI](https://learn.microsoft.com/en-us/typography/font-list/segoe-ui) / [Fira Code](https://github.com/tonsky/FiraCode)
+- **Deployment**: Optimized for Vercel and modern static hosting.
 
 ---
 
@@ -69,22 +73,16 @@ Featuring a **glassmorphic UI**, **3D particle backgrounds**, and **real-time th
 1. **Clone the repository**:
 
    ```bash
-   git clone https://github.com/your-username/Power-BI-Analytics-Portal.git
+   git clone https://github.com/ajaygangwar945/Portfolio-Hub.git
    ```
 
-2. **Open the project**:
-   Simply open `powerbi.html` in any modern web browser.
-3. **Customize Dashboards**:
-   Update the `dashboards` array in the `<script>` section of `powerbi.html` with your own Power BI URLs.
-
----
-
-## 🛡️ License
-
-Distributed under the **MIT License**. See `LICENSE` for more information.
+2. **Launch the Hub**:
+   Open `index.html` in any modern web browser.
+3. **Explore Portals**:
+   Navigate through the "Technical Portfolios" grid to enter specific domain portals.
 
 ---
 
 <div align="center">
-Built with ❤️ for Data Insights & Visualization
+Built with ❤️ for Technical Excellence & Visual Clarity
 </div>

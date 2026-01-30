@@ -362,7 +362,7 @@
             document.documentElement.classList.toggle('dark');
             const isDark = document.documentElement.classList.contains('dark');
             localStorage.setItem('theme', isDark ? 'dark' : 'light');
-            cups.forEach(c => c.material.color.setHex(isDark ? 0x5382a1 : 0xf89820));
+            cups.forEach(c => c.material.color.setHex(isDark ? 0xed8b00 : 0xf89820));
         }
 
         window.onload = () => { initThree(); showHub(); if (localStorage.getItem('theme') === 'dark') toggleTheme(); };

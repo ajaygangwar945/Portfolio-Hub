@@ -488,7 +488,7 @@
             localStorage.setItem('theme', isDark ? 'dark' : 'light');
             document.getElementById('sun-icon').classList.toggle('hidden', !isDark);
             document.getElementById('moon-icon').classList.toggle('hidden', isDark);
-            objects.forEach(obj => obj.material.color.setHex(isDark ? 0xf2c811 : 0xd24726));
+            objects.forEach(obj => obj.material.color.setHex(isDark ? 0xf2c811 : 0xebbb14));
         }
 
         function showHub() {

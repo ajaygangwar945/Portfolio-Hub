@@ -182,7 +182,7 @@
                     onclick="showVault()" aria-label="Show Tableau Fundamentals">
                     Tableau Fundamentals
                 </button>
-                <button onclick="toggleTheme()" title="Toggle theme"
+                <button onclick="toggleTheme()" title="Toggle theme" aria-label="Toggle dark and light theme"
                     class="p-2 text-[#605e5c] dark:text-[#a19f9d] hover:bg-[#f3f2f1] dark:hover:bg-[#323130] rounded-full transition-all">
                     <svg id="sun-icon" class="w-5 h-5 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <circle cx="12" cy="12" r="5" stroke-width="2" />
@@ -510,6 +510,19 @@
             localStorage.setItem('theme', isDark ? 'dark' : 'light');
             document.getElementById('sun-icon').classList.toggle('hidden', !isDark);
             document.getElementById('moon-icon').classList.toggle('hidden', isDark);
+
+            if (particles) {
+                const colors = particles.geometry.attributes.color.array;
+                const color1 = new THREE.Color(isDark ? 0x00c4cc : 0x1f457e);
+                const color2 = new THREE.Color(isDark ? 0x1f457e : 0x00c4cc);
+                for (let i = 0; i < 300; i++) {
+                    const c = i < 150 ? color1 : color2;
+                    colors[i * 3] = c.r;
+                    colors[i * 3 + 1] = c.g;
+                    colors[i * 3 + 2] = c.b;
+                }
+                particles.geometry.attributes.color.needsUpdate = true;
+            }
         }
 
         function showHub() {
