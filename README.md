@@ -1,4 +1,4 @@
-<img src="assets/portfolio_hub_banner.png" width="100%" height="200" style="object-fit: cover;" alt="Portfolio Hub Banner">
+<img src="assets/Gemini_Generated_Image.png" width="100%" height="200" style="object-fit: cover;" alt="Portfolio Hub Banner">
 
 <h1 align="center"> 🌌 Portfolio Hub<h1>
 
