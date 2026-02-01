@@ -168,12 +168,37 @@
                 </div>
             </div>
 
-            <div class="flex items-center gap-3">
+            <!-- Mobile Menu -->
+            <div class="md:hidden flex items-center gap-2">
+                <button onclick="location.href='index.html'" class="p-2 text-gray-500 dark:text-gray-400"
+                    aria-label="Go Back" title="Go Back">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+                    </svg>
+                </button>
+                <button onclick="toggleTheme()" class="p-2 text-[#605e5c] dark:text-[#a19f9d]" aria-label="Toggle theme"
+                    title="Toggle theme">
+                    <svg id="sun-icon-mobile" class="w-5 h-5 hidden" fill="none" stroke="currentColor"
+                        viewBox="0 0 24 24">
+                        <circle cx="12" cy="12" r="5" stroke-width="2" />
+                        <path stroke-linecap="round" stroke-width="2"
+                            d="M12 1v2m0 18v2M4.22 4.22l1.42 1.42m12.72 12.72l1.42 1.42M1 12h2m18 0h2M4.22 19.78l1.42-1.42M17.66 6.34l1.42-1.42" />
+                    </svg>
+                    <svg id="moon-icon-mobile" class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
+                    </svg>
+                </button>
+            </div>
+
+            <!-- Desktop Menu -->
+            <div class="hidden md:flex items-center gap-3">
                 <a href="index.html" aria-label="View all language portals"
-                    class="hidden md:inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-xs font-bold border border-[#edebe9] dark:border-[#3b3a39] hover:bg-pbi-yellow hover:text-black hover:border-pbi-yellow transition-all">
+                    class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-xs font-bold border border-[#edebe9] dark:border-[#3b3a39] hover:bg-pbi-yellow hover:text-black hover:border-pbi-yellow transition-all">
                     All Portals
                 </a>
-                <div class="h-6 w-px bg-[#edebe9] dark:bg-[#3b3a39] hidden md:block mx-1"></div>
+                <div class="h-6 w-px bg-[#edebe9] dark:bg-[#3b3a39] mx-1"></div>
                 <button id="nav-hub-btn" class="px-4 py-1.5 rounded-full text-xs font-bold transition-all"
                     onclick="showHub()" aria-label="Show Power BI Projects">
                     Projects
@@ -184,12 +209,13 @@
                 </button>
                 <button onclick="toggleTheme()" title="Toggle Theme" aria-label="Toggle dark and light theme"
                     class="p-2 text-[#605e5c] dark:text-[#a19f9d] hover:bg-[#f3f2f1] dark:hover:bg-[#323130] rounded-full transition-all">
-                    <svg id="sun-icon" class="w-5 h-5 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <svg id="sun-icon-desktop" class="w-5 h-5 hidden" fill="none" stroke="currentColor"
+                        viewBox="0 0 24 24">
                         <circle cx="12" cy="12" r="5" stroke-width="2" />
                         <path stroke-linecap="round" stroke-width="2"
                             d="M12 1v2m0 18v2M4.22 4.22l1.42 1.42m12.72 12.72l1.42 1.42M1 12h2m18 0h2M4.22 19.78l1.42-1.42M17.66 6.34l1.42-1.42" />
                     </svg>
-                    <svg id="moon-icon" class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <svg id="moon-icon-desktop" class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                             d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
                     </svg>
@@ -343,7 +369,7 @@
                     </div>
                 </div>
 
-                <div id="basics-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div id="basics-grid" class="grid grid-cols-1 xs:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
                     <!-- Cards populated by JS -->
                 </div>
             </section>
@@ -486,8 +512,16 @@
             document.documentElement.classList.toggle('dark');
             const isDark = document.documentElement.classList.contains('dark');
             localStorage.setItem('theme', isDark ? 'dark' : 'light');
-            document.getElementById('sun-icon').classList.toggle('hidden', !isDark);
-            document.getElementById('moon-icon').classList.toggle('hidden', isDark);
+
+            ['sun-icon-desktop', 'sun-icon-mobile'].forEach(id => {
+                const el = document.getElementById(id);
+                if (el) el.classList.toggle('hidden', !isDark);
+            });
+            ['moon-icon-desktop', 'moon-icon-mobile'].forEach(id => {
+                const el = document.getElementById(id);
+                if (el) el.classList.toggle('hidden', isDark);
+            });
+
             objects.forEach(obj => obj.material.color.setHex(isDark ? 0xf2c811 : 0xebbb14));
         }
 
@@ -582,9 +616,11 @@
 
         window.onload = () => {
             if (localStorage.getItem('theme') === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
-                document.documentElement.classList.add('dark');
-                document.getElementById('sun-icon').classList.remove('hidden');
-                document.getElementById('moon-icon').classList.add('hidden');
+                if (!document.documentElement.classList.contains('dark')) {
+                    document.documentElement.classList.add('dark');
+                    ['sun-icon-desktop', 'sun-icon-mobile'].forEach(id => { const el = document.getElementById(id); if (el) el.classList.remove('hidden'); });
+                    ['moon-icon-desktop', 'moon-icon-mobile'].forEach(id => { const el = document.getElementById(id); if (el) el.classList.add('hidden'); });
+                }
             }
             initThree(); populate(); showHub();
         };
