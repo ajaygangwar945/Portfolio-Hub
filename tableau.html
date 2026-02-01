@@ -168,7 +168,31 @@
                 </div>
             </div>
 
-            <div class="flex items-center gap-3">
+            <!-- Mobile Menu -->
+            <div class="md:hidden flex items-center gap-2">
+                <button onclick="location.href='index.html'" class="p-2 text-gray-500 dark:text-gray-400"
+                    aria-label="Go Back">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+                    </svg>
+                </button>
+                <button onclick="toggleTheme()" class="p-2 text-[#605e5c] dark:text-[#a19f9d]">
+                    <svg id="sun-icon-mobile" class="w-5 h-5 hidden" fill="none" stroke="currentColor"
+                        viewBox="0 0 24 24">
+                        <circle cx="12" cy="12" r="5" stroke-width="2" />
+                        <path stroke-linecap="round" stroke-width="2"
+                            d="M12 1v2m0 18v2M4.22 4.22l1.42 1.42m12.72 12.72l1.42 1.42M1 12h2m18 0h2M4.22 19.78l1.42-1.42M17.66 6.34l1.42-1.42" />
+                    </svg>
+                    <svg id="moon-icon-mobile" class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
+                    </svg>
+                </button>
+            </div>
+
+            <!-- Desktop Menu -->
+            <div class="hidden md:flex items-center gap-3">
                 <a href="index.html" aria-label="View all language portals"
                     class="hidden md:inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-xs font-bold border border-[#edebe9] dark:border-[#3b3a39] hover:bg-tableau-orange hover:text-white hover:border-tableau-orange transition-all">
                     All Portals
@@ -184,12 +208,13 @@
                 </button>
                 <button onclick="toggleTheme()" title="Toggle theme" aria-label="Toggle dark and light theme"
                     class="p-2 text-[#605e5c] dark:text-[#a19f9d] hover:bg-[#f3f2f1] dark:hover:bg-[#323130] rounded-full transition-all">
-                    <svg id="sun-icon" class="w-5 h-5 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <svg id="sun-icon-desktop" class="w-5 h-5 hidden" fill="none" stroke="currentColor"
+                        viewBox="0 0 24 24">
                         <circle cx="12" cy="12" r="5" stroke-width="2" />
                         <path stroke-linecap="round" stroke-width="2"
                             d="M12 1v2m0 18v2M4.22 4.22l1.42 1.42m12.72 12.72l1.42 1.42M1 12h2m18 0h2M4.22 19.78l1.42-1.42M17.66 6.34l1.42-1.42" />
                     </svg>
-                    <svg id="moon-icon" class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <svg id="moon-icon-desktop" class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                             d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9 0 0012 21a9.003 9 0 008.354-5.646z" />
                     </svg>
@@ -210,7 +235,7 @@
                         <span class="w-1.5 h-1.5 rounded-full bg-tableau-orange animate-ping"></span>
                     </p>
                     <h1
-                        class="text-4xl sm:text-5xl lg:text-7xl font-black leading-[1.1] text-[#201f1e] dark:text-white tracking-tight">
+                        class="text-3xl sm:text-5xl lg:text-7xl font-black leading-[1.1] text-[#201f1e] dark:text-white tracking-tight">
                         See Data. <br> <span
                             class="text-transparent bg-clip-text bg-gradient-to-r from-tableau-blue to-tableau-cyan drop-shadow-sm">Understand
                             it.</span> <br>
@@ -236,7 +261,7 @@
                 </div>
 
                 <!-- KPI Quick View -->
-                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div class="grid grid-cols-1 xs:grid-cols-2 gap-4">
                     <div class="kpi-card shadow-xl rounded-2xl">
                         <div class="kpi-inner p-6 rounded-2xl border border-tableau-orange/20">
                             <p class="text-[10px] font-bold text-tableau-orange uppercase tracking-widest mb-1">Current
@@ -344,9 +369,10 @@
                     </div>
                 </div>
 
-                <div id="basics-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <section id="content-grid"
+                    class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 fade-in-3d">
                     <!-- Cards populated by JS -->
-                </div>
+                </section>
             </section>
         </div>
     </main>
@@ -508,8 +534,15 @@
             document.documentElement.classList.toggle('dark');
             const isDark = document.documentElement.classList.contains('dark');
             localStorage.setItem('theme', isDark ? 'dark' : 'light');
-            document.getElementById('sun-icon').classList.toggle('hidden', !isDark);
-            document.getElementById('moon-icon').classList.toggle('hidden', isDark);
+
+            ['sun-icon-desktop', 'sun-icon-mobile'].forEach(id => {
+                const el = document.getElementById(id);
+                if (el) el.classList.toggle('hidden', !isDark);
+            });
+            ['moon-icon-desktop', 'moon-icon-mobile'].forEach(id => {
+                const el = document.getElementById(id);
+                if (el) el.classList.toggle('hidden', isDark);
+            });
 
             if (particles) {
                 const colors = particles.geometry.attributes.color.array;
@@ -602,7 +635,7 @@
         }
 
         function populate() {
-            const grid = document.getElementById('basics-grid');
+            const grid = document.getElementById('content-grid'); // Changed from basics-grid
             grid.innerHTML = basicsData.map((b, i) => `
                 <div class="tips-card fade-in-3d" style="animation-delay: ${i * 0.1}s">
                     <div class="tips-card-inner bg-white/40 dark:bg-white/5 backdrop-blur-xl p-8 rounded-3xl shadow-xl border border-tableau-orange/10 hover:border-tableau-orange/50 transition-all h-full">
@@ -621,12 +654,16 @@
         }
 
         window.onload = () => {
+            initThree();
+            populate();
+            showHub();
             if (localStorage.getItem('theme') === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
-                document.documentElement.classList.add('dark');
-                document.getElementById('sun-icon').classList.remove('hidden');
-                document.getElementById('moon-icon').classList.add('hidden');
+                if (!document.documentElement.classList.contains('dark')) {
+                    document.documentElement.classList.add('dark');
+                    ['sun-icon-desktop', 'sun-icon-mobile'].forEach(id => { const el = document.getElementById(id); if (el) el.classList.remove('hidden'); });
+                    ['moon-icon-desktop', 'moon-icon-mobile'].forEach(id => { const el = document.getElementById(id); if (el) el.classList.add('hidden'); });
+                }
             }
-            initThree(); populate(); showHub();
         };
     </script>
 </body>

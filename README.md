@@ -1,10 +1,9 @@
 <img src="assets/Gemini_Generated_Image.png" width="100%" height="200" style="object-fit: cover;" alt="Portfolio Hub Banner">
 
-<h1 align="center"> 🌌 Portfolio Hub<h1>
+<h1 align="center"> 🌌 Portfolio Hub</h1>
 
 <div align="center">
 
-[![GitHub Repo](https://img.shields.io/badge/GitHub-Portfolio_Hub-181717?style=flat&logo=github)](https://github.com/ajaygangwar945/Portfolio-Hub)
 [![Vercel Deployed](https://img.shields.io/badge/Vercel-Deployed-000000?style=flat&logo=vercel)](https://ajay-portfolio-hub.vercel.app/)
 [![Portfolios](https://img.shields.io/badge/Portfolios-16_Portals-blue?style=flat&logo=docsdotrs)](https://github.com/ajaygangwar945/Portfolio-Hub)
 [![Tech Stack](https://img.shields.io/badge/Stack-HTML5_%7C_JS_%7C_Three.js-orange?style=flat)](https://github.com/ajaygangwar945/Portfolio-Hub)
