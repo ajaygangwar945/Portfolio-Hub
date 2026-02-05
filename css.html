@@ -323,36 +323,40 @@
     <script>
         const hubProjects = [
             {
-                title: 'Power BI Analytics',
-                desc: 'Enterprise-grade dashboards with terrorist analysis and learning metrics. Built with official PBI embedded patterns.',
-                image: 'assets/powerbi_analytics_viz_1769713432495.png',
-                icon: '📊',
-                tags: ['DATA', 'POWER BI'],
-                link: 'powerbi.html'
+                title: 'Pet Adoption & Animal Welfare',
+                desc: 'Responsive pet adoption platform with engaging hero section, image gallery slider, and animal welfare information.',
+                image: 'assets/pet_adoption_project_new.png',
+                icon: '🐾',
+                tags: ['CSS', 'RESPONSIVE'],
+                liveLink: 'https://pet-adoption-animal-welfare.netlify.app/',
+                repoLink: 'https://github.com/ajaygangwar945/Pet-Adoption-Animal-Welfare'
             },
             {
-                title: 'Excel Mastery',
-                desc: 'Advanced formulas, VBA automation tricks, and data modeling guides. Transitioning from grid to web analytics.',
-                image: 'assets/excel_mastery_viz_1769713456906.png',
-                icon: '📈',
-                tags: ['AUTOMATION', 'EXCEL'],
-                link: 'excel.html'
+                title: 'HTML Learning Hub',
+                desc: 'Interactive learning platform with 30+ HTML/CSS modules, 3D Three.js dashboard, and glassmorphism UI.',
+                image: 'assets/html_learning_hub_new.png',
+                icon: '🌐',
+                tags: ['CSS3', 'THREE.JS'],
+                liveLink: 'https://ajaygangwar945.github.io/First-HTML-Project-Overview/',
+                repoLink: 'https://github.com/ajaygangwar945/First-HTML-Project-Overview'
             },
             {
-                title: 'Tableau Visual Hub',
-                desc: 'Visual storytelling techniques, LOD expressions, and interactive dashboarding for complex datasets.',
-                image: 'assets/tableau_hub_viz_1769713475738.png',
-                icon: '🎨',
-                tags: ['VISUALS', 'TABLEAU'],
-                link: 'tableau.html'
+                title: 'Stylish Achievements',
+                desc: 'A modern, interactive portfolio built with React, TypeScript, and 3D web technologies to showcase achievements.',
+                image: 'assets/css_styling_viz_1769713493068.png',
+                icon: '✨',
+                tags: ['REACT', '3D'],
+                liveLink: 'https://stylish-achievements.vercel.app/',
+                repoLink: 'https://github.com/ajaygangwar945/Stylish-Achievements'
             },
             {
-                title: 'Portfolio Directory',
-                desc: 'A centralized collection of interactive dashboards, technical guides, and full-stack web development projects.',
-                image: 'portfolio_hub_viz_1769713510715.png',
-                icon: '📂',
-                tags: ['HUB', 'HTML'],
-                link: 'index.html'
+                title: 'Weather App',
+                desc: 'A React-based weather application that provides real-time weather data with a focus on clean layout and responsive design.',
+                image: 'assets/flutter_weather_viz.png',
+                icon: '☁️',
+                tags: ['REACT', 'API'],
+                liveLink: 'https://weather-forcasting-temperature.netlify.app/',
+                repoLink: 'https://github.com/ajaygangwar945/Weather-App'
             }
         ];
 
@@ -542,10 +546,16 @@
                                 </div>
                             </div>
                             <p class="text-xs text-gray-500 dark:text-gray-400 font-medium leading-relaxed mb-6 flex-1">${p.desc}</p>
-                            <button onclick="window.open('${p.link}', '_blank')" 
-                                class="w-full py-3 rounded-xl bg-gradient-to-r from-css-blue to-css-bright text-white text-[10px] font-black uppercase tracking-[0.2em] shadow-lg shadow-css-blue/20 hover:shadow-css-blue/40 hover:scale-[1.02] transition-all flex items-center justify-center gap-2">
-                                VIEW PROJECT <span class="text-sm">→</span>
-                            </button>
+                            <div class="flex gap-3">
+                                <button onclick="window.open('${p.liveLink}', '_blank')" 
+                                    class="flex-1 py-3 rounded-xl bg-gradient-to-r from-css-blue to-css-bright text-white text-[9px] font-black uppercase tracking-wider shadow-lg shadow-css-blue/20 hover:shadow-css-blue/40 hover:scale-[1.02] transition-all flex items-center justify-center gap-2">
+                                    LIVE DEMO <span class="text-sm">↗</span>
+                                </button>
+                                <button onclick="window.open('${p.repoLink}', '_blank')" 
+                                    class="flex-1 py-3 rounded-xl border border-css-blue/20 text-css-blue dark:text-css-bright text-[9px] font-black uppercase tracking-wider hover:bg-css-blue/5 hover:scale-[1.02] transition-all flex items-center justify-center gap-2">
+                                    VIEW CODE <span class="text-sm">⌨️</span>
+                                </button>
+                            </div>
                         </div>
                     </div>
                 </div>

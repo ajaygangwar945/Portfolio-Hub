@@ -301,19 +301,19 @@
 
             <!-- Dashboard Section -->
             <section id="dashboard-section" class="space-y-8 fade-in-3d">
-                <div class="flex flex-col md:flex-row items-stretch justify-between gap-6">
+                <div class="flex flex-col md:flex-row items-center justify-between gap-4">
                     <div
-                        class="bg-white dark:bg-[#1b1a19] p-4 rounded-2xl border border-excel-green/10 flex flex-col justify-center min-w-[280px] hover:border-excel-green/30 transition-all shadow-sm group">
+                        class="bg-white dark:bg-[#1b1a19] px-6 py-2.5 rounded-2xl border border-excel-green/10 flex flex-col justify-center min-w-[240px] hover:border-excel-green/30 transition-all shadow-sm group">
                         <label for="dashboard-selector"
-                            class="text-[9px] font-black text-gray-400 dark:text-gray-500 uppercase tracking-widest mb-1 group-hover:text-excel-green transition-colors">Configuration</label>
+                            class="text-[8px] font-black text-gray-400 dark:text-gray-500 uppercase tracking-widest mb-0.5 group-hover:text-excel-green transition-colors">Configuration</label>
                         <div class="relative">
                             <select id="dashboard-selector" onchange="switchDashboard(this.value)"
                                 aria-label="Dashboard Configuration Selector"
-                                class="w-full bg-transparent text-lg font-black text-[#201f1e] dark:text-white outline-none border-none p-0 cursor-pointer appearance-none truncate pr-8">
+                                class="w-full bg-transparent text-base font-black text-[#201f1e] dark:text-white outline-none border-none p-0 cursor-pointer appearance-none truncate pr-8">
                                 <!-- Populated by JS -->
                             </select>
                             <div class="absolute right-0 top-1/2 -translate-y-1/2 pointer-events-none text-excel-green">
-                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                         d="M19 9l-7 7-7-7" />
                                 </svg>
@@ -321,7 +321,7 @@
                         </div>
                     </div>
 
-                    <div id="stats-container" class="flex-1 grid grid-cols-1 xs:grid-cols-2 gap-4 w-full">
+                    <div id="stats-container" class="flex-1 grid grid-cols-2 gap-4 w-full">
                         <!-- Stats populated by JS -->
                     </div>
                 </div>
@@ -576,11 +576,11 @@
             setTimeout(() => {
                 frame.src = db.url; exp.innerHTML = db.explanation;
                 stats.innerHTML = db.stats.map((s, i) => `
-                    <div class="kpi-inner p-4 rounded-2xl border border-excel-green/10 bg-white/80 dark:bg-[#0b0b0a]/80 backdrop-blur-md shadow-sm">
-                        <p class="text-[9px] font-black text-gray-500 uppercase tracking-widest">${s.label}</p>
-                        <div class="flex items-center justify-between mt-2">
-                            <span class="text-lg font-black">${s.value}</span>
-                            <span class="text-[9px] font-black px-2 py-0.5 rounded ${s.color} bg-excel-green/10 uppercase">${s.trend}</span>
+                    <div class="kpi-inner px-6 py-2.5 rounded-2xl border border-excel-green/10 bg-white/80 dark:bg-[#0b0b0a]/80 backdrop-blur-md shadow-sm">
+                        <p class="text-[8px] font-black text-gray-500 uppercase tracking-widest">${s.label}</p>
+                        <div class="flex items-center justify-between mt-0.5">
+                            <span class="text-base font-black">${s.value}</span>
+                            <span class="text-[8px] font-black px-1.5 py-0.5 rounded ${s.color} bg-excel-green/10 uppercase">${s.trend}</span>
                         </div>
                     </div>
                 `).join('');
