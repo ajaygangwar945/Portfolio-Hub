@@ -229,7 +229,7 @@
 
             <!-- Hero Section -->
             <section class="grid gap-12 lg:grid-cols-[1.5fr,1fr] items-center">
-                <div class="space-y-6">
+                <div class="order-1 lg:col-start-1 space-y-6">
                     <p
                         class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-[11px] font-bold bg-tableau-orange/10 text-tableau-orange border border-tableau-orange/30">
                         VISUAL ARCHITECT
@@ -249,20 +249,10 @@
                         parameters, and
                         interactive storytelling to unlock the full potential of data.
                     </p>
-                    <div class="flex flex-wrap gap-4 pt-2">
-                        <button id="hero-hub-btn" onclick="showHub()" title="View Tableau Projects"
-                            class="inline-flex items-center justify-center px-8 py-3 rounded-xl text-sm font-bold transition-all shadow-lg hover:shadow-orange-500/20">
-                            Projects
-                        </button>
-                        <button id="hero-vault-btn" onclick="showVault()" title="View Tableau Fundamentals"
-                            class="inline-flex items-center justify-center px-8 py-3 rounded-xl text-sm font-bold transition-all">
-                            Tableau Fundamentals
-                        </button>
-                    </div>
                 </div>
 
                 <!-- KPI Quick View -->
-                <div class="grid grid-cols-1 xs:grid-cols-2 gap-4">
+                <div class="order-2 lg:order-none lg:col-start-2 lg:row-span-2 grid grid-cols-1 xs:grid-cols-2 gap-4">
                     <div class="kpi-card shadow-xl rounded-2xl">
                         <div class="kpi-inner p-6 rounded-2xl border border-tableau-orange/20">
                             <p class="text-[10px] font-bold text-tableau-orange uppercase tracking-widest mb-1">Current
@@ -283,6 +273,18 @@
                                 LOD_&_PARAMETERS</p>
                         </div>
                     </div>
+                </div>
+
+                <!-- Action Block -->
+                <div class="order-3 lg:col-start-1 flex flex-wrap gap-4 pt-2">
+                    <button id="hero-hub-btn" onclick="showHub()" title="View Tableau Projects"
+                        class="inline-flex items-center justify-center px-8 py-3 rounded-xl text-sm font-bold transition-all shadow-lg hover:shadow-orange-500/20">
+                        Projects
+                    </button>
+                    <button id="hero-vault-btn" onclick="showVault()" title="View Tableau Fundamentals"
+                        class="inline-flex items-center justify-center px-8 py-3 rounded-xl text-sm font-bold transition-all">
+                        Tableau Fundamentals
+                    </button>
                 </div>
             </section>
 

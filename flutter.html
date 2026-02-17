@@ -179,7 +179,7 @@
     <main class="relative z-10 flex-none pb-20">
         <div class="max-w-6xl mx-auto px-4 sm:px-6 pt-12 space-y-12">
             <section class="grid gap-12 lg:grid-cols-[1.5fr,1fr] items-center">
-                <div class="space-y-6">
+                <div class="order-1 lg:col-start-1 space-y-6">
                     <p
                         class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-[11px] font-bold bg-flutter-blue/10 text-flutter-blue border border-flutter-blue/20 uppercase tracking-widest">
                         APP ARCHITECT <span class="w-1.5 h-1.5 rounded-full bg-flutter-blue animate-ping"></span></p>
@@ -193,15 +193,10 @@
                     <p class="text-sm sm:text-lg text-gray-500 dark:text-gray-400 font-medium leading-relaxed">
                         Craft beautiful applications for any screen. Master the reactive UI framework of Flutter. I
                         deploy high-performance, multi-platform apps with optimized native integrations.</p>
-                    <div class=" flex gap-4 pt-4">
-                        <button id="hero-hub-btn" onclick="showHub()"
-                            class="inline-flex items-center justify-center px-8 py-3 rounded-xl text-sm font-bold bg-flutter-blue text-white shadow-lg hover:shadow-flutter-blue/30 hover:scale-[1.02] transition-all">Projects</button>
-                        <button id="hero-vault-btn" onclick="showVault()"
-                            class="inline-flex items-center justify-center px-8 py-3 rounded-xl text-sm font-bold border border-flutter-blue/20 hover:bg-flutter-blue/5 transition-all">Flutter
-                            Fundamentals</button>
-                    </div>
                 </div>
-                <div class="grid grid-cols-1 xs:grid-cols-2 gap-4">
+
+                <!-- KPI Block -->
+                <div class="order-2 lg:order-none lg:col-start-2 lg:row-span-2 grid grid-cols-1 xs:grid-cols-2 gap-4">
                     <div class="kpi-card shadow-xl rounded-2xl">
                         <div class="kpi-inner p-6 rounded-2xl border border-flutter-blue/10">
                             <p class="text-[10px] font-bold text-flutter-blue uppercase tracking-widest mb-1">Projects
@@ -221,6 +216,15 @@
                                 FLUTTER_&_DART</p>
                         </div>
                     </div>
+                </div>
+
+                <!-- Action Block -->
+                <div class="order-3 lg:col-start-1 flex gap-4 pt-4">
+                    <button id="hero-hub-btn" onclick="showHub()"
+                        class="inline-flex items-center justify-center px-8 py-3 rounded-xl text-sm font-bold bg-flutter-blue text-white shadow-lg hover:shadow-flutter-blue/30 hover:scale-[1.02] transition-all">Projects</button>
+                    <button id="hero-vault-btn" onclick="showVault()"
+                        class="inline-flex items-center justify-center px-8 py-3 rounded-xl text-sm font-bold border border-flutter-blue/20 hover:bg-flutter-blue/5 transition-all">Flutter
+                        Fundamentals</button>
                 </div>
             </section>
 

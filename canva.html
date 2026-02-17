@@ -177,7 +177,7 @@
     <main class="relative z-10 flex-none pb-20">
         <div class="max-w-6xl mx-auto px-4 sm:px-6 pt-12 space-y-12">
             <section class="grid gap-12 lg:grid-cols-[1.5fr,1fr] items-center">
-                <div class="space-y-6">
+                <div class="order-1 lg:col-start-1 space-y-6">
                     <p
                         class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-[11px] font-bold bg-gradient-to-r from-canva-purple/10 to-canva-teal/10 text-canva-purple border border-canva-purple/20 uppercase tracking-widest">
                         VISUAL ARCHITECT <span class="w-1.5 h-1.5 rounded-full bg-canva-teal animate-ping"></span></p>
@@ -191,15 +191,10 @@
                     <p class="text-sm sm:text-lg text-gray-500 dark:text-gray-400 font-medium leading-relaxed">
                         Accelerate your visual output. Master the high-speed design engine of Canva. I develop
                         professional visuals and brand assets that drive personal project identity.</p>
-                    <div class="flex gap-4">
-                        <button id="hero-hub-btn" onclick="showHub()" title="View Canva Projects"
-                            class="inline-flex items-center justify-center px-8 py-3 rounded-xl text-sm font-bold bg-canva-purple text-white shadow-lg shadow-canva-purple/30 hover:shadow-canva-purple/50 transition-all">Projects</button>
-                        <button id="hero-vault-btn" onclick="showVault()" title="View Canva Fundamentals"
-                            class="inline-flex items-center justify-center px-8 py-3 rounded-xl text-sm font-bold border border-canva-purple/20 hover:bg-canva-purple/5 transition-all">Canva
-                            Fundamentals</button>
-                    </div>
                 </div>
-                <div class="grid grid-cols-1 xs:grid-cols-2 gap-4">
+
+                <!-- KPI Block -->
+                <div class="order-2 lg:order-none lg:col-start-2 lg:row-span-2 grid grid-cols-1 xs:grid-cols-2 gap-4">
                     <div class="kpi-card shadow-xl rounded-2xl">
                         <div class="kpi-inner p-6 rounded-2xl border border-canva-teal/10">
                             <p class="text-[10px] font-bold text-canva-teal uppercase tracking-widest mb-1">Creative</p>
@@ -217,6 +212,15 @@
                             </p>
                         </div>
                     </div>
+                </div>
+
+                <!-- Action Block -->
+                <div class="order-3 lg:col-start-1 flex gap-4">
+                    <button id="hero-hub-btn" onclick="showHub()" title="View Canva Projects"
+                        class="inline-flex items-center justify-center px-8 py-3 rounded-xl text-sm font-bold bg-canva-purple text-white shadow-lg shadow-canva-purple/30 hover:shadow-canva-purple/50 transition-all">Projects</button>
+                    <button id="hero-vault-btn" onclick="showVault()" title="View Canva Fundamentals"
+                        class="inline-flex items-center justify-center px-8 py-3 rounded-xl text-sm font-bold border border-canva-purple/20 hover:bg-canva-purple/5 transition-all">Canva
+                        Fundamentals</button>
                 </div>
             </section>
 

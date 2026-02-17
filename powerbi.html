@@ -229,7 +229,7 @@
 
             <!-- Hero Section -->
             <section class="grid gap-12 lg:grid-cols-[1.5fr,1fr] items-center">
-                <div class="space-y-6 text-center lg:text-left">
+                <div class="order-1 lg:col-start-1 space-y-6 text-center lg:text-left">
                     <div class="flex justify-center lg:justify-start">
                         <p
                             class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-[10px] sm:text-[11px] font-bold bg-[#fff4ce] text-[#8a6d00] dark:bg-[#433519] dark:text-[#f8d375] border border-pbi-yellow/30">
@@ -250,20 +250,10 @@
                         Master the science of data architecture with Power BI. Explore my portfolio of enterprise-grade
                         reports and deep-dive into the technical mechanics of the analytics stack.
                     </p>
-                    <div class="flex flex-wrap justify-center lg:justify-start gap-4">
-                        <button id="hero-dashboard-btn" onclick="showHub()" title="View Power BI Projects"
-                            class="inline-flex items-center justify-center px-6 sm:px-8 py-2.5 sm:py-3 rounded-xl text-xs sm:text-sm font-bold bg-pbi-yellow text-white shadow-lg hover:shadow-yellow-500/20 transition-all">
-                            Projects
-                        </button>
-                        <button id="hero-basics-btn" onclick="showVault()" title="View Power BI Fundamentals"
-                            class="inline-flex items-center justify-center px-6 sm:px-8 py-2.5 sm:py-3 rounded-xl text-xs sm:text-sm font-bold border border-pbi-yellow/20 hover:bg-pbi-yellow/5 transition-all text-gray-500 dark:text-gray-400">
-                            Power BI Fundamentals
-                        </button>
-                    </div>
                 </div>
 
                 <!-- KPI Quick View -->
-                <div class="grid grid-cols-1 xs:grid-cols-2 gap-4">
+                <div class="order-2 lg:order-none lg:col-start-2 lg:row-span-2 grid grid-cols-1 xs:grid-cols-2 gap-4">
                     <div class="kpi-card shadow-xl rounded-2xl">
                         <div class="kpi-inner p-4 sm:p-6 rounded-2xl border border-pbi-yellow/20">
                             <p
@@ -291,6 +281,18 @@
                                 TOTAL_INCIDENTS_MAPPED</p>
                         </div>
                     </div>
+                </div>
+
+                <!-- Action Block -->
+                <div class="order-3 lg:col-start-1 flex flex-wrap justify-center lg:justify-start gap-4">
+                    <button id="hero-dashboard-btn" onclick="showHub()" title="View Power BI Projects"
+                        class="inline-flex items-center justify-center px-6 sm:px-8 py-2.5 sm:py-3 rounded-xl text-xs sm:text-sm font-bold bg-pbi-yellow text-white shadow-lg hover:shadow-yellow-500/20 transition-all">
+                        Projects
+                    </button>
+                    <button id="hero-basics-btn" onclick="showVault()" title="View Power BI Fundamentals"
+                        class="inline-flex items-center justify-center px-6 sm:px-8 py-2.5 sm:py-3 rounded-xl text-xs sm:text-sm font-bold border border-pbi-yellow/20 hover:bg-pbi-yellow/5 transition-all text-gray-500 dark:text-gray-400">
+                        Power BI Fundamentals
+                    </button>
                 </div>
             </section>
 

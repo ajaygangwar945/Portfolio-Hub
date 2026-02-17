@@ -177,7 +177,7 @@
     <main class="relative z-10 flex-none pb-12 lg:pb-20">
         <div class="max-w-6xl mx-auto px-4 sm:px-6 pt-8 lg:pt-12 space-y-10 lg:space-y-12">
             <section class="grid gap-12 lg:grid-cols-[1.5fr,1fr] items-center">
-                <div class="space-y-6 text-center lg:text-left">
+                <div class="order-1 lg:col-start-1 space-y-6 text-center lg:text-left">
                     <div class="flex justify-center lg:justify-start">
                         <p
                             class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-[10px] sm:text-[11px] font-bold bg-word-blue/10 text-word-blue border border-word-blue/20 uppercase tracking-widest">
@@ -195,15 +195,10 @@
                         class="text-sm sm:text-base lg:text-lg text-gray-500 dark:text-gray-400 font-medium max-w-2xl mx-auto lg:mx-0 leading-relaxed">
                         Architecting the written word for maximum clarity. I design semantic document systems
                         and technical prose that define professional grade communication for personal projects.</p>
-                    <div class="flex flex-wrap justify-center lg:justify-start gap-4">
-                        <button id="hero-hub-btn" onclick="showHub()" title="View Word Projects"
-                            class="inline-flex items-center justify-center px-6 sm:px-8 py-2.5 sm:py-3 rounded-xl text-xs sm:text-sm font-bold bg-word-blue text-white shadow-lg hover:shadow-word-blue/30 transition-all">Projects</button>
-                        <button id="hero-vault-btn" onclick="showVault()" title="View Word Fundamentals"
-                            class="inline-flex items-center justify-center px-6 sm:px-8 py-2.5 sm:py-3 rounded-xl text-xs sm:text-sm font-bold border border-word-blue/20 hover:bg-word-blue/5 transition-all text-gray-500 dark:text-gray-400">Word
-                            Fundamentals</button>
-                    </div>
                 </div>
-                <div class="grid grid-cols-1 xs:grid-cols-2 gap-4">
+
+                <!-- KPI Block -->
+                <div class="order-2 lg:order-none lg:col-start-2 lg:row-span-2 grid grid-cols-1 xs:grid-cols-2 gap-4">
                     <div class="kpi-card shadow-xl rounded-2xl">
                         <div class="kpi-inner p-4 sm:p-6 rounded-2xl border border-word-blue/10">
                             <p
@@ -226,6 +221,15 @@
                                 REPORTS_&_MANUALS</p>
                         </div>
                     </div>
+                </div>
+
+                <!-- Action Block -->
+                <div class="order-3 lg:col-start-1 flex flex-wrap justify-center lg:justify-start gap-4">
+                    <button id="hero-hub-btn" onclick="showHub()" title="View Word Projects"
+                        class="inline-flex items-center justify-center px-6 sm:px-8 py-2.5 sm:py-3 rounded-xl text-xs sm:text-sm font-bold bg-word-blue text-white shadow-lg hover:shadow-word-blue/30 transition-all">Projects</button>
+                    <button id="hero-vault-btn" onclick="showVault()" title="View Word Fundamentals"
+                        class="inline-flex items-center justify-center px-6 sm:px-8 py-2.5 sm:py-3 rounded-xl text-xs sm:text-sm font-bold border border-word-blue/20 hover:bg-word-blue/5 transition-all text-gray-500 dark:text-gray-400">Word
+                        Fundamentals</button>
                 </div>
             </section>
 

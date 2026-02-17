@@ -83,6 +83,28 @@
             border-color: rgba(38, 77, 228, 0.5);
         }
 
+        .kpi-card {
+            perspective: 1000px;
+        }
+
+        .kpi-inner {
+            transform-style: preserve-3d;
+            transition: all 0.25s ease;
+            background: rgba(255, 255, 255, 0.8);
+            -webkit-backdrop-filter: blur(10px);
+            backdrop-filter: blur(10px);
+        }
+
+        .dark .kpi-inner {
+            background: rgba(26, 31, 46, 0.8);
+        }
+
+        .kpi-card:hover .kpi-inner {
+            transform: translateY(-8px) rotateX(2deg);
+            box-shadow: 0 20px 40px -15px rgba(38, 77, 228, 0.3);
+            border-color: rgba(38, 77, 228, 0.5);
+        }
+
         .tips-card {
             perspective: 1000px;
             transform-style: preserve-3d;
@@ -239,7 +261,7 @@
 
             <!-- Hero Section -->
             <section class="grid gap-8 lg:grid-cols-[1.5fr,1fr] items-center">
-                <div class="space-y-6 text-center lg:text-left">
+                <div class="order-1 lg:col-start-1 space-y-6 text-center lg:text-left">
                     <div class="flex justify-center lg:justify-start">
                         <p
                             class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-[10px] sm:text-[11px] font-bold bg-blue-100 text-[#264de4] dark:bg-blue-900/30 border border-blue-200 dark:border-blue-800/50">
@@ -260,36 +282,47 @@
                         Architecting highly responsive UI systems. I specialize in professional design implementations
                         and master the 2D/3D layout mechanics of modern CSS.
                     </p>
-                    <div class="flex flex-wrap justify-center lg:justify-start gap-4 pt-2">
-                        <button id="hero-hub-btn" onclick="showHub()" title="View CSS Projects"
-                            class="inline-flex items-center justify-center px-6 sm:px-8 py-2.5 sm:py-3 rounded-xl text-xs sm:text-sm font-bold transition-all shadow-lg hover:shadow-blue-500/20">
-                            Projects
-                        </button>
-                        <button id="hero-vault-btn" onclick="showVault()" title="View CSS Fundamentals"
-                            class="inline-flex items-center justify-center px-6 sm:px-8 py-2.5 sm:py-3 rounded-xl text-xs sm:text-sm font-bold transition-all">
-                            CSS Fundamentals
-                        </button>
+                </div>
+
+                <!-- KPI Quick View -->
+                <div class="order-2 lg:order-none lg:col-start-2 lg:row-span-2 grid grid-cols-1 xs:grid-cols-2 gap-4">
+                    <div class="kpi-card shadow-xl rounded-2xl">
+                        <div class="kpi-inner p-4 sm:p-6 rounded-2xl border border-css-blue/20">
+                            <p class="text-[9px] sm:text-[10px] font-bold text-css-blue uppercase tracking-widest mb-1">
+                                Current
+                                Mode</p>
+                            <h3 id="mode-status"
+                                class="text-base sm:text-lg font-black text-[#201f1e] dark:text-white uppercase">
+                                PORTFOLIO</h3>
+                            <div class="flex items-center gap-2 mt-4">
+                                <span class="w-2 h-2 rounded-full bg-css-blue animate-pulse"></span>
+                                <span
+                                    class="text-[9px] sm:text-[11px] font-semibold text-gray-500 italic uppercase">STABLE_BUILD</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="kpi-card shadow-xl rounded-2xl">
+                        <div class="kpi-inner p-4 sm:p-6 rounded-2xl border border-css-blue/20">
+                            <p class="text-[9px] sm:text-[10px] font-bold text-gray-500 uppercase tracking-widest mb-1">
+                                Learning</p>
+                            <h3 class="text-base sm:text-lg font-black text-[#201f1e] dark:text-white">Basics</h3>
+                            <p
+                                class="text-[9px] sm:text-[11px] font-semibold text-css-blue mt-2 italic tracking-tighter uppercase">
+                                FLEXBOX_&_GRID</p>
+                        </div>
                     </div>
                 </div>
 
-                <!-- Featured SVG Hero Graphic -->
-                <div class="relative hidden lg:block fade-in-3d">
-                    <div class="absolute -inset-4 bg-blue-500/10 blur-3xl rounded-full"></div>
-                    <svg viewBox="0 0 512 512" class="w-full h-auto drop-shadow-2xl relative z-10" role="img"
-                        aria-label="CSS3 Logo">
-                        <path d="M107.4 443L71 13.1h369.2l-36.4 429.9L255.8 499 107.4 443z" fill="#264de4" />
-                        <path d="M256 463.3l119.7-33.1L405 73.4H256v389.9z" fill="#2965f1" />
-                        <path
-                            d="M256 211.3h-60.8l-4.2-47h65V114H140l12.4 139.1H256v-41.8zM256 324l-.2.1-55.5-15-3.6-40.1h-41.9l7.3 81.3L256 377v-53z"
-                            fill="#EBEBEB" />
-                        <path
-                            d="M256 211.3v41.8h60l-5.7 63.9-54.3 14.7v53.1l93.7-25.4 1.3-14.7L364.1 114h-108v50.3h64.7l-6.8 47z"
-                            fill="white" />
-                        <rect x="100" y="100" width="312" height="312" stroke="white" stroke-width="2"
-                            stroke-dasharray="10 10" fill="none" opacity="0.2" />
-                        <circle cx="256" cy="256" r="180" stroke="white" stroke-width="1.5" stroke-dasharray="5 5"
-                            fill="none" opacity="0.1" />
-                    </svg>
+                <!-- Action Block -->
+                <div class="order-3 lg:col-start-1 flex flex-wrap justify-center lg:justify-start gap-4 pt-2">
+                    <button id="hero-hub-btn" onclick="showHub()" title="View CSS Projects"
+                        class="inline-flex items-center justify-center px-6 sm:px-8 py-2.5 sm:py-3 rounded-xl text-xs sm:text-sm font-bold transition-all shadow-lg hover:shadow-blue-500/20">
+                        Projects
+                    </button>
+                    <button id="hero-vault-btn" onclick="showVault()" title="View CSS Fundamentals"
+                        class="inline-flex items-center justify-center px-6 sm:px-8 py-2.5 sm:py-3 rounded-xl text-xs sm:text-sm font-bold transition-all">
+                        CSS Fundamentals
+                    </button>
                 </div>
             </section>
 
