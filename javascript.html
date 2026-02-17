@@ -4,8 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HTML PORTFOLIO</title>
-    <link rel="icon" type="image/svg+xml" href="assets/HTML5_Badge.svg">
+    <title>JAVASCRIPT PORTFOLIO</title>
+    <link rel="icon" type="image/svg+xml" href="assets/JavaScript.svg">
 
     <!-- Tailwind -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -19,14 +19,14 @@
             theme: {
                 extend: {
                     colors: {
-                        html: {
-                            orange: '#E34F26',
-                            bright: '#f06529',
-                            dark: '#1f1614',
+                        js: {
+                            yellow: '#f7df1e',
+                            bright: '#ffe000',
+                            dark: '#1f1e00',
                             grey: '#605e5c',
-                            lightBg: '#fffbf9',
-                            darkBg: '#0a0502',
-                            accent: '#E34F26'
+                            lightBg: '#fffee6',
+                            darkBg: '#050500',
+                            accent: '#f7df1e'
                         }
                     }
                 }
@@ -58,7 +58,7 @@
         }
 
         .hero-glow {
-            filter: drop-shadow(0 0 20px rgba(227, 79, 38, 0.3));
+            filter: drop-shadow(0 0 20px rgba(247, 223, 30, 0.4));
         }
 
         .project-card {
@@ -74,13 +74,13 @@
         }
 
         .dark .project-inner {
-            background: rgba(37, 36, 35, 0.8);
+            background: rgba(31, 30, 0, 0.8);
         }
 
         .project-card:hover .project-inner {
             transform: translateY(-8px) rotateX(2deg);
-            box-shadow: 0 20px 40px -15px rgba(227, 79, 38, 0.3);
-            border-color: rgba(227, 79, 38, 0.5);
+            box-shadow: 0 20px 40px -15px rgba(247, 223, 30, 0.3);
+            border-color: rgba(247, 223, 30, 0.5);
         }
 
         .tips-card {
@@ -99,7 +99,7 @@
             transform: scale(1.02);
             box-shadow:
                 0 20px 40px -12px rgba(0, 0, 0, 0.35),
-                0 0 0 1px rgba(227, 79, 38, 0.3);
+                0 0 0 1px rgba(247, 223, 30, 0.3);
         }
 
         .fade-in-3d {
@@ -139,17 +139,17 @@
             background: rgba(255, 255, 255, 0.7);
             -webkit-backdrop-filter: blur(12px);
             backdrop-filter: blur(12px);
-            border-bottom: 1px solid rgba(227, 79, 38, 0.1);
+            border-bottom: 1px solid rgba(247, 223, 30, 0.1);
         }
 
         .dark .glass-nav {
-            background: rgba(31, 22, 20, 0.8);
+            background: rgba(5, 5, 0, 0.8);
         }
     </style>
 </head>
 
 <body
-    class="min-h-screen flex flex-col bg-html-lightBg dark:bg-html-darkBg text-[#323130] dark:text-[#f3f2f1] overflow-x-hidden">
+    class="min-h-screen flex flex-col bg-js-lightBg dark:bg-js-darkBg text-[#323130] dark:text-[#f3f2f1] overflow-x-hidden">
 
     <canvas id="three-canvas"></canvas>
 
@@ -158,14 +158,14 @@
         <div class="max-w-6xl mx-auto flex items-center justify-between px-4 sm:px-6 h-16">
             <div class="flex items-center gap-3 group">
                 <div class="flex items-center transition-transform hover:rotate-12">
-                    <img src="assets/HTML5_Badge.svg" class="w-8 h-8 rounded shadow-lg shadow-orange-500/20"
-                        alt="HTML Logo" title="HTML Portfolio Logo">
+                    <img src="assets/JavaScript.svg" class="w-8 h-8 rounded shadow-lg shadow-yellow-500/20"
+                        alt="JavaScript Logo" title="JavaScript Portfolio Logo">
                 </div>
                 <div>
-                    <p class="text-sm font-bold text-[#201f1e] dark:text-white uppercase tracking-tighter">HTML
+                    <p class="text-sm font-bold text-[#201f1e] dark:text-white uppercase tracking-tighter">JAVASCRIPT
                         PORTFOLIO</p>
-                    <p class="text-[11px] text-[#605e5c] dark:text-[#a19f9d] font-semibold">Architect • Analyst •
-                        Developer</p>
+                    <p class="text-[11px] text-[#605e5c] dark:text-[#a19f9d] font-semibold">Architect • Logic •
+                        Engineer</p>
                 </div>
             </div>
 
@@ -196,17 +196,17 @@
             <!-- Desktop Menu -->
             <div class="hidden md:flex items-center gap-3">
                 <a href="index.html" aria-label="View all language projects"
-                    class="hidden md:inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-xs font-bold border border-[#edebe9] dark:border-[#3b3a39] hover:bg-html-orange hover:text-white hover:border-html-orange transition-all">
+                    class="hidden md:inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-xs font-bold border border-[#edebe9] dark:border-[#3b3a39] hover:bg-js-yellow hover:text-black hover:border-js-yellow transition-all">
                     All Projects
                 </a>
                 <div class="h-6 w-px bg-[#edebe9] dark:bg-[#3b3a39] hidden md:block mx-1"></div>
                 <button id="nav-hub-btn" class="px-4 py-1.5 rounded-full text-xs font-bold transition-all"
-                    onclick="showHub()" aria-label="Show HTML Projects">
+                    onclick="showHub()" aria-label="Show JavaScript Projects">
                     Projects
                 </button>
                 <button id="nav-vault-btn" class="px-4 py-1.5 rounded-full text-xs font-bold transition-all"
-                    onclick="showVault()" aria-label="Show HTML Fundamentals">
-                    HTML Fundamentals
+                    onclick="showVault()" aria-label="Show JavaScript Fundamentals">
+                    JavaScript Fundamentals
                 </button>
                 <button onclick="toggleTheme()" title="Toggle Theme" aria-label="Toggle dark and light theme"
                     class="p-2 text-[#605e5c] dark:text-[#a19f9d] hover:bg-[#f3f2f1] dark:hover:bg-[#323130] rounded-full transition-all">
@@ -233,49 +233,44 @@
                 <div class="space-y-6 text-center lg:text-left">
                     <div class="flex justify-center lg:justify-start">
                         <p
-                            class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-[10px] sm:text-[11px] font-bold bg-orange-100 text-[#E34F26] dark:bg-orange-900/30 border border-orange-200 dark:border-orange-800/50">
-                            WEB ARCHITECT
-                            <span class="w-1.5 h-1.5 rounded-full bg-html-orange animate-ping"></span>
+                            class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-[10px] sm:text-[11px] font-bold bg-yellow-105 text-js-dark dark:bg-yellow-900/30 border border-yellow-200 dark:border-yellow-800/50">
+                            LOGIC ARCHITECT
+                            <span class="w-1.5 h-1.5 rounded-full bg-js-yellow animate-ping"></span>
                         </p>
                     </div>
                     <h1
                         class="text-3xl sm:text-5xl lg:text-7xl font-black leading-tight lg:leading-[1.1] text-[#201f1e] dark:text-white tracking-tight">
-                        Structural <span
-                            class="text-transparent bg-clip-text bg-gradient-to-r from-html-orange to-html-bright drop-shadow-sm">Integrity.</span>
+                        Functional <span
+                            class="text-transparent bg-clip-text bg-gradient-to-r from-js-yellow to-yellow-600 drop-shadow-sm">Dynamics.</span>
                         <br>
-                        Semantic <span
-                            class="text-transparent bg-clip-text bg-gradient-to-r from-html-bright to-orange-400">Excellence.</span>
+                        Computational <span
+                            class="text-transparent bg-clip-text bg-gradient-to-r from-yellow-500 to-amber-600">Mastery.</span>
                     </h1>
                     <p
                         class="text-sm sm:text-base lg:text-lg text-[#605e5c] dark:text-[#a19f9d] max-w-2xl mx-auto lg:mx-0 leading-relaxed font-medium">
-                        Master semantic structural integrity and standard compliance. I develop robust HTML5
-                        architectures that form the backbone of clean, accessible web projects.
+                        Mastering the logic of the dynamic web. I engineer high-performance JavaScript systems and
+                        architect complex interface behaviors with deterministic precision.
                     </p>
                     <div class="flex flex-wrap justify-center lg:justify-start gap-4 pt-2">
-                        <button id="hero-hub-btn" onclick="showHub()" title="View HTML Projects"
-                            class="inline-flex items-center justify-center px-6 sm:px-8 py-2.5 sm:py-3 rounded-xl text-xs sm:text-sm font-bold transition-all shadow-lg hover:shadow-orange-500/20">
+                        <button id="hero-hub-btn" onclick="showHub()" title="View JavaScript Projects"
+                            class="inline-flex items-center justify-center px-6 sm:px-8 py-2.5 sm:py-3 rounded-xl text-xs sm:text-sm font-bold transition-all shadow-lg hover:shadow-yellow-500/20">
                             Projects
                         </button>
-                        <button id="hero-vault-btn" onclick="showVault()" title="View HTML Fundamentals"
+                        <button id="hero-vault-btn" onclick="showVault()" title="View JavaScript Fundamentals"
                             class="inline-flex items-center justify-center px-6 sm:px-8 py-2.5 sm:py-3 rounded-xl text-xs sm:text-sm font-bold transition-all">
-                            HTML Fundamentals
+                            JavaScript Fundamentals
                         </button>
                     </div>
                 </div>
 
                 <!-- Featured SVG Hero Graphic -->
                 <div class="relative hidden lg:block fade-in-3d">
-                    <div class="absolute -inset-4 bg-orange-500/10 blur-3xl rounded-full"></div>
-                    <svg viewBox="0 0 512 512" class="w-full h-auto drop-shadow-2xl relative z-10" role="img"
-                        aria-label="HTML5 Logo">
-                        <path fill="#E34F26" d="M71,460 L30,0 481,0 440,460 255,512" />
-                        <path fill="#EF652A" d="M256,472 L405,431 440,37 256,37" />
-                        <path fill="#EBEBEB"
-                            d="M256,208 L181,208 176,150 256,150 256,94 255,94 114,94 115,109 129,265 256,265zM256,355 L255,355 192,338 188,293 158,293 132,293 139,382 255,414 256,414z" />
-                        <path fill="#FFF"
-                            d="M255,208 L255,265 325,265 318,338 255,355 255,414 371,382 372,372 385,223 387,208 371,208zM255,94 L255,129 255,150 255,150 392,150 392,150 392,150 393,138 396,109 397,94z" />
-                        <circle cx="256" cy="256" r="230" stroke="white" stroke-width="4" stroke-dasharray="10 20"
-                            fill="none" opacity="0.3" />
+                    <div class="absolute -inset-4 bg-yellow-500/10 blur-3xl rounded-full"></div>
+                    <svg viewBox="0 0 630 630" class="w-full h-auto drop-shadow-2xl relative z-10" role="img"
+                        aria-label="JavaScript Logo">
+                        <rect width="630" height="630" fill="#f7df1e" rx="40" ry="40" />
+                        <path fill="#000"
+                            d="m423.2 492.19c12.69 20.72 29.2 35.95 58.4 35.95 24.53 0 40.2-12.26 40.2-29.2 0-20.3-16.1-27.49-43.1-39.3l-14.8-6.35c-42.72-18.2-71.1-41-71.1-89.2 0-44.4 33.83-78.2 86.7-78.2 37.64 0 64.7 13.1 84.2 47.4l-46.1 29.6c-10.15-18.2-21.1-25.37-38.1-25.37-17.34 0-28.33 11-28.33 25.37 0 17.76 11 24.95 36.4 35.95l14.8 6.34c50.3 21.57 78.7 43.56 78.7 93 0 53.3-41.87 82.5-98.1 82.5-54.98 0-90.5-26.2-107.88-60.54zm-209.13 5.13c9.3 16.5 17.76 30.45 38.1 30.45 19.45 0 31.72-7.61 31.72-37.2v-201.3h59.2v202.1c0 61.3-35.94 89.2-88.4 89.2-47.4 0-74.85-24.53-88.81-54.075z" />
                     </svg>
                 </div>
             </section>
@@ -286,13 +281,14 @@
         </div>
     </main>
 
-    <footer class="relative z-20 border-t border-html-orange/10 glass-nav">
+    <footer class="relative z-20 border-t border-js-yellow/10 glass-nav">
         <div class="max-w-6xl mx-auto px-4 sm:px-6 py-8 flex flex-col md:flex-row items-center justify-between gap-6">
             <div class="flex items-center gap-4">
                 <div class="flex items-center gap-2">
-                    <img src="assets/HTML5_Badge.svg" class="w-5 h-5 opacity-90" alt="HTML footer logo"
-                        title="HTML Portfolio Logo">
-                    <span class="text-sm font-black tracking-widest uppercase text-html-orange">HTML PORTFOLIO</span>
+                    <img src="assets/JavaScript.svg" class="w-5 h-5 opacity-90" alt="JavaScript footer logo"
+                        title="JavaScript Portfolio Logo">
+                    <span class="text-sm font-black tracking-widest uppercase text-js-yellow">JAVASCRIPT
+                        PORTFOLIO</span>
                 </div>
                 <div class="w-[1px] h-3 bg-gray-300 dark:bg-gray-800"></div>
                 <p class="text-[10px] text-gray-600 dark:text-gray-400 font-bold uppercase tracking-widest">© 2026
@@ -301,8 +297,8 @@
             <div class="flex items-center gap-6">
                 <button onclick="showHub()" aria-label="Go to Projects"
                     class="footer-nav-link text-xs font-bold uppercase tracking-widest transition-all">Projects</button>
-                <button onclick="showVault()" aria-label="Go to HTML Fundamentals"
-                    class="footer-nav-link text-xs font-bold uppercase tracking-widest transition-all">HTML
+                <button onclick="showVault()" aria-label="Go to JavaScript Fundamentals"
+                    class="footer-nav-link text-xs font-bold uppercase tracking-widest transition-all">JavaScript
                     Fundamentals</button>
             </div>
         </div>
@@ -311,113 +307,113 @@
     <script>
         const hubProjects = [
             {
-                title: 'Certificates & Docs Portal',
-                desc: 'A premium, high-performance portfolio portal for showcasing professional certifications, awards, and educational achievements.',
-                image: 'assets/certificates_banner.png',
-                icon: '🎓',
-                tags: ['HTML5', 'SEMANTIC'],
-                repoLink: 'https://github.com/ajaygangwar945/Certificates-Docs-Portal',
-                liveLink: 'https://certificates-docs-portal.vercel.app/'
-            },
-            {
-                title: 'Pet Adoption & Animal Welfare',
-                desc: 'Responsive pet adoption platform with engaging hero section, image gallery slider, animal welfare information, and contact forms with validation.',
-                image: 'assets/pet_adoption_project_new.png',
-                icon: '🐾',
-                tags: ['HTML5', 'SEMANTIC'],
-                repoLink: 'https://github.com/ajaygangwar945/Pet-Adoption-Animal-Welfare',
-                liveLink: 'https://pet-adoption-animal-welfare.netlify.app/'
-            },
-            {
-                title: 'HTML Learning Hub',
-                desc: 'Interactive learning platform with 30+ HTML/CSS modules, 3D Three.js dashboard, glassmorphism UI, real-time search, and custom SVG favicons.',
-                image: 'assets/html_learning_hub_new.png',
-                icon: '🌐',
-                tags: ['HTML5', 'STRUCTURE'],
-                repoLink: 'https://github.com/ajaygangwar945/First-HTML-Project-Overview',
-                liveLink: 'https://ajaygangwar945.github.io/First-HTML-Project-Overview/'
-            },
-            {
                 title: 'Eventfolio',
                 desc: 'Ghibli-inspired interactive portfolio showcasing hackathons, leadership, and technical journeys using pure HTML, CSS, and JavaScript.',
                 image: 'assets/digital_landscape_viz.png',
                 icon: '🍃',
-                tags: ['HTML5', 'SEMANTIC'],
+                tags: ['JS', 'INTERACTIVE', 'THREE.JS'],
                 repoLink: 'https://github.com/ajaygangwar945/Eventfolio',
                 liveLink: 'https://eventfolio.vercel.app/'
+            },
+            {
+                title: 'Certificates & Docs Portal',
+                desc: 'A premium, high-performance portfolio portal for showcasing professional certifications, awards, and educational achievements.',
+                image: 'assets/certificates_banner.png',
+                icon: '🎓',
+                tags: ['JS', 'LOGIC'],
+                repoLink: 'https://github.com/ajaygangwar945/Certificates-Docs-Portal',
+                liveLink: 'https://certificates-docs-portal.vercel.app/'
+            },
+            {
+                title: 'Weather Application',
+                desc: 'Real-time weather sensing platform with dynamic interface updates, API integration, and location-aware logic systems.',
+                image: 'assets/flutter_weather_viz.png',
+                icon: '☁️',
+                tags: ['API', 'DOM-LOGIC'],
+                repoLink: 'https://github.com/ajaygangwar945/Weather-App',
+                liveLink: 'https://weather-forcasting-temperature.netlify.app/'
+            },
+            {
+                title: 'HTML Learning Hub',
+                desc: 'Master the core mechanics of the modern web with interactive logic modules, real-time code execution, and dynamic UI patterns.',
+                image: 'assets/html_learning_hub_new.png',
+                icon: '🚀',
+                tags: ['LEARNING', 'LOGIC'],
+                repoLink: 'https://github.com/ajaygangwar945/First-HTML-Project-Overview',
+                liveLink: 'https://ajaygangwar945.github.io/First-HTML-Project-Overview/'
             }
         ];
 
         const vaultLessons = [
             {
-                icon: '🏗️',
-                title: 'Semantic DOM',
+                icon: '⚙️',
+                title: 'Core Engine',
                 points: [
-                    'Use <main> for unique page context',
-                    'Implement <nav> for link architecture',
-                    'Deploy <article> for content chunks',
-                    'Enforce logical H1-H6 hierarchy',
-                    'Use <section> for thematic grouping'
+                    'Mastering Event Loop mechanics',
+                    'Scope & Closure architecture',
+                    'Prototype-based inheritance',
+                    'Strategic memory management',
+                    'Synchronous call stack logic'
                 ]
             },
             {
-                icon: '📋',
-                title: 'Input Logic',
+                icon: '⏳',
+                title: 'Async Patterns',
                 points: [
-                    'Use native types for autocomplete data',
-                    'Map <label> for A11y compliance',
-                    'Encapsulate data with <fieldset>',
-                    'Enable async validation triggers',
-                    'Leverage built-in pattern matching'
+                    'Promise chain orchestration',
+                    'Async/Await control flow',
+                    'Event-driven architecture',
+                    'Non-blocking I/O systems',
+                    'Strategic timeout logic'
                 ]
             },
             {
-                icon: '📈',
-                title: 'Meta Architecture',
+                icon: '🧠',
+                title: 'Data Structures',
                 points: [
-                    'Define global <title> strings',
-                    'Optimize social Open Graph nodes',
-                    'Inject JSON-LD for rich snippets',
-                    'Manage canonical link pointers',
-                    'Refresh content via meta-http'
+                    'Advanced Object manipulation',
+                    'Functional Array pipelines',
+                    'Map/Set reference models',
+                    'Buffer & Streams logic',
+                    'JSON serialization trees'
                 ]
             },
             {
-                icon: '♿',
-                title: 'Accessibility 4.0',
+                icon: '🌐',
+                title: 'DOM Interaction',
                 points: [
-                    'Define implicit ARIA landmarks',
-                    'Optimize for screen reader focus',
-                    'Support keyboard trap management',
-                    'Use descriptive alt tagging',
-                    'Leverage <figure> annotations'
+                    'Surgical DOM manipulation',
+                    'Custom Event dispatchers',
+                    'Intersection Observer logic',
+                    'Virtual fragment rendering',
+                    'CSSOM dynamic injection'
+                ]
+            },
+            {
+                icon: '🛡️',
+                title: 'Security & Auth',
+                points: [
+                    'JWT token management',
+                    'CORS policy orchestration',
+                    'Sanitization logic filters',
+                    'Secure Storage patterns',
+                    'Request validation nodes'
                 ]
             },
             {
                 icon: '🏎️',
-                title: 'Asset Pipeline',
+                title: 'Performance',
                 points: [
-                    'Optimize SVG group IDs',
-                    'Use responsive <picture> sets',
-                    'Define preload critical tags',
-                    'Lazy-load tertiary media nodes',
-                    'Optimize DOM-render painting'
-                ]
-            },
-            {
-                icon: '⚡',
-                title: 'Web Graphics',
-                points: [
-                    'Direct <canvas> vector draw',
-                    'Inline optimized <svg> nodes',
-                    'WebGL renderer initialization',
-                    'Manage SVG filters & masks',
-                    'High DPI pixel-ratio scaling'
+                    'V8 optimization triggers',
+                    'Garbage collection tuning',
+                    'Strategic Debounce/Throttle',
+                    'Web Worker threading',
+                    'Critical path instrumentation'
                 ]
             }
         ];
 
-        // 3D background with Floating HTML Tags
+        // 3D background with Floating JavaScript Symbols
         let scene, camera, renderer, objects = [];
         let mouseX = 0, mouseY = 0;
 
@@ -433,16 +429,12 @@
             renderer.setPixelRatio(window.devicePixelRatio);
             renderer.setSize(window.innerWidth, window.innerHeight);
 
-            // Create floating 3D wireframe boxes (representing div blocks)
+            // Create floating 3D wireframe boxes (representing JS logic blocks)
             for (let i = 0; i < 40; i++) {
-                const geometry = new THREE.BoxGeometry(
-                    Math.random() * 10 + 5,
-                    Math.random() * 10 + 5,
-                    Math.random() * 10 + 5
-                );
+                const geometry = new THREE.IcosahedronGeometry(Math.random() * 5 + 3, 0);
                 const edges = new THREE.EdgesGeometry(geometry);
                 const material = new THREE.LineBasicMaterial({
-                    color: 0xE34F26, // HTML Orange
+                    color: 0xf7df1e, // JS Yellow
                     transparent: true,
                     opacity: Math.random() * 0.4 + 0.1
                 });
@@ -503,7 +495,7 @@
             const grid = document.getElementById('content-grid');
             grid.innerHTML = hubProjects.map((p, i) => `
                 <div class="kpi-card fade-in-3d group" style="animation-delay: ${i * 0.1}s">
-                    <div class="kpi-inner rounded-3xl border border-html-orange/10 h-full flex flex-col overflow-hidden bg-white/70 dark:bg-[#1f1614]/60 backdrop-blur-xl shadow-xl transition-all">
+                    <div class="kpi-inner rounded-3xl border border-js-yellow/10 h-full flex flex-col overflow-hidden bg-white/70 dark:bg-[#1f1e00]/60 backdrop-blur-xl shadow-xl transition-all">
                         <div class="h-48 overflow-hidden relative">
                             <img src="${p.image}" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" alt="${p.title}">
                             <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
@@ -511,19 +503,19 @@
                         </div>
                         <div class="p-8 flex-1 flex flex-col bg-white dark:bg-transparent">
                             <div class="flex items-center justify-between mb-4">
-                                <h3 class="font-black text-xl tracking-tight text-gray-900 dark:text-white group-hover:text-html-orange transition-colors">${p.title}</h3>
+                                <h3 class="font-black text-xl tracking-tight text-gray-900 dark:text-white group-hover:text-js-yellow transition-colors">${p.title}</h3>
                                 <div class="flex gap-2">
-                                    ${p.tags.map(t => `<span class="text-[9px] font-black px-2 py-0.5 rounded-full bg-html-orange/10 text-html-orange uppercase tracking-wider">${t}</span>`).join('')}
+                                    ${p.tags.map(t => `<span class="text-[9px] font-black px-2 py-0.5 rounded-full bg-js-yellow/10 text-js-yellow uppercase tracking-wider">${t}</span>`).join('')}
                                 </div>
                             </div>
                             <p class="text-xs text-gray-500 dark:text-gray-400 font-medium leading-relaxed mb-6 flex-1">${p.desc}</p>
                             <div class="flex gap-3">
                                 <button onclick="window.open('${p.liveLink}', '_blank')" 
-                                    class="flex-1 py-3 rounded-xl bg-gradient-to-r from-html-orange to-html-bright text-white text-[9px] font-black uppercase tracking-wider shadow-lg shadow-html-orange/20 hover:shadow-html-orange/40 hover:scale-[1.02] transition-all flex items-center justify-center gap-2">
+                                    class="flex-1 py-3 rounded-xl bg-gradient-to-r from-js-yellow to-yellow-600 text-black text-[9px] font-black uppercase tracking-wider shadow-lg shadow-js-yellow/20 hover:shadow-js-yellow/40 hover:scale-[1.02] transition-all flex items-center justify-center gap-2">
                                     LIVE DEMO <span class="text-sm">↗</span>
                                 </button>
                                 <button onclick="window.open('${p.repoLink}', '_blank')" 
-                                    class="flex-1 py-3 rounded-xl border border-html-orange/20 text-html-orange dark:text-html-bright text-[9px] font-black uppercase tracking-wider hover:bg-html-orange/5 hover:scale-[1.02] transition-all flex items-center justify-center gap-2">
+                                    class="flex-1 py-3 rounded-xl border border-js-yellow/20 text-js-yellow dark:text-yellow-400 text-[9px] font-black uppercase tracking-wider hover:bg-js-yellow/5 hover:scale-[1.02] transition-all flex items-center justify-center gap-2">
                                     VIEW CODE <span class="text-sm">⌨️</span>
                                 </button>
                             </div>
@@ -542,12 +534,12 @@
 
         function showVault() {
             const grid = document.getElementById('content-grid');
-            const headerTitle = "ARCHITECTURAL FOUNDATIONS";
-            const headerDesc = "Deep dive into the structural mechanics of modern HTML5. From semantic DOM trees to accessible interface patterns, master the standards that drive the global internet.";
+            const headerTitle = "COMPUTATIONAL MECHANICS";
+            const headerDesc = "Deep dive into the logical engines of the dynamic web. From asynchronous control flow to memory management strategies, master the patterns that drive industrial-grade JavaScript.";
 
             const headerHTML = `
-                <div class="col-span-1 md:col-span-2 lg:col-span-3 p-8 rounded-3xl bg-opacity-50 border border-html-orange/20 mb-4 relative overflow-hidden group">
-                    <div class="absolute inset-0 bg-gradient-to-r from-html-orange/10 to-transparent opacity-0 group-hover:opacity-20 transition-opacity"></div>
+                <div class="col-span-1 md:col-span-2 lg:col-span-3 p-8 rounded-3xl bg-opacity-50 border border-js-yellow/20 mb-4 relative overflow-hidden group">
+                    <div class="absolute inset-0 bg-gradient-to-r from-js-yellow/10 to-transparent opacity-0 group-hover:opacity-20 transition-opacity"></div>
                     <h2 class="text-3xl font-black uppercase mb-4 tracking-tighter text-gray-900 dark:text-white">${headerTitle}</h2>
                     <p class="text-gray-600 dark:text-gray-400 font-medium max-w-2xl text-sm sm:text-base">${headerDesc}</p>
                 </div>
@@ -555,15 +547,15 @@
 
             const cardsHTML = vaultLessons.map((v, i) => `
                 <div class="kpi-card fade-in-3d" style="animation-delay: ${i * 0.1}s">
-                    <div class="kpi-inner p-6 rounded-2xl border border-html-orange/10 h-full bg-white/40 dark:bg-gray-900/40 hover:bg-white/60 dark:hover:bg-gray-900/60 transition-all shadow-sm">
+                    <div class="kpi-inner p-6 rounded-2xl border border-js-yellow/10 h-full bg-white/40 dark:bg-gray-900/40 hover:bg-white/60 dark:hover:bg-gray-900/60 transition-all shadow-sm">
                         <div class="flex items-center gap-4 mb-6">
-                            <span class="text-2xl bg-html-orange/10 dark:bg-html-orange/20 p-3 rounded-lg">${v.icon}</span>
+                            <span class="text-2xl bg-js-yellow/10 dark:bg-js-yellow/20 p-3 rounded-lg">${v.icon}</span>
                             <h3 class="font-bold text-lg text-gray-900 dark:text-white tracking-tight">${v.title}</h3>
                         </div>
                         <ul class="space-y-3">
                             ${v.points.map(p => `
                                 <li class="flex items-start text-[11px] text-gray-600 dark:text-gray-400 font-mono tracking-wide">
-                                    <span class="text-html-orange mr-3 font-bold opacity-80">//</span>
+                                    <span class="text-js-yellow mr-3 font-bold opacity-80">//</span>
                                     <span class="leading-relaxed hover:text-gray-900 dark:hover:text-gray-200 transition-colors">${escapeHTML(p)}</span>
                                 </li>
                             `).join('')}
@@ -576,11 +568,17 @@
             setActive('vault');
         }
 
+        function setActive(mode) {
+            setHeroActive(mode);
+            setNavbarActive(mode);
+            setFooterActive(mode);
+        }
+
         function setHeroActive(mode) {
             const hBtn = document.getElementById('hero-hub-btn');
             const vBtn = document.getElementById('hero-vault-btn');
-            const act = "inline-flex items-center justify-center px-8 py-3 rounded-xl text-sm font-bold bg-html-orange text-white shadow-lg hover:shadow-html-orange/30 transition-all";
-            const inact = "inline-flex items-center justify-center px-8 py-3 rounded-xl text-sm font-bold border border-html-orange/20 hover:bg-html-orange/5 transition-all text-gray-500 dark:text-gray-400";
+            const act = "inline-flex items-center justify-center px-8 py-3 rounded-xl text-sm font-bold bg-js-yellow text-black shadow-lg hover:shadow-js-yellow/30 transition-all";
+            const inact = "inline-flex items-center justify-center px-8 py-3 rounded-xl text-sm font-bold border border-js-yellow/20 hover:bg-js-yellow/5 transition-all text-gray-500 dark:text-gray-400";
             if (hBtn) hBtn.className = mode === 'hub' ? act : inact;
             if (vBtn) vBtn.className = mode === 'vault' ? act : inact;
         }
@@ -588,8 +586,8 @@
         function setNavbarActive(mode) {
             const hBtn = document.getElementById('nav-hub-btn');
             const vBtn = document.getElementById('nav-vault-btn');
-            const act = "px-4 py-1.5 rounded-full text-xs font-bold transition-all bg-html-orange text-white shadow-lg";
-            const inact = "px-4 py-1.5 rounded-full text-xs font-bold transition-all text-gray-400 hover:text-html-orange";
+            const act = "px-4 py-1.5 rounded-full text-xs font-bold transition-all bg-js-yellow text-black shadow-lg";
+            const inact = "px-4 py-1.5 rounded-full text-xs font-bold transition-all text-gray-400 hover:text-js-yellow";
             if (hBtn) hBtn.className = mode === 'hub' ? act : inact;
             if (vBtn) vBtn.className = mode === 'vault' ? act : inact;
         }
@@ -597,15 +595,9 @@
         function setFooterActive(mode) {
             document.querySelectorAll('.footer-nav-link').forEach(btn => {
                 const label = btn.textContent.replace(/\s+/g, ' ').trim().toLowerCase();
-                const isActive = (mode === 'hub' && label === 'projects') || (mode === 'vault' && label === 'html fundamentals');
-                btn.className = `footer-nav-link px-5 py-2 rounded-full text-[10px] font-black uppercase tracking-widest transition-all ${isActive ? 'bg-html-orange text-white shadow-lg' : 'border border-transparent text-gray-500 hover:text-html-orange'}`;
+                const isActive = (mode === 'hub' && label === 'projects') || (mode === 'vault' && label === 'javascript fundamentals');
+                btn.className = `footer-nav-link px-5 py-2 rounded-full text-[10px] font-black uppercase tracking-widest transition-all ${isActive ? 'bg-js-yellow text-black shadow-lg' : 'border border-transparent text-gray-500 hover:text-js-yellow'}`;
             });
-        }
-
-        function setActive(mode) {
-            setHeroActive(mode);
-            setNavbarActive(mode);
-            setFooterActive(mode);
         }
 
         function toggleTheme() {

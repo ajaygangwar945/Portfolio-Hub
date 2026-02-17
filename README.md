@@ -16,9 +16,9 @@
 
 ## 🚀 Overview
 
-The **Portfolio Hub** is a centralized, high-integrity ecosystem designed to showcase a diverse range of technical skills across 17 specialized portfolios. From low-level systems engineering in C++ to cinematic visual storytelling in Tableau, this hub provides a unified interface for exploring projects, technical fundamentals, and high-performance visualizations.
+The **Portfolio Hub** is a centralized, high-integrity ecosystem designed to showcase a diverse range of technical skills across 18 specialized portfolios. From low-level systems engineering in C++ to cinematic visual storytelling in Tableau, this hub provides a unified interface for exploring projects, technical fundamentals, and high-performance visualizations.
 
-Featuring **theme-synchronized 3D backgrounds**, **glassmorphic UI components**, and **interactive data portals**, the Hub is engineered to provide a premium, cohesive experience across all technical clusters.
+Featuring **theme-synchronized 3D backgrounds**, **glassmorphic UI components**, and **fully responsive layouts**, the Hub is engineered to provide a premium, cohesive experience across all technical clusters and devices.
 
 ---
 
@@ -36,34 +36,36 @@ This project is deployed and hosted on Vercel, providing high-performance static
 
 ## 📂 Available Portfolios
 
-The Hub consists of 16 distinct portals, each tailored to a specific technology or domain:
+The Hub consists of 18 distinct portals, each tailored to a specific technology or domain:
 
 | Domain | Portfolios |
 | :--- | :--- |
 | **Creative & Design** | [🎨 Paint](paint.html) • [📷 Photoshop](photoshop.html) • [💎 Figma](figma.html) • [✨ Canva](canva.html) |
-| **Office & Productivity**| [📝 Word](word.html) • [📽️ PowerPoint](ppt.html) • [📈 Excel master](excel.html) |
+| **Office & Productivity**| [📝 Word](word.html) • [📽️ PowerPoint](ppt.html) • [📈 Excel Master](excel.html) |
 | **Web Development** | [🌐 HTML5 Architecture](html.html) • [🎨 CSS3 Design](css.html) • [📱 Flutter Mobile](flutter.html) |
-| **Programming & Data** | [⚙️ C Metal](c.html) • [⚙️ C++ Infrastructure](cpp.html) • [🐍 Python Systems](python.html) • [☕ Java Backend](java.html) • [📊 DBMS Logic](dbms.html) |
+| **Programming & Data** | [⚙️ C Metal](c.html) • [⚙️ C++ Infrastructure](cpp.html) • [🐍 Python Systems](python.html) • [☕ Java Backend](java.html) • [🟡 JavaScript Logic](javascript.html) • [📊 DBMS Logic](dbms.html) |
 | **Business Intelligence** | [📉 Power BI Analytics](powerbi.html) • [📊 Tableau Visual Hub](tableau.html) |
 
 ---
 
 ## ✨ Key Global Features
 
-- **Theme Synchronization**: Integrated Three.js backgrounds that adapt dynamically to Light and Dark modes across all 17 pages.
-- **High-Fidelity Visuals**: Custom-generated project previews and glassmorphic KPI cards for a professional aesthetic.
-- **Cross-Link Architecture**: A standardized navigation system allowing seamless transitions between the central hub and specialized portals.
-- **Interactive Data**: Real-time dashboard embedding for Power BI, Tableau, and Excel portfolios.
+- **Mobile-First Responsiveness**: All 19 pages (Hub + 18 Portals) are fully optimized for mobile, tablet, and desktop viewports.
+- **Full Accessibility Audit**: High-integrity semantic markup with comprehensive ARIA labels and alt-text for all visual assets.
+- **Theme Synchronization**: Integrated Three.js backgrounds that adapt dynamically to Light and Dark modes.
+- **High-Fidelity Visuals**: Glassmorphic UI components and cinematic KPI cards for a professional, premium aesthetic.
+- **Cross-Link Architecture**: A standardized navigation system for seamless transitions between portals.
+- **Interactive Dashboards**: Live embedding for Power BI, Tableau, and Excel performance sheets.
 
 ---
 
 ## 🛠️ Global Tech Stack
 
-- **Core**: HTML5, Vanilla JavaScript, CSS3
-- **Styling**: [Tailwind CSS](https://tailwindcss.com/)
-- **3D Engine**: [Three.js](https://threejs.org/)
+- **Core**: HTML5 (Semantic), Vanilla JavaScript (ES6+), CSS3 (Modern Flex/Grid)
+- **Styling**: [Tailwind CSS](https://tailwindcss.com/) (Mobile-First Utility Architecture)
+- **3D Engine**: [Three.js](https://threejs.org/) (High-Performance WebGL)
 - **Typography**: [Segoe UI](https://learn.microsoft.com/en-us/typography/font-list/segoe-ui) / [Fira Code](https://github.com/tonsky/FiraCode)
-- **Deployment**: Optimized for Vercel and modern static hosting.
+- **Deployment**: Optimized for Vercel and global static hosting.
 
 ---
 

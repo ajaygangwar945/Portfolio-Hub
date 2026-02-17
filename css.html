@@ -234,19 +234,21 @@
         </div>
     </header>
 
-    <main class="relative z-10 flex-none">
-        <div class="max-w-6xl mx-auto px-4 sm:px-6 pt-12 pb-6 space-y-12">
+    <main class="relative z-10 flex-none pb-12 lg:pb-20">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 pt-8 lg:pt-12 space-y-10 lg:space-y-12">
 
             <!-- Hero Section -->
             <section class="grid gap-8 lg:grid-cols-[1.5fr,1fr] items-center">
-                <div class="space-y-6">
-                    <p
-                        class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-[11px] font-bold bg-blue-100 text-[#264de4] dark:bg-blue-900/30 border border-blue-200 dark:border-blue-800/50">
-                        VISUAL ARCHITECT
-                        <span class="w-1.5 h-1.5 rounded-full bg-css-blue animate-ping"></span>
-                    </p>
+                <div class="space-y-6 text-center lg:text-left">
+                    <div class="flex justify-center lg:justify-start">
+                        <p
+                            class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-[10px] sm:text-[11px] font-bold bg-blue-100 text-[#264de4] dark:bg-blue-900/30 border border-blue-200 dark:border-blue-800/50">
+                            VISUAL ARCHITECT
+                            <span class="w-1.5 h-1.5 rounded-full bg-css-blue animate-ping"></span>
+                        </p>
+                    </div>
                     <h1
-                        class="text-4xl sm:text-5xl lg:text-7xl font-black leading-[1.1] text-[#201f1e] dark:text-white tracking-tight">
+                        class="text-3xl sm:text-5xl lg:text-7xl font-black leading-tight lg:leading-[1.1] text-[#201f1e] dark:text-white tracking-tight">
                         Visual <span
                             class="text-transparent bg-clip-text bg-gradient-to-r from-css-blue to-css-bright drop-shadow-sm">Systems.</span>
                         <br>
@@ -254,17 +256,17 @@
                             class="text-transparent bg-clip-text bg-gradient-to-r from-css-bright to-blue-400">Motion.</span>
                     </h1>
                     <p
-                        class="text-sm sm:text-lg text-[#605e5c] dark:text-[#a19f9d] max-w-xl leading-relaxed font-medium">
+                        class="text-sm sm:text-base lg:text-lg text-[#605e5c] dark:text-[#a19f9d] max-w-2xl mx-auto lg:mx-0 leading-relaxed font-medium">
                         Architecting highly responsive UI systems. I specialize in professional design implementations
                         and master the 2D/3D layout mechanics of modern CSS.
                     </p>
-                    <div class="flex flex-wrap gap-4 pt-2">
+                    <div class="flex flex-wrap justify-center lg:justify-start gap-4 pt-2">
                         <button id="hero-hub-btn" onclick="showHub()" title="View CSS Projects"
-                            class="inline-flex items-center justify-center px-8 py-3 rounded-xl text-sm font-bold transition-all shadow-lg hover:shadow-blue-500/20">
+                            class="inline-flex items-center justify-center px-6 sm:px-8 py-2.5 sm:py-3 rounded-xl text-xs sm:text-sm font-bold transition-all shadow-lg hover:shadow-blue-500/20">
                             Projects
                         </button>
                         <button id="hero-vault-btn" onclick="showVault()" title="View CSS Fundamentals"
-                            class="inline-flex items-center justify-center px-8 py-3 rounded-xl text-sm font-bold transition-all">
+                            class="inline-flex items-center justify-center px-6 sm:px-8 py-2.5 sm:py-3 rounded-xl text-xs sm:text-sm font-bold transition-all">
                             CSS Fundamentals
                         </button>
                     </div>
@@ -273,7 +275,8 @@
                 <!-- Featured SVG Hero Graphic -->
                 <div class="relative hidden lg:block fade-in-3d">
                     <div class="absolute -inset-4 bg-blue-500/10 blur-3xl rounded-full"></div>
-                    <svg viewBox="0 0 512 512" class="w-full h-auto drop-shadow-2xl relative z-10">
+                    <svg viewBox="0 0 512 512" class="w-full h-auto drop-shadow-2xl relative z-10" role="img"
+                        aria-label="CSS3 Logo">
                         <path d="M107.4 443L71 13.1h369.2l-36.4 429.9L255.8 499 107.4 443z" fill="#264de4" />
                         <path d="M256 463.3l119.7-33.1L405 73.4H256v389.9z" fill="#2965f1" />
                         <path
@@ -323,11 +326,20 @@
     <script>
         const hubProjects = [
             {
+                title: 'Certificates & Docs Portal',
+                desc: 'A premium, high-performance portfolio portal for showcasing professional certifications, awards, and educational achievements.',
+                image: 'assets/certificates_banner.png',
+                icon: '🎓',
+                tags: ['CSS3', 'GLASSMORPHISM'],
+                repoLink: 'https://github.com/ajaygangwar945/Certificates-Docs-Portal',
+                liveLink: 'https://certificates-docs-portal.vercel.app/'
+            },
+            {
                 title: 'Pet Adoption & Animal Welfare',
                 desc: 'Responsive pet adoption platform with engaging hero section, image gallery slider, and animal welfare information.',
                 image: 'assets/pet_adoption_project_new.png',
                 icon: '🐾',
-                tags: ['CSS', 'RESPONSIVE'],
+                tags: ['CSS3', 'RESPONSIVE'],
                 liveLink: 'https://pet-adoption-animal-welfare.netlify.app/',
                 repoLink: 'https://github.com/ajaygangwar945/Pet-Adoption-Animal-Welfare'
             },
@@ -336,7 +348,7 @@
                 desc: 'Interactive learning platform with 30+ HTML/CSS modules, 3D Three.js dashboard, and glassmorphism UI.',
                 image: 'assets/html_learning_hub_new.png',
                 icon: '🌐',
-                tags: ['CSS3', 'THREE.JS'],
+                tags: ['CSS3', '3D-LAYOUT'],
                 liveLink: 'https://ajaygangwar945.github.io/First-HTML-Project-Overview/',
                 repoLink: 'https://github.com/ajaygangwar945/First-HTML-Project-Overview'
             },
@@ -345,7 +357,7 @@
                 desc: 'A modern, interactive portfolio built with React, TypeScript, and 3D web technologies to showcase achievements.',
                 image: 'assets/css_styling_viz_1769713493068.png',
                 icon: '✨',
-                tags: ['REACT', '3D'],
+                tags: ['STYLING', '3D-VISUALS'],
                 liveLink: 'https://stylish-achievements.vercel.app/',
                 repoLink: 'https://github.com/ajaygangwar945/Stylish-Achievements'
             },
@@ -354,9 +366,18 @@
                 desc: 'A React-based weather application that provides real-time weather data with a focus on clean layout and responsive design.',
                 image: 'assets/flutter_weather_viz.png',
                 icon: '☁️',
-                tags: ['REACT', 'API'],
+                tags: ['RESPONSIVE', 'UI-DESIGN'],
                 liveLink: 'https://weather-forcasting-temperature.netlify.app/',
                 repoLink: 'https://github.com/ajaygangwar945/Weather-App'
+            },
+            {
+                title: 'Eventfolio',
+                desc: 'Ghibli-inspired interactive portfolio showcasing hackathons, leadership, and technical journeys using pure HTML, CSS, and JavaScript.',
+                image: 'assets/digital_landscape_viz.png',
+                icon: '🍃',
+                tags: ['CSS3', 'ANIMATION', 'GHIBLI'],
+                repoLink: 'https://github.com/ajaygangwar945/Eventfolio',
+                liveLink: 'https://eventfolio.vercel.app/'
             }
         ];
 
