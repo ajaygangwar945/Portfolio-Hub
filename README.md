@@ -5,7 +5,6 @@
 <div align="center">
 
 [![Vercel Deployed](https://img.shields.io/badge/Vercel-Deployed-000000?style=flat&logo=vercel)](https://ajay-portfolio-hub.vercel.app/)
-[![Portfolios](https://img.shields.io/badge/Portfolios-17_Portals-blue?style=flat&logo=docsdotrs)](https://github.com/ajaygangwar945/Portfolio-Hub)
 [![Tech Stack](https://img.shields.io/badge/Stack-HTML5_%7C_JS_%7C_Three.js-orange?style=flat)](https://github.com/ajaygangwar945/Portfolio-Hub)
 [![Design](https://img.shields.io/badge/Design-Glassmorphic-FF69B4?style=flat)](https://github.com/ajaygangwar945/Portfolio-Hub)
 [![Status](https://img.shields.io/badge/Status-Active-success?style=flat)](https://ajay-portfolio-hub.vercel.app/)
