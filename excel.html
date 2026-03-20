@@ -313,17 +313,17 @@
             <section id="dashboard-section" class="space-y-8 fade-in-3d">
                 <div class="flex flex-col md:flex-row items-center justify-between gap-4">
                     <div
-                        class="bg-white dark:bg-[#1b1a19] px-6 py-2.5 rounded-2xl border border-excel-green/10 flex flex-col justify-center w-full md:w-auto min-w-[240px] hover:border-excel-green/30 transition-all shadow-sm group">
+                        class="bg-white dark:bg-[#1b1a19] px-6 py-4 rounded-2xl border border-excel-green/10 flex flex-col justify-center min-w-[280px] hover:border-excel-green/30 transition-all shadow-sm group">
                         <label for="dashboard-selector"
-                            class="text-[8px] font-black text-gray-400 dark:text-gray-500 uppercase tracking-widest mb-0.5 group-hover:text-excel-green transition-colors">Configuration</label>
+                            class="text-[9px] font-black text-gray-400 dark:text-gray-500 uppercase tracking-widest mb-1 group-hover:text-excel-green transition-colors">Configuration</label>
                         <div class="relative">
                             <select id="dashboard-selector" onchange="switchDashboard(this.value)"
                                 aria-label="Dashboard Configuration Selector"
-                                class="w-full bg-transparent text-base font-black text-[#201f1e] dark:text-white outline-none border-none p-0 cursor-pointer appearance-none truncate pr-8">
+                                class="w-full bg-transparent text-lg font-black text-[#201f1e] dark:text-white outline-none border-none p-0 cursor-pointer appearance-none truncate pr-8">
                                 <!-- Populated by JS -->
                             </select>
                             <div class="absolute right-0 top-1/2 -translate-y-1/2 pointer-events-none text-excel-green">
-                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                         d="M19 9l-7 7-7-7" />
                                 </svg>
@@ -331,7 +331,7 @@
                         </div>
                     </div>
 
-                    <div id="stats-container" class="flex-1 grid grid-cols-2 gap-4 w-full">
+                    <div id="stats-container" class="flex-1 grid grid-cols-1 sm:grid-cols-2 gap-4 w-full">
                         <!-- Stats populated by JS -->
                     </div>
                 </div>
@@ -356,7 +356,9 @@
                                     Accessing Workbook</p>
                             </div>
                             <div class="flex-1 overflow-hidden rounded-2xl bg-[#f8f9fa] dark:bg-black/20">
-                                <iframe id="pbi-frame" title="Excel Dashboard" src="about:blank" allowfullscreen="true"
+                                <iframe id="pbi-frame" title="Road Accident Excel Dashboard" 
+                                    src="https://1drv.ms/x/c/844acd8e58422598/IQTDVUVa8Z0qSKuJXKUlqdaVAdUIL6xsUQ7dz3I84Xc0NKE?em=2&wdAllowInteractivity=True&wdHideGridlines=True&wdHideHeaders=True&wdDownloadButton=True&wdInConfigurator=True" 
+                                    allowfullscreen="true"
                                     class="w-full h-full border-0"></iframe>
                             </div>
                         </div>
@@ -423,55 +425,28 @@
     <script>
         const dashboards = [
             {
-                id: 'sales_performance',
-                title: 'Global Sales Performance',
-                url: 'https://app.powerbi.com/view?r=eyJrIjoiNTY4YWQxMGItNGFhMC00ZWQ4LThlZjUtMDY0NWY4OGJkYjdhIiwidCI6ImUxNGU3M2ViLTUyNTEtNDM4OC04ZDY3LThmOWYyZTJkNWE0NiIsImMiOjEwfQ%3D%3D',
+                id: 'road_accident',
+                title: 'Road Accident Analysis',
+                url: 'https://1drv.ms/x/c/844acd8e58422598/IQTDVUVa8Z0qSKuJXKUlqdaVAdUIL6xsUQ7dz3I84Xc0NKE?em=2&wdAllowInteractivity=True&wdHideGridlines=True&wdHideHeaders=True&wdDownloadButton=True&wdInConfigurator=True',
                 stats: [
-                    { label: 'Total Revenue', value: '$2.4M', trend: '↑ 14%', color: 'text-excel-green' },
-                    { label: 'Avg Order', value: '$840', trend: '↑ 3%', color: 'text-excel-green' }
+                    { label: 'Total Casualties', value: '23.4K', trend: '↑ 2.9%', color: 'text-red-500' },
+                    { label: 'Fatalities', value: '2.9%', trend: '↓ 0.5%', color: 'text-excel-green' }
                 ],
                 explanation: `
-                    <p class="mb-6 font-bold text-[#201f1e] dark:text-white uppercase tracking-wider">High-Fidelity: Group Operations</p>
-                    <p class="mb-6">Global sales monitoring utilizing Power Pivot and advanced DAX integration. This workbook aggregates high-frequency transactional data into executive KPI summaries.</p>
+                    <p class="mb-6 font-bold text-[#201f1e] dark:text-white uppercase tracking-wider">Analysis: Road Safety Dynamics</p>
+                    <p class="mb-6">High-integrity data modeling within a spreadsheet environment. This dashboard leverages Excel's native engines to transform 23,000+ casualty records into actionable safety metrics.</p>
                     <div class="space-y-4">
                         <div class="flex gap-4 p-4 rounded-2xl bg-black/5 dark:bg-white/5 border border-excel-green/10 hover:border-excel-green/30 transition-all">
                             <span class="text-excel-green font-black">✦</span>
-                            <p class="text-xs font-medium italic">Unified reporting across regional siloes using Power Pivot data modeling.</p>
+                            <p class="text-xs font-medium italic">Comparative monthly mapping of Current Year (CY) vs. Prior Year (PY) casualties to identify seasonal risk trends.</p>
                         </div>
                         <div class="flex gap-4 p-4 rounded-2xl bg-black/5 dark:bg-white/5 border border-excel-green/10 hover:border-excel-green/30 transition-all">
                             <span class="text-excel-green font-black">✦</span>
-                            <p class="text-xs font-medium italic">Automated forecasting models with historical trend correlation.</p>
+                            <p class="text-xs font-medium italic">Granular risk profiling by vehicle type, revealing Cars as the primary casualty contributors with over 18.7K incidents.</p>
                         </div>
                         <div class="flex gap-4 p-4 rounded-2xl bg-black/5 dark:bg-white/5 border border-excel-green/10 hover:border-excel-green/30 transition-all">
                             <span class="text-excel-green font-black">✦</span>
-                            <p class="text-xs font-medium italic">Interactive slicer-driven drill-downs for granular market analysis.</p>
-                        </div>
-                    </div>
-                `
-            },
-            {
-                id: 'inventory_control',
-                title: 'Inventory & Supply Chain',
-                url: 'https://app.powerbi.com/view?r=eyJrIjoiMDY0ZWM2MDMtY2Y2OC00NTM4LTk0ZDAtMGY5NGE1YzE1OWZlIiwidCI6ImM0YTYwOWY0LWZlMmYtNGU3Ni1hOGYxLWIzYWRiYmE3ZGEyYyIsImMiOjF9',
-                stats: [
-                    { label: 'Stock Value', value: '$840K', trend: 'Stable', color: 'text-blue-500' },
-                    { label: 'Turnover', value: '4.2x', trend: '↑ 0.8', color: 'text-excel-green' }
-                ],
-                explanation: `
-                    <p class="mb-6 font-bold text-[#201f1e] dark:text-white uppercase tracking-wider">Tactical: Supply Chain Ops</p>
-                    <p class="mb-6">Modern supply chain monitoring built on XLOOKUP logic and dynamic array engines. Designed for real-time inventory tracking and demand planning.</p>
-                    <div class="space-y-4">
-                        <div class="flex gap-4 p-4 rounded-2xl bg-black/5 dark:bg-white/5 border border-excel-green/10 hover:border-excel-green/30 transition-all">
-                            <span class="text-excel-green font-black">✦</span>
-                            <p class="text-xs font-medium italic">Dynamic stock aging analysis with automated reorder triggers.</p>
-                        </div>
-                        <div class="flex gap-4 p-4 rounded-2xl bg-black/5 dark:bg-white/5 border border-excel-green/10 hover:border-excel-green/30 transition-all">
-                            <span class="text-excel-green font-black">✦</span>
-                            <p class="text-xs font-medium italic">Supplier performance scorecarding integrated with logistics data.</p>
-                        </div>
-                        <div class="flex gap-4 p-4 rounded-2xl bg-black/5 dark:bg-white/5 border border-excel-green/10 hover:border-excel-green/30 transition-all">
-                            <span class="text-excel-green font-black">✦</span>
-                            <p class="text-xs font-medium italic">Optimized demand forecasting using statistical moving averages.</p>
+                            <p class="text-xs font-medium italic">Detailed infrastructure mapping with heavy emphasis on Single Carriageway risk factors accounting for 16.3K+ casualties.</p>
                         </div>
                     </div>
                 `
@@ -585,12 +560,12 @@
             load.style.display = 'flex'; load.style.opacity = '1';
             setTimeout(() => {
                 frame.src = db.url; exp.innerHTML = db.explanation;
-                stats.innerHTML = db.stats.map((s, i) => `
-                    <div class="kpi-inner px-6 py-2.5 rounded-2xl border border-excel-green/10 bg-white/80 dark:bg-[#0b0b0a]/80 backdrop-blur-md shadow-sm">
-                        <p class="text-[8px] font-black text-gray-500 uppercase tracking-widest">${s.label}</p>
-                        <div class="flex items-center justify-between mt-0.5">
-                            <span class="text-base font-black">${s.value}</span>
-                            <span class="text-[8px] font-black px-1.5 py-0.5 rounded ${s.color} bg-excel-green/10 uppercase">${s.trend}</span>
+                stats.innerHTML = db.stats.map(s => `
+                    <div class="kpi-inner px-6 py-4 rounded-2xl border border-excel-green/10 bg-white/80 dark:bg-[#0b0b0a]/80 backdrop-blur-md shadow-sm">
+                        <p class="text-[9px] font-black text-gray-500 uppercase tracking-widest">${s.label}</p>
+                        <div class="flex items-center justify-between mt-2">
+                            <span class="text-lg font-black">${s.value}</span>
+                            <span class="text-[9px] font-black px-2 py-0.5 rounded ${s.color} bg-excel-green/10 uppercase">${s.trend}</span>
                         </div>
                     </div>
                 `).join('');
@@ -652,7 +627,6 @@
                     </div>
                 </div>
             `).join('');
-
             const sel = document.getElementById('dashboard-selector');
             sel.innerHTML = dashboards.map(db => `<option value="${db.id}" class="bg-white dark:bg-[#1b1a19] text-[#201f1e] dark:text-gray-200 py-2">${db.title}</option>`).join('');
         }
